@@ -1,0 +1,13 @@
+.header {
+    grid-area: h;
+    border: orangered 1px solid;
+    }
+    
+    
+    .logo {
+      border: orangered 1px solid;
+    }
+    .logo img {
+      width: 150px;
+    }
+    

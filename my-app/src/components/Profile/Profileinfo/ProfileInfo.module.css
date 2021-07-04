@@ -1,0 +1,30 @@
+.profileInfo {
+    grid-area: info;
+    border: rgb(11, 228, 11) 1px solid;
+    background-color: burlywood;
+    display: grid;
+    grid-template-rows: 200px 100px;
+    grid-template-columns: 250px 650px;
+    grid-gap: 10px;
+    grid-template-areas: 
+    "image personalInfo "
+    "image contacts";
+}
+.profileImage {
+    grid-area: image;
+    background-color: cadetblue;
+    width: 250px;
+    height: 300px;
+}
+.profileImage img {
+    width: 250px;
+}
+.personalInfo {
+    grid-area: personalInfo;
+    background-color: darkgrey;
+    padding-left:10px;
+}
+.contacts {
+    grid-area: contacts;
+}
+

@@ -1,0 +1,4 @@
+.myPosts {
+    grid-area: posts;
+    background-color: cyan;
+}

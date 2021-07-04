@@ -1,0 +1,28 @@
+.item {
+    color: blue;
+    margin: 10px;
+    border: blue solid 1px;
+    display: grid;
+    grid-template-columns: 60px 600px;
+    grid-gap: 10px;
+
+  grid-template-areas: 
+  "a t";
+  border: orangered 1px solid;
+  }
+
+.item img {
+  width: 50px;
+  border-radius: 30px;
+}
+.text {
+  grid-area: t;
+  border: orangered 1px solid;
+}
+.ava {
+  grid-area: a;
+  border: orangered 1px solid;
+}
+.likes img {
+  width: 40px;
+}

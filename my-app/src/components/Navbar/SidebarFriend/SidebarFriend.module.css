@@ -1,0 +1,10 @@
+.sidebarFriend img {
+    width: 50px;
+    border-radius: 30px;
+  }
+.sidebarFriend {
+    border: red solid 1px;
+    width: 60px;
+    float: left;
+    margin: 5px;
+}

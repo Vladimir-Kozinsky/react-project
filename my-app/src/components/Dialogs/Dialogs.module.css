@@ -1,0 +1,20 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 200px 720px;
+    grid-template-areas: 
+    "u m";
+    grid-gap: 10px;
+
+}
+.users {
+    grid-area: u;
+    border: orangered solid 1px;
+    
+}
+.messages {
+    grid-area: m;
+    border: orangered solid 1px;
+}
+.newMessage {
+    margin-top: 20px;
+}

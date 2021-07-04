@@ -1,0 +1,19 @@
+.profileImage img {
+    width: 900px;
+    height: 150px;
+  }
+ .profilePage {
+  display: grid;
+  grid-template-rows: 150 px 300px 600px;
+  grid-template-columns: 300 400px;
+  grid-gap: 10px;
+
+  grid-template-areas: 
+  "image image"
+  "info info"
+  "posts posts";
+  border: orangered 1px solid;
+}
+
+
+

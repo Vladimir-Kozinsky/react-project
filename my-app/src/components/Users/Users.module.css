@@ -1,0 +1,28 @@
+.user {
+    display: grid;
+    grid-template-columns: 150px 600px;
+    grid-template-areas: "a i";
+    grid-gap: 10px;
+}
+
+.avaBlock {
+    margin-top: 10px;
+    grid-area: a;
+    border: solid 1px red;
+    background-color: rgb(209, 161, 119);
+}
+
+.infoBlock {
+    margin-top: 10px;
+    grid-area: i;
+    border: solid 1px green;
+    background-color: rgb(247, 192, 144);
+}
+.followButton {
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
