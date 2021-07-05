@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import { Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -12,7 +12,7 @@ const App = (props) => {
   return (
 
     <div className="appWrapper">
-      <Header />
+      <HeaderContainer />
       <Navbar state={props.store.getState().navBarPage} />
       <div className="appContent">
         <Route path="/profile/:userId" render={() => <ProfileContainer />} />
