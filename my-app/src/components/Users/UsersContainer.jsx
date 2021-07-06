@@ -2,6 +2,8 @@ import { connect } from "react-redux";
 import { followSuccess, setCurrentPage, follow, unfollow, unfollowSuccess , toggleIsProgress, getUsers } from "../../redux/usersReduser";
 import React from 'react';
 import Users from "./Users";
+import { withAuthRedirect } from "../hoc/withAuthRedirect";
+import { withRouter } from "react-router-dom";
 
 
 class UsersAPIComponent extends React.Component {
@@ -19,7 +21,7 @@ class UsersAPIComponent extends React.Component {
 
     render() {
 
-        return <Users totalUsersCount={this.props.totalUsersCount}
+        return <Users {...this.props} totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
             onPageChanged={this.onPageChanged}
             currentPage={this.props.currentPage}
@@ -30,6 +32,7 @@ class UsersAPIComponent extends React.Component {
             isFetching={this.props.isFetching}
             toggleIsProgress={this.props.toggleIsProgress}
             followingInProgress={this.props.followingInProgress}
+            //isAuth={this.props.isAuth}
 
         />
     }
@@ -44,7 +47,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -70,11 +73,14 @@ let mapStateToProps = (state) => {
 //         }
 //     }
 // }
+let AuthRedirectComponent = withAuthRedirect(UsersAPIComponent);
+
+let WithUrl = withRouter(AuthRedirectComponent)
 
 const UsersContainer = connect(mapStateToProps, {
     unfollowSuccess , followSuccess ,  
     setCurrentPage,  
     toggleIsProgress, getUsers, follow, unfollow
-})(UsersAPIComponent);
+})(WithUrl);
 
 export default UsersContainer;

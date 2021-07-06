@@ -3,7 +3,7 @@ import Dialogs from './Dialogs';
 import { addMessage, changeMessageText } from '../../redux/dialogsReduser';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
 class DialogsAPIContainer extends React.Component {
     componentDidCatch() {
@@ -17,18 +17,18 @@ class DialogsAPIContainer extends React.Component {
     }
 }
 
+let AuthRedirectComponent = withAuthRedirect(DialogsAPIContainer);
 
 
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage,
-        isAuth: state.auth.isAuth
+        messagesPage: state.messagesPage
     }
 }
 
 
 
-let WithUrl = withRouter(DialogsAPIContainer)
+let WithUrl = withRouter(AuthRedirectComponent)
 
 const DialogsContainer = connect(mapStateToProps, {addMessage, changeMessageText})(WithUrl);
 
