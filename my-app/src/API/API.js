@@ -15,17 +15,20 @@ const usersAPI = {
                 return response.data
             });
     },
-    follow (userId) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/ /follow/${userId}`)
+    follow(userId) {
+        return instance.post(`follow/${userId}`)
     },
 
-    unfollow (userId) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/ /follow/${userId}`)
+    unfollow(userId) {
+        return instance.delete(`follow/${userId}`)
+    },
+    userInfo(userId) {
+        return instance.get(`profile/${userId}`)
+    },
+    getUserAuth() {
+        return  instance.get(`/auth/me`)
     }
-
-
 }
-
 
 
 export default usersAPI;

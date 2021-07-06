@@ -1,3 +1,5 @@
+import usersAPI from "../API/API";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE_INFO = 'SET-PROFILEINFO';
@@ -48,6 +50,14 @@ export const addPostTextActionCreator = () => {
 }
 export const setProfileInfo = (profileInfo) => {
     return { type: SET_PROFILE_INFO, profileInfo }
+}
+export const getUserInfo = (userId) => {
+    return (dispatch) => {
+       usersAPI.userInfo(userId)
+       .then(response => {
+        dispatch(setProfileInfo(response.data));
+    })
+    }
 }
 
 export default profileReduser;

@@ -1,3 +1,5 @@
+import usersAPI from "../API/API";
+
 const GET_DATA_AUTH = 'GET-DATA-AUTH';
 
 
@@ -29,5 +31,17 @@ const profileReduser = (state = initialState, action) => {
 export const getDataAC = (authdata) => {
     return { type: GET_DATA_AUTH, authdata }
 }
+
+
+export const getAuth= () => {
+  return (dispatch) => {
+    usersAPI.getUserAuth().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(getDataAC(response.data))
+        }
+    })
+  }
+}
+
 
 export default profileReduser;
