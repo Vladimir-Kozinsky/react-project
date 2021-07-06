@@ -36,11 +36,11 @@ const dialogsReduser = (state = initialState, action) => {
 }
 
 
-export const changeMessageTextActionCreator = (newText) => {
+export const changeMessageText = (newText) => {
     return { type: UPDATE_MESSAGE_TEXT, newText: newText }
 }
 
-export const addMessageTextActionCreator = () => {
+export const addMessage = () => {
     return {
         type: ADD_MESSAGE
     }

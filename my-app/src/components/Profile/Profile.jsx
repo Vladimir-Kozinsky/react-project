@@ -2,6 +2,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 import s from './Profile.module.css';
 import Preloader from '../common/Preloader';
 import ProfileInfo from './Profileinfo/ProfileInfo';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -9,6 +10,7 @@ const Profile = (props) => {
   if (!props.profileInfo) {
     return <Preloader />
   }
+  if (!props.isAuth) return <Redirect to = {"/login"} />
   return (
     <div className={s.profilePage}>
       <div className={s.profileImage}>

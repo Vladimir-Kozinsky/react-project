@@ -1,27 +1,35 @@
 import React from 'react';
 import Dialogs from './Dialogs';
-import { addMessageTextActionCreator, changeMessageTextActionCreator } from '../../redux/dialogsReduser';
+import { addMessage, changeMessageText } from '../../redux/dialogsReduser';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+
+
+class DialogsAPIContainer extends React.Component {
+    componentDidCatch() {
+
+    }
+    render () {
+        return <Dialogs messagesPage={this.props.messagesPage} 
+        isAuth={this.props.isAuth}
+        addMessage={this.props.addMessage}
+        changeMessageText={this.props.changeMessageText} />
+    }
+}
 
 
 
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: () => {
-            dispatch(addMessageTextActionCreator());
-        },
-        changeMessageText: (newText) => {
-            dispatch(changeMessageTextActionCreator(newText));
-        },
-    }
-}
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+let WithUrl = withRouter(DialogsAPIContainer)
+
+const DialogsContainer = connect(mapStateToProps, {addMessage, changeMessageText})(WithUrl);
 
 export default DialogsContainer;
