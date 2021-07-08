@@ -1,26 +1,21 @@
 import { connect } from "react-redux";
-import { followSuccess, setCurrentPage, follow, unfollow, unfollowSuccess , toggleIsProgress, getUsers } from "../../redux/usersReduser";
+import { followSuccess, setCurrentPage, follow, unfollow, unfollowSuccess, toggleIsProgress, getUsers } from "../../redux/usersReduser";
 import React from 'react';
 import Users from "./Users";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { withRouter } from "react-router-dom";
+import { compose } from 'redux';
 
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
-
     onPageChanged = (pageNumber) => {
         this.props.getUsers(pageNumber, this.props.pageSize);
-             
         this.props.setCurrentPage(pageNumber)
-        
-
     }
-
     render() {
-
         return <Users {...this.props} totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
             onPageChanged={this.onPageChanged}
@@ -32,13 +27,10 @@ class UsersAPIComponent extends React.Component {
             isFetching={this.props.isFetching}
             toggleIsProgress={this.props.toggleIsProgress}
             followingInProgress={this.props.followingInProgress}
-            //isAuth={this.props.isAuth}
-
+        //isAuth={this.props.isAuth}
         />
     }
 }
-
-
 
 let mapStateToProps = (state) => {
     return {
@@ -73,14 +65,12 @@ let mapStateToProps = (state) => {
 //         }
 //     }
 // }
-let AuthRedirectComponent = withAuthRedirect(UsersAPIComponent);
 
-let WithUrl = withRouter(AuthRedirectComponent)
-
-const UsersContainer = connect(mapStateToProps, {
-    unfollowSuccess , followSuccess ,  
-    setCurrentPage,  
-    toggleIsProgress, getUsers, follow, unfollow
-})(WithUrl);
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        unfollowSuccess, followSuccess, setCurrentPage,
+        toggleIsProgress, getUsers, follow, unfollow
+    }),
+    withRouter,
+    withAuthRedirect
+)(UsersAPIComponent);
