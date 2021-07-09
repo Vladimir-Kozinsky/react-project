@@ -30,7 +30,7 @@ const usersAPI = {
     }
 }
 
-const profileAPI = {}
+
 
 
 
