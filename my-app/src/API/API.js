@@ -30,6 +30,9 @@ const usersAPI = {
     }
 }
 
+const profileAPI = {}
+
+
 
 export default usersAPI;
 
