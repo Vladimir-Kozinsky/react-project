@@ -3,6 +3,7 @@ import webLogo from './../../common/profile/contactsLogos/webLogo.jpg';
 import facebookLogo from './../../common/profile/contactsLogos/facebookLogo.png';
 import instaLogo from './../../common/profile/contactsLogos/instLogo.svg';
 import vkLogo from './../../common/profile/contactsLogos/vkLogo.png';
+import ProfileStatus from './ProfileStatus/ProfileStatus'
 
 const ProfileInfo = (props) => {
 
@@ -16,14 +17,18 @@ const ProfileInfo = (props) => {
                 <div className={s.userName}>
                     {props.profileInfo.fullName}
                 </div>
-                <div className={s.userStatus}>
-                    {props.profileInfo.aboutMe
-                        ? props.profileInfo.aboutMe
-                        : ' '}
+                <ProfileStatus status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus} />
+
+                <div className={s.aboutMe}>
+                    <div className={s.aboutMeDiv}>About Me:</div>
+                    <div className={s.aboutMeText}>{props.profileInfo.aboutMe
+                    ? props.profileInfo.aboutMe
+                    : " no filled"}</div>
                 </div>
                 <div className={s.lookingForAJob}>
                     <div className={s.lookingForAJobDiv}>LookingForAJob:</div>{(props.profileInfo.lookingForAJob) ? <div className={s.lookingForAJobText}>Yes</div> : <div className={s.lookingForAJobText}>No</div>}
                 </div>
+
                 <div className={s.lookingForAJobDescription}>
                     <div className={s.lookingForAJobDescriptionDiv}>Job Description:</div>{props.profileInfo.lookingForAJobDescription
                         ? props.profileInfo.lookingForAJobDescription

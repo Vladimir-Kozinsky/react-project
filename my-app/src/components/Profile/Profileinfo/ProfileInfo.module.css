@@ -77,11 +77,12 @@
     margin: 10px 0 5px 0;
     text-align: center;
 }
-.userStatus {
-    font-style: italic;
-    margin: 5px 0 10px 0;
-    text-align: center;
-    color: cadetblue;
+.aboutMe {
+    margin: 10px 0 10px 0;
+}
+.aboutMeDiv {
+    float: left;
+    width: 210px;
 }
 .lookingForAJob {
     margin: 10px 0 10px 0;

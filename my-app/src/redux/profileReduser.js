@@ -1,8 +1,10 @@
 import usersAPI from "../API/API";
+import {ProfileAPI} from "../API/API";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE_INFO = 'SET-PROFILEINFO';
+const SET_STATUS = 'SET-STATUS';
 
 let initialState = {
     posts: [
@@ -11,9 +13,9 @@ let initialState = {
         { id: 3, message: 'It is my first post ad fff', likesCounter: 29 },
     ],
     newPostText: 'It camasutra',
-    profileInfo: null
+    profileInfo: null,
+    status: '',
 }
-
 
 const profileReduser = (state = initialState, action) => {
     switch (action.type) {
@@ -31,7 +33,12 @@ const profileReduser = (state = initialState, action) => {
         case SET_PROFILE_INFO:
             return {
                 ...state,
-                profileInfo: action.profileInfo 
+                profileInfo: action.profileInfo
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
             }
         default:
             return state;
@@ -42,7 +49,6 @@ const profileReduser = (state = initialState, action) => {
 export const changePostTextActionCreator = (newText) => {
     return { type: UPDATE_POST_TEXT, newText: newText }
 }
-
 export const addPostTextActionCreator = () => {
     return {
         type: ADD_POST
@@ -53,10 +59,32 @@ export const setProfileInfo = (profileInfo) => {
 }
 export const getUserInfo = (userId) => {
     return (dispatch) => {
-       usersAPI.userInfo(userId)
-       .then(response => {
-        dispatch(setProfileInfo(response.data));
-    })
+        usersAPI.userInfo(userId)
+            .then(response => {
+                dispatch(setProfileInfo(response.data));
+            })
+    }
+}
+
+export const setStatus = (status) => {
+    return { type: SET_STATUS, status }
+}
+
+export const getStatus = (userId) => {
+    return (dispatch) => {
+        ProfileAPI.getUserStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data));
+            })
+    }
+}
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        ProfileAPI.updateStatus(status).then(response =>{
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(response.data.data));
+            }
+        })
     }
 }
 

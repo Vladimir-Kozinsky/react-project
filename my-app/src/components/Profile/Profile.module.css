@@ -4,7 +4,7 @@
   }
  .profilePage {
   display: grid;
-  grid-template-rows: 150px 350px 600px;
+  grid-template-rows: 150px 400px 600px;
   grid-template-columns: 300 400px;
   grid-gap: 10px;
 
