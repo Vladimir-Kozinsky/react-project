@@ -1,8 +1,7 @@
 import usersAPI from "../API/API";
-import {ProfileAPI} from "../API/API";
+import { ProfileAPI } from "../API/API";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE_INFO = 'SET-PROFILEINFO';
 const SET_STATUS = 'SET-STATUS';
 
@@ -12,7 +11,6 @@ let initialState = {
         { id: 2, message: 'It is my first post', likesCounter: 27 },
         { id: 3, message: 'It is my first post ad fff', likesCounter: 29 },
     ],
-    newPostText: 'It camasutra',
     profileInfo: null,
     status: '',
 }
@@ -22,13 +20,7 @@ const profileReduser = (state = initialState, action) => {
         case ADD_POST:
             return {
                 ...state,
-                newPostText: '',
-                posts: [...state.posts, { id: 5, message: state.newPostText, likesCounter: 29 }]
-            }
-        case UPDATE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText,
+                posts: [...state.posts, { id: 5, message: action.value, likesCounter: 29 }]
             }
         case SET_PROFILE_INFO:
             return {
@@ -46,13 +38,8 @@ const profileReduser = (state = initialState, action) => {
 
 }
 
-export const changePostTextActionCreator = (newText) => {
-    return { type: UPDATE_POST_TEXT, newText: newText }
-}
-export const addPostTextActionCreator = () => {
-    return {
-        type: ADD_POST
-    }
+export const addPostTextActionCreator = (value) => {
+    return { type: ADD_POST, value }
 }
 export const setProfileInfo = (profileInfo) => {
     return { type: SET_PROFILE_INFO, profileInfo }
@@ -80,7 +67,7 @@ export const getStatus = (userId) => {
 }
 export const updateStatus = (status) => {
     return (dispatch) => {
-        ProfileAPI.updateStatus(status).then(response =>{
+        ProfileAPI.updateStatus(status).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(response.data.data));
             }

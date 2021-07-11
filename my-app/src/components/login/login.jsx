@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
 
 const Login = (props) => {
   const onSubmit = (formData) => {
@@ -32,7 +32,6 @@ const LoginForm = (props) => {
     </form>
   )
 }
-
 
 
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)

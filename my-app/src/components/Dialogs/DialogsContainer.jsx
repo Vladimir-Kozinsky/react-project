@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialogs from './Dialogs';
-import { addMessage, changeMessageText } from '../../redux/dialogsReduser';
+import { addMessage } from '../../redux/dialogsReduser';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
@@ -23,7 +23,7 @@ let mapStateToProps = (state) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, { addMessage, changeMessageText }),
+    connect(mapStateToProps, { addMessage }),
     withRouter,
     withAuthRedirect,
 )(DialogsAPIContainer);
