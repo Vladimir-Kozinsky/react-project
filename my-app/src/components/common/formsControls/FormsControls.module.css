@@ -1,0 +1,9 @@
+
+.errorBorderRed textarea {
+    border: solid 3px red;
+}
+.errorMessage {
+    color: red;
+    border: solid 1px red;
+    border-radius: 3px;
+}
