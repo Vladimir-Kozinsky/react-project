@@ -6,7 +6,7 @@ import { RequiredField, MaxLengthCreator } from '../../../utilits/validation/val
 import { Textarea } from '../../common/formsControls/FormsControls';
 
 
-let maxLength15 = MaxLengthCreator(50);
+let maxLength = MaxLengthCreator(50);
 
 
 const MyPosts = (props) => {
@@ -27,7 +27,7 @@ const ProfileForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
             <div className={s.errorBorderRed}>
-                <Field component={Textarea} name="newPostText" validate={[RequiredField, maxLength15 ]} placeholder="Write posts" />
+                <Field component={Textarea} name="newPostText" validate={[RequiredField, maxLength ]} placeholder="Write posts" />
             </div>
             <div>
                 <button >Add</button>
