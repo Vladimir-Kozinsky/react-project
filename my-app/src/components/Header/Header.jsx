@@ -9,7 +9,9 @@ const Header = (props) => {
         <img src="https://cdn.logo.com/hotlink-ok/logo-social.png"></img>
       </div>
       <div className={s.login}>
-        {props.isAuth === true ? <span>{props.authdata.data.login}</span> :<NavLink to="/login"> <div>login</div>   </NavLink> }
+        {props.isAuth === true ? <div>
+          <span>{props.authdata.data.login}</span> <button onClick={props.logout} >logout</button>
+        </div>  :<NavLink to="/login"> <div>login</div>   </NavLink> }
         
       </div>
 
