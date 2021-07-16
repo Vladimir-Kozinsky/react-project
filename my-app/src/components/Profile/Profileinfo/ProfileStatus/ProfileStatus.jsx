@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import s from './ProfileStatus.module.css';
 
@@ -22,13 +23,9 @@ const ProfileStatus = (props) => {
         setStatus(e.currentTarget.value);
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevProps.status !== this.props.status) {
-    //         this.setState({
-    //             status: this.state.status,
-    //         });
-    //     }
-    // }
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
 
     return (
         <div className={s.userStatus}>
