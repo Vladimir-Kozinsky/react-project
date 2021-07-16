@@ -16,7 +16,6 @@ class ProfileAPIContainer extends React.Component {
         }
         this.props.getUserInfo(userId);
         this.props.getStatus(userId);
-
     }
 
     render() {
