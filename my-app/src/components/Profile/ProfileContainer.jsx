@@ -10,21 +10,27 @@ class ProfileAPIContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = this.props.authorizedUserId.id;
+        } if (!userId) {
+            this.props.history.push('/login');
         }
         this.props.getUserInfo(userId);
         this.props.getStatus(userId);
+
     }
+
     render() {
-        return <Profile {...this.props} profileInfo={this.props.profileInfo} 
-        isAuth={this.props.isAuth} status={this.props.status} 
-        setStatus={this.props.setStatus} updateStatus={this.props.updateStatus} />
+        return <Profile {...this.props} profileInfo={this.props.profileInfo}
+            isAuth={this.props.isAuth} status={this.props.status}
+            setStatus={this.props.setStatus} updateStatus={this.props.updateStatus} />
     }
 }
 let mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.profileInfo,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.authdata,
+        isAuth: state.auth.isAuth
     }
 }
 export default compose(

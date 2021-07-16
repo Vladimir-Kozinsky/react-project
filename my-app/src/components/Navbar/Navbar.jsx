@@ -6,12 +6,11 @@ import SidebarFriend from './SidebarFriend/SidebarFriend';
 
 const Navbar = (props) => {
 
-  let friends = props.state.sidebar.map(f => <SidebarFriend friend={f.friend} />)
-
+  let friends = props.state.navBarPage.sidebar.map(f => <SidebarFriend friend={f.friend} />)
   return (
     <nav className={s.nav}>
       <div className={s.item}>
-        <NavLink to="/profile/2" activeClassName={s.active}>Profile</NavLink>
+        <NavLink to="/profile"  activeClassName={s.active}>Profile</NavLink>
       </div>
       <div className={s.item}>
         <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>

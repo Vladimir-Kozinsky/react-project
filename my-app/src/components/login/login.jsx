@@ -31,10 +31,13 @@ const LoginForm = (props) => {
       <div>
         <Field type="checkbox" name="rememberMe" component="input" /> Remember me
       </div>
+      {props.error && <div>
+        {props.error}
+      </div>
+      }
       <div>
         <button>Login</button>
       </div>
-      <div></div>
     </form>
   )
 }
