@@ -4,6 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 import { MaxLengthCreator, RequiredField } from '../../utilits/validation/validation';
 import { Input } from '../common/formsControls/FormsControls';
 import { login } from './../../redux/authReduser';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
+import { redirectToProfile } from '../hoc/redirectToProfile';
 
 let maxLength = MaxLengthCreator(25);
 
@@ -45,4 +48,7 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
 
-export default connect(null, { login })(Login);
+export default  compose(connect(null, { login }), 
+withRouter,
+redirectToProfile
+)(Login);

@@ -16,7 +16,10 @@ const Profile = (props) => {
         <img src="https://img.freepik.com/free-vector/watercolor-pastel-sky-background_23-2148898822.jpg?size=626&ext=jpg&ga=GA1.2.1149860058.1620777600"></img>
       </div>
 
-      <ProfileInfo profileInfo={props.profileInfo} status={props.status} setStatus={props.setStatus} updateStatus={props.updateStatus} />
+      <ProfileInfo profileInfo={props.profileInfo} 
+      status={props.status} 
+      setStatus={props.setStatus} 
+      updateStatus={props.updateStatus} />
       <MyPostsContainer />
     </div>
   )
