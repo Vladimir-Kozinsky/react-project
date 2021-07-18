@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from 'redux';
 
+
 class ProfileAPIContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
@@ -29,7 +30,8 @@ let mapStateToProps = (state) => {
         profileInfo: state.profilePage.profileInfo,
         status: state.profilePage.status,
         authorizedUserId: state.auth.authdata,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+
     }
 }
 export default compose(

@@ -10,7 +10,7 @@ let maxLength = MaxLengthCreator(50);
 
 
 const MyPosts = (props) => {
-    let posts = props.profilePage.posts.map(p => <Post message={p.message} likesCounter={p.likesCounter} />)
+    let posts = props.profilePage.posts.map(p => <Post updateLikesCount={props.updateLikesCount}  postId={p.id} message={p.message} likesCounter={p.likesCounter} />)
     let addPost = (value) => {
         props.addPost(value.newPostText);
     }

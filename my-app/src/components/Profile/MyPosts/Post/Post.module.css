@@ -3,26 +3,63 @@
     margin: 10px;
     border: blue solid 1px;
     display: grid;
-    grid-template-columns: 60px 600px;
+    grid-template-columns: 80px 600px;
+    grid-template-rows: 100px 40px;
     grid-gap: 10px;
 
   grid-template-areas: 
-  "a t";
+  "a p"
+  "l l";
   border: orangered 1px solid;
   }
 
-.item img {
-  width: 50px;
-  border-radius: 30px;
+.post {
+  grid-area: p;
 }
-.text {
-  grid-area: t;
-  border: orangered 1px solid;
+.postText{
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  border: rgb(92, 139, 226) 1px solid;
 }
 .ava {
   grid-area: a;
-  border: orangered 1px solid;
+  height: 80px;
+}
+.ava img {
+  width: 80px;
 }
 .likes img {
-  width: 40px;
+  width: 75px;
+}
+.likes img:hover{
+  width: 77px;
+  transition-duration: 100ms;
+}
+.likes img:active{
+  width: 79px;
+  transition-duration: 100ms;
+}
+.likes {
+  grid-area: l;
+  float: left;
+  
+}
+.likesCount {
+  color: rgb(56, 107, 202);
+  font-size: 18px;
+  width: 35px;
+  height: 34px;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.likeImg {
+  height: 35px;
+  width: 80px;
+  float: left;
+}
+.postUserName {
+  text-align: center; 
 }

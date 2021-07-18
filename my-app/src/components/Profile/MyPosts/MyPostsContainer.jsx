@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addPostTextActionCreator } from '../../../redux/profileReduser';
+import { addPostTextActionCreator, updateLikesCountAC } from '../../../redux/profileReduser';
 import MyPosts from './MyPosts';
 
 
@@ -13,6 +13,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         addPost: (value) => {
             dispatch(addPostTextActionCreator(value));
+        },
+        updateLikesCount: (postId) => {
+            dispatch(updateLikesCountAC(postId))
         }
     }
 }

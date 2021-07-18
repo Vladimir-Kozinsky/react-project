@@ -4,6 +4,8 @@ import { ProfileAPI } from "../API/API";
 const ADD_POST = 'ADD-POST';
 const SET_PROFILE_INFO = 'SET-PROFILEINFO';
 const SET_STATUS = 'SET-STATUS';
+const SET_INITIALAZED = 'SET-INITIALAZED';
+const SET_LIKE_COUNTER = 'SET-LIKE-COUNTER';
 
 let initialState = {
     posts: [
@@ -20,7 +22,7 @@ const profileReduser = (state = initialState, action) => {
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, { id: 5, message: action.value, likesCounter: 29 }]
+                posts: [...state.posts, { id: 5, message: action.value, likesCounter: 0 }]
             }
         case SET_PROFILE_INFO:
             return {
@@ -32,6 +34,35 @@ const profileReduser = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
+        case SET_INITIALAZED:
+            return {
+                ...state,
+                initialazed: true
+            }
+        case SET_LIKE_COUNTER:
+            for (let i = 0; i < state.posts.length; i++) {
+                if (state.posts[i].id === action.postId) {
+                    let count = state.posts[i].likesCounter + 1;
+                    return { 
+                        ...state,
+                        ...state.posts[i].likesCounter = count
+                    }
+                    
+
+                    //     return {
+                    //         ...state,
+                    // posts: [{ id: 5, message: action.value, likesCounter: 0 } ]                      
+
+                    //     }
+                    console.log(state.posts[i])
+                }
+
+            }
+
+        // 
+
+
+
         default:
             return state;
     }
@@ -74,5 +105,16 @@ export const updateStatus = (status) => {
         })
     }
 }
+
+export const setLikesCounter = (postId) => {
+    return { type: SET_LIKE_COUNTER, postId }
+}
+
+export const updateLikesCountAC = (postId) => {
+    return (dispatch) => {
+        dispatch(setLikesCounter(postId))
+    }
+}
+
 
 export default profileReduser;
