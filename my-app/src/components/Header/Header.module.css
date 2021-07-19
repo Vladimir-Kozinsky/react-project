@@ -10,4 +10,7 @@
     .logo img {
       width: 150px;
     }
-    
+    .clock {
+      float: right;
+      margin-right: 10px;
+    }

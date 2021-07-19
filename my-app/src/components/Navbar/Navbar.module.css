@@ -6,7 +6,7 @@
 .item {
   color: white;
   margin: 10px;
-  border: gold solid 1px;
+  height: 20px;
 }
 .item a {
   text-decoration: none;
@@ -17,4 +17,9 @@
 }
 .sidebarFriends {
   border: gold solid 1px;
+}
+.item a:hover {
+  font-size: 17px;
+  transition: 1000;
+  color: gold;
 }
