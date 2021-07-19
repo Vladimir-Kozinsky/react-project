@@ -1,23 +1,19 @@
 import s from './Users.module.css';
 import Preloader from '../common/Preloader';
 import { NavLink } from 'react-router-dom';
+import Paginator from './Paginator/Paginator';
 
 const Users = (props) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
+    
     return (
         <div>
             {props.isFetching ? <Preloader /> : null}
 
-            <div>
-                {pages.map(p => {
-                    return <span onClick={() => { props.onPageChanged(p); }} className={props.currentPage === p && s.selectedPage} > {p} </span>
-                })}
-            </div>
+           <Paginator totalUsersCount={props.totalUsersCount} 
+           pageSize={props.pageSize} 
+           onPageChanged={props.onPageChanged} 
+           currentPage={props.currentPage} />
             {
                 props.users.map(u => <div className={s.user}>
                     <div className={s.avaBlock}>
