@@ -6,6 +6,8 @@ const SET_PROFILE_INFO = 'SET-PROFILEINFO';
 const SET_STATUS = 'SET-STATUS';
 const SET_INITIALAZED = 'SET-INITIALAZED';
 const SET_LIKE_COUNTER = 'SET-LIKE-COUNTER';
+const SAVE_PHOTO_SACCESS = 'SAVE-PHOTO-SACCESS';
+
 
 let initialState = {
     posts: [
@@ -15,6 +17,7 @@ let initialState = {
     ],
     profileInfo: null,
     status: '',
+
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -43,23 +46,19 @@ const profileReduser = (state = initialState, action) => {
             for (let i = 0; i < state.posts.length; i++) {
                 if (state.posts[i].id === action.postId) {
                     let count = state.posts[i].likesCounter + 1;
-                    return { 
+                    return {
                         ...state,
                         ...state.posts[i].likesCounter = count
                     }
-                    
-
-                    //     return {
-                    //         ...state,
-                    // posts: [{ id: 5, message: action.value, likesCounter: 0 } ]                      
-
-                    //     }
-                    console.log(state.posts[i])
                 }
+            }
+        case SAVE_PHOTO_SACCESS:
+            return {
+                ...state,
+                profileInfo: { ...state.profileInfo, photos: action.photos }
 
             }
 
-        // 
 
 
 
@@ -75,6 +74,11 @@ export const addPostTextActionCreator = (value) => {
 export const setProfileInfo = (profileInfo) => {
     return { type: SET_PROFILE_INFO, profileInfo }
 }
+
+export const savePhotoSuccess = (photos) => {
+    return { type: SAVE_PHOTO_SACCESS, photos }
+}
+
 export const getUserInfo = (userId) => {
     return (dispatch) => {
         usersAPI.userInfo(userId)
@@ -115,6 +119,14 @@ export const updateLikesCountAC = (postId) => {
         dispatch(setLikesCounter(postId))
     }
 }
-
+export const savePhoto = (photo) => {
+    return (dispatch) => {
+        ProfileAPI.savePhoto(photo).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(savePhotoSuccess(response.data.data.photos))
+            }
+        })
+    }
+}
 
 export default profileReduser;

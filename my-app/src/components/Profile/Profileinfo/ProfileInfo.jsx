@@ -7,10 +7,16 @@ import ProfileStatus from './ProfileStatus/ProfileStatus'
 
 const ProfileInfo = (props) => {
 
+    const onMainPhotoSelect = (e) => {
+        if (e.target.files.length) {
+            props.savePhoto(e.target.files[0])
+        }
+    }
     return (
         <div className={s.profileInfo}>
             <div className={s.profileImage}>
                 <img src={props.profileInfo.photos.large} alt="photo" />
+                {props.isOwner && <input type={"file"} onChange={onMainPhotoSelect} />}
             </div>
 
             <div className={s.personalInfo}>
@@ -22,8 +28,8 @@ const ProfileInfo = (props) => {
                 <div className={s.aboutMe}>
                     <div className={s.aboutMeDiv}>About Me:</div>
                     <div className={s.aboutMeText}>{props.profileInfo.aboutMe
-                    ? props.profileInfo.aboutMe
-                    : " no filled"}</div>
+                        ? props.profileInfo.aboutMe
+                        : " no filled"}</div>
                 </div>
                 <div className={s.lookingForAJob}>
                     <div className={s.lookingForAJobDiv}>LookingForAJob:</div>{(props.profileInfo.lookingForAJob) ? <div className={s.lookingForAJobText}>Yes</div> : <div className={s.lookingForAJobText}>No</div>}

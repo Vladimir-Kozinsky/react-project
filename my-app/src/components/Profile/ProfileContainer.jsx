@@ -1,14 +1,15 @@
 import Profile from "./Profile";
 import React from 'react';
 import { connect } from "react-redux";
-import { setProfileInfo, getUserInfo, setStatus, getStatus, updateStatus } from "../../redux/profileReduser";
+import { setProfileInfo, getUserInfo, setStatus, getStatus, updateStatus, savePhoto } from "../../redux/profileReduser";
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from 'redux';
 
 
+
 class ProfileAPIContainer extends React.Component {
-    componentDidMount() {
+    updateProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = this.props.authorizedUserId.id;
@@ -18,11 +19,21 @@ class ProfileAPIContainer extends React.Component {
         this.props.getUserInfo(userId);
         this.props.getStatus(userId);
     }
+    componentDidMount() {
+        this.updateProfile()
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.userId != this.props.match.params.userId) {
+            this.updateProfile()
+        }
 
+    }
     render() {
         return <Profile {...this.props} profileInfo={this.props.profileInfo}
             isAuth={this.props.isAuth} status={this.props.status}
-            setStatus={this.props.setStatus} updateStatus={this.props.updateStatus} />
+            setStatus={this.props.setStatus} updateStatus={this.props.updateStatus}
+            isOwner = {!this.props.match.params.userId}
+            savePhoto = {this.props.savePhoto} />
     }
 }
 let mapStateToProps = (state) => {
@@ -31,11 +42,12 @@ let mapStateToProps = (state) => {
         status: state.profilePage.status,
         authorizedUserId: state.auth.authdata,
         isAuth: state.auth.isAuth,
+       
 
     }
 }
 export default compose(
-    connect(mapStateToProps, { setProfileInfo, getUserInfo, setStatus, getStatus, updateStatus }),
+    connect(mapStateToProps, { setProfileInfo, getUserInfo, setStatus, getStatus, updateStatus, savePhoto }),
     withRouter,
     withAuthRedirect
 )(ProfileAPIContainer);
