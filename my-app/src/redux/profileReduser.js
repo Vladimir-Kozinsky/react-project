@@ -1,5 +1,6 @@
 import usersAPI from "../API/API";
 import { ProfileAPI } from "../API/API";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'ADD-POST';
 const SET_PROFILE_INFO = 'SET-PROFILEINFO';
@@ -7,6 +8,7 @@ const SET_STATUS = 'SET-STATUS';
 const SET_INITIALAZED = 'SET-INITIALAZED';
 const SET_LIKE_COUNTER = 'SET-LIKE-COUNTER';
 const SAVE_PHOTO_SACCESS = 'SAVE-PHOTO-SACCESS';
+const SET_EDIT_MODE = 'SET-EDIT-MODE';
 
 
 let initialState = {
@@ -17,7 +19,7 @@ let initialState = {
     ],
     profileInfo: null,
     status: '',
-
+    editMode: false,
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -56,12 +58,12 @@ const profileReduser = (state = initialState, action) => {
             return {
                 ...state,
                 profileInfo: { ...state.profileInfo, photos: action.photos }
-
             }
-
-
-
-
+            case SET_EDIT_MODE:
+                return {
+                    ...state,
+                    editMode: action.editMode
+                }
         default:
             return state;
     }
@@ -77,6 +79,9 @@ export const setProfileInfo = (profileInfo) => {
 
 export const savePhotoSuccess = (photos) => {
     return { type: SAVE_PHOTO_SACCESS, photos }
+}
+export const setEditMode = (editMode) => {
+    return { type: SET_EDIT_MODE, editMode }
 }
 
 export const getUserInfo = (userId) => {
@@ -128,5 +133,22 @@ export const savePhoto = (photo) => {
         })
     }
 }
+
+export const saveProfileInfo = (formData) => {
+    return (dispatch, getState) => {
+        const userId = getState().auth.authdata.id
+        ProfileAPI.sendProfileInfo(formData).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getUserInfo(userId))
+                dispatch(setEditMode(false))
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error ";
+                dispatch(stopSubmit('profileInfo', { _error: message }));
+                dispatch(setEditMode(true))
+            }
+        })
+    }
+}
+
 
 export default profileReduser;

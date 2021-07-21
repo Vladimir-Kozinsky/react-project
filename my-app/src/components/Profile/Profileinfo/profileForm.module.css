@@ -1,0 +1,5 @@
+.profileform {
+    grid-area: info;
+    border: solid 1px red;
+    padding-left: 20px;
+}
