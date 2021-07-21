@@ -146,6 +146,9 @@ export const saveProfileInfo = (formData) => {
                 dispatch(stopSubmit('profileInfo', { _error: message }));
                 dispatch(setEditMode(true))
             }
+
+
+            
         })
     }
 }
