@@ -8,7 +8,7 @@ const instance = axios.create({
     }
 });
 
-const usersAPI = {
+export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 5) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
@@ -29,8 +29,8 @@ const usersAPI = {
     getUserAuth() {
         return instance.get(`/auth/me`)
     },
-    login(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, { email, password, rememberMe })
+    login(email, password, rememberMe = false, captcha) {
+        return instance.post(`auth/login`, { email, password, rememberMe, captcha })
     },
     logout() {
         return instance.delete(`auth/login`)
@@ -62,6 +62,12 @@ export const ProfileAPI = {
     }
 }
 
+export const SecurityAPI = {
+    getCaptchaUrl(){
+        return instance.get('security/get-captcha-url');
+    }
+
+}
 
 
 export default usersAPI;

@@ -11,6 +11,7 @@ const SAVE_PHOTO_SACCESS = 'SAVE-PHOTO-SACCESS';
 const SET_EDIT_MODE = 'SET-EDIT-MODE';
 
 
+
 let initialState = {
     posts: [
         { id: 1, message: 'Hi, how are you?', likesCounter: 15 },
@@ -59,11 +60,12 @@ const profileReduser = (state = initialState, action) => {
                 ...state,
                 profileInfo: { ...state.profileInfo, photos: action.photos }
             }
-            case SET_EDIT_MODE:
-                return {
-                    ...state,
-                    editMode: action.editMode
-                }
+        case SET_EDIT_MODE:
+            return {
+                ...state,
+                editMode: action.editMode
+            }
+        
         default:
             return state;
     }
@@ -96,6 +98,8 @@ export const getUserInfo = (userId) => {
 export const setStatus = (status) => {
     return { type: SET_STATUS, status }
 }
+
+
 
 export const getStatus = (userId) => {
     return (dispatch) => {
@@ -146,12 +150,10 @@ export const saveProfileInfo = (formData) => {
                 dispatch(stopSubmit('profileInfo', { _error: message }));
                 dispatch(setEditMode(true))
             }
-
-
-            
         })
     }
 }
+
 
 
 export default profileReduser;

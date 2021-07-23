@@ -38,7 +38,8 @@ class ProfileAPIContainer extends React.Component {
             savePhoto={this.props.savePhoto}
             saveProfileInfo={this.props.saveProfileInfo}
             editMode={this.props.editMode}
-            setEditMode={this.props.setEditMode} />
+            setEditMode={this.props.setEditMode}
+            />
     }
 }
 let mapStateToProps = (state) => {
@@ -48,6 +49,8 @@ let mapStateToProps = (state) => {
         authorizedUserId: state.auth.authdata,
         isAuth: state.auth.isAuth,
         editMode: state.profilePage.editMode,
+        setCaptchaUrlSucces: state.auth.setCaptchaUrlSucces,
+        captchaUrl: state.auth.captchaUrl
 
 
     }

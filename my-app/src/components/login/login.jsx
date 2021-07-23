@@ -12,12 +12,14 @@ let maxLength = MaxLengthCreator(25);
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login(formData.login, formData.password, formData.rememberMe)
+    props.login(formData.login, formData.password, formData.rememberMe, formData.captcha)
   }
   return (
     <div>
       <h1>LOGIN</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit}
+        setCaptchaUrlSucces={props.setCaptchaUrlSucces}
+        captchaUrl={props.captchaUrl} />
     </div>
   )
 }
@@ -38,6 +40,8 @@ const LoginForm = (props) => {
         {props.error}
       </div>
       }
+      {props.captchaUrl && <img src={props.captchaUrl} />}
+      {props.captchaUrl && <Field placeholder='captcha' name="captcha" component={Input} />}
       <div>
         <button>Login</button>
       </div>
@@ -45,10 +49,16 @@ const LoginForm = (props) => {
   )
 }
 
+let mapStateToProps = (state) => {
+  return {
+    setCaptchaUrlSucces: state.auth.setCaptchaUrlSucces,
+    captchaUrl: state.auth.captchaUrl
+  }
+}
 
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
 
-export default  compose(connect(null, { login }), 
-withRouter,
-redirectToProfile
+export default compose(connect(mapStateToProps, { login }),
+  withRouter,
+  redirectToProfile
 )(Login);

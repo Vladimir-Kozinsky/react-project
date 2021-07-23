@@ -3,7 +3,7 @@ import { Input, Textarea } from '../../common/formsControls/FormsControls';
 import s from './profileForm.module.css';
 
 const ProfileInfoForm = (props) => {
-
+debugger
     return (
         <form className={s.profileform} onSubmit={props.handleSubmit} >
             <div className={s.FullNameDiv}>FullName:</div>
@@ -34,6 +34,7 @@ const ProfileInfoForm = (props) => {
                     <Field placeholder='website' name="contacts.website" component={Input} />
                 </div>
             </div>
+            
             {props.error && <div>{props.error}</div>}
             <button>Save</button>
             <button onClick={() => props.setEditMode(false)} >Cancel</button>

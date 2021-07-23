@@ -3,7 +3,6 @@ import s from './Profile.module.css';
 import Preloader from '../common/Preloader';
 import ProfileInfo from './Profileinfo/ProfileInfo';
 import { ProfileInfoReduxForm } from './Profileinfo/ProfileInfoForm';
-import { useState } from 'react';
 
 
 
@@ -27,7 +26,7 @@ const Profile = (props) => {
       </div>
 
       {props.editMode
-        ? <ProfileInfoReduxForm initialValues={props.profileInfo}
+        ? <ProfileInfoReduxForm  initialValues={props.profileInfo}
           onSubmit={onSubmit}
           profileInfo={props.profileInfo} />
         : <ProfileInfo profileInfo={props.profileInfo}

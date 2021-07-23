@@ -1,9 +1,9 @@
 import { stopSubmit } from "redux-form";
-import usersAPI from "../API/API";
+import { usersAPI, SecurityAPI } from "../API/API";
 
 const GET_DATA_AUTH = 'GET-DATA-AUTH';
 const SET_USER_DATA = 'SET-USER-DATA';
-
+const SET_CAPTCHA_URL = 'SET-CAPTCHA-URL';
 
 let initialState = {
     authdata: {
@@ -12,6 +12,8 @@ let initialState = {
         login: null,
     },
     isAuth: false,
+    captchaUrl: null,
+    setCaptchaUrlSucces: false,
 
 }
 
@@ -30,7 +32,11 @@ const authReduser = (state = initialState, action) => {
                 authdata: { ...action.payload },
                 isAuth: false
             }
-
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captchaUrl: action.captchaUrl
+            }
         default:
             return state;
     }
@@ -39,6 +45,10 @@ const authReduser = (state = initialState, action) => {
 
 export const getDataAC = (authdata) => {
     return { type: GET_DATA_AUTH, authdata }
+}
+
+export const setCaptchaUrl = (captchaUrl) => {
+    return { type: SET_CAPTCHA_URL, captchaUrl }
 }
 
 
@@ -56,13 +66,17 @@ export const setDataAC = (id, email, login) => {
     return { type: SET_USER_DATA, payload: { id, email, login } }
 }
 
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, captcha) => {
     return (dispatch) => {
 
-        usersAPI.login(email, password, rememberMe).then(response => {
+        usersAPI.login(email, password, rememberMe, captcha).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuth())
+                dispatch(setCaptchaUrl(null))
             } else {
+                if (response.data.resultCode === 10) {
+                    dispatch(getCaptchaUrl());
+                }
                 let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error ";
                 dispatch(stopSubmit('login', { _error: message }));
             }
@@ -79,5 +93,13 @@ export const logout = () => {
     }
 }
 
+
+export const getCaptchaUrl = () => {
+    return (dispatch) => {
+        SecurityAPI.getCaptchaUrl().then(response => {
+            dispatch(setCaptchaUrl(response.data.url))
+        })
+    }
+}
 
 export default authReduser;
