@@ -2,14 +2,12 @@
   width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: 150px 600px;
   grid-template-columns: 250px 940px;
   grid-gap: 10px;
 
   grid-template-areas: 
-  "h h"
   "n c";
-  border: orangered 1px solid;
+  border: rgb(200, 255, 0) 1px solid;
 }
 .appConrent {
   grid-area: c;

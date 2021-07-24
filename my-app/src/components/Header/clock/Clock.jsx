@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './clock.module.css';
 
 class Clock extends React.Component {
     constructor(props) {
@@ -11,15 +12,18 @@ class Clock extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timerID);
     }
-tick() {
-    this.setState({
-        date: new Date()
-    });
-}
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
 
     render() {
         return (
-            <h3>Time:{this.state.date.toLocaleTimeString()}</h3>
+            <div className={s.clock}>
+                <h3>Time:{this.state.date.toLocaleTimeString()}</h3>
+            </div>
+
         )
     }
 }

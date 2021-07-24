@@ -26,17 +26,19 @@ class App extends Component {
       return <Preloader />
     }
     return (
-      <div className="appWrapper">
+      <div>
         <HeaderContainer />
-        <Navbar state={this.props.store.getState()} />
-        <div className="appContent">
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={() => <Login />} />
+        <div className="appWrapper">
+          <Navbar state={this.props.store.getState()} />
+          <div className="appContent">
+            <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+            <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/login" render={() => <Login />} />
+          </div>
         </div>
-
       </div>
+
 
     );
   }

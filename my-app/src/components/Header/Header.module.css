@@ -1,16 +1,81 @@
 .header {
-    grid-area: h;
-    border: orangered 1px solid;
+    border: rgb(0, 60, 255) 1px solid;
+
+
+   
+}
+.headerContainer {
+      width: 1200px;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-template-areas: 
+      "headerLinks logo clock login";
+      margin: 0 auto;
     }
     
-    
-    .logo {
-      border: orangered 1px solid;
+.logo {
+      text-align: center;
+      grid-area: logo;
+     
+      
     }
     .logo img {
-      width: 150px;
+      height: 60px;
     }
-    .clock {
-      float: right;
-      margin-right: 10px;
+    
+    .login {
+      grid-area: login;
+      text-align: center;
+      
     }
+    .login span {
+      color: crimson;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  
+    .headerWallpaper {
+
+      
+    }
+    .headerWallpaper img {
+      height: 250px;
+      width: 100%;
+    }
+    .headerLinks a {
+      text-decoration: none;
+      color: crimson;
+      font-weight: bold;
+      font-size: 18px;
+      padding-left: 10px;
+    }
+.menu {
+  position: relative;
+  display: inline-block;
+}
+.dropMenuContent {
+  display: none;
+  position: absolute;
+  margin-right: 40px;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+}
+.dropMenuContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+.dropMenuContent a:hover {
+  background-color: #ddd;
+}
+.menu:hover .dropMenuContent {
+  display: block;
+}
+.menu:hover .menuButton {
+  background-color: rgb(238, 204, 211);
+}
