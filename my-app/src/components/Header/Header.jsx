@@ -7,6 +7,13 @@ import wallpaper from './../common/header/wallpaper.jpg';
 
 const Header = (props) => {
 
+  const dropMenu = () => {
+    document.getElementById('qq').style.display = 'block';
+  }
+  const hideMenu = () => {
+    document.getElementById('qq').style.display = 'none';
+  }
+
   return (
     <header className={s.header}>
       <div className={s.headerContainer}>
@@ -17,23 +24,30 @@ const Header = (props) => {
         <div className={s.login}>
 
 
-          
+
 
 
 
 
           {props.isAuth === true ? <div>
             <div className={s.menu}>
-            <span className={s.menuButton} >{props.authdata.login}</span>
-            <div className={s.dropMenuContent}>
-              <a href="#">Link 1</a>
-              <a href="#">Setting</a>
+              <button className={s.avaButton}
+                onClick={dropMenu}
+                autoFocus={true}
+                onBlur={hideMenu} >{props.avararPhoto
+                  ? <img src={props.avararPhoto} alt="" />
+                  : <span>Photo</span>}
+              </button>
+              <div id="qq" className={s.dropMenuContent}>
+                <NavLink to="/profile" >{props.authdata.login}</NavLink>
+                <a href="#">Link 1</a>
+                <a href="#">Setting</a>
+              </div>
               <button onClick={props.logout} >Sing out</button>
             </div>
-          </div>
-            
 
-            
+
+
           </div> : <NavLink to="/login"><div>login</div></NavLink>}
         </div>
         <div className={s.headerLinks}>

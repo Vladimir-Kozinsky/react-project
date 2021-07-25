@@ -59,6 +59,9 @@ export const ProfileAPI = {
     },
     sendProfileInfo(formData) {
         return instance.put('profile', formData);
+    },
+    userPhoto(userId) {
+        return instance.get(`profile/${userId}`); 
     }
 }
 

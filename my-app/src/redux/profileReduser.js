@@ -9,6 +9,7 @@ const SET_INITIALAZED = 'SET-INITIALAZED';
 const SET_LIKE_COUNTER = 'SET-LIKE-COUNTER';
 const SAVE_PHOTO_SACCESS = 'SAVE-PHOTO-SACCESS';
 const SET_EDIT_MODE = 'SET-EDIT-MODE';
+const SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO';
 
 
 
@@ -21,6 +22,7 @@ let initialState = {
     profileInfo: null,
     status: '',
     editMode: false,
+    profileSmallPhotoUrl: null,
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -65,7 +67,13 @@ const profileReduser = (state = initialState, action) => {
                 ...state,
                 editMode: action.editMode
             }
-        
+        case SET_PROFILE_PHOTO:
+            return {
+                ...state,
+                profileSmallPhotoUrl: action.smallPhotoUrl
+            }
+
+
         default:
             return state;
     }
@@ -85,12 +93,24 @@ export const savePhotoSuccess = (photos) => {
 export const setEditMode = (editMode) => {
     return { type: SET_EDIT_MODE, editMode }
 }
+export const setProfolePhoto = (smallPhotoUrl) => {
+    return { type: SET_PROFILE_PHOTO, smallPhotoUrl }
+}
 
 export const getUserInfo = (userId) => {
     return (dispatch) => {
+
         usersAPI.userInfo(userId)
             .then(response => {
                 dispatch(setProfileInfo(response.data));
+            })
+    }
+}
+export const getProfilePhoto = (userId) => {
+    return (dispatch) => {
+        ProfileAPI.userPhoto(userId)
+            .then(response => {
+                dispatch(setProfolePhoto(response.data.photos.small))
             })
     }
 }
@@ -133,6 +153,8 @@ export const savePhoto = (photo) => {
         ProfileAPI.savePhoto(photo).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(savePhotoSuccess(response.data.data.photos))
+                dispatch(setProfolePhoto(response.data.data.photos.small)) //update small photo in Header
+
             }
         })
     }

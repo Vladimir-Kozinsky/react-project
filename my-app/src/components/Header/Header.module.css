@@ -34,10 +34,7 @@
       font-size: 18px;
     }
   
-    .headerWallpaper {
-
-      
-    }
+  
     .headerWallpaper img {
       height: 250px;
       width: 100%;
@@ -52,6 +49,14 @@
 .menu {
   position: relative;
   display: inline-block;
+  padding-top: 7px;
+}
+.avaButton {
+  border-radius: 50px;
+}
+.menu img {
+  height: 35px;
+  border-radius: 50px;
 }
 .dropMenuContent {
   display: none;
@@ -73,9 +78,9 @@
 .dropMenuContent a:hover {
   background-color: #ddd;
 }
-.menu:hover .dropMenuContent {
+/* .menu:active .dropMenuContent {
   display: block;
-}
+} */
 .menu:hover .menuButton {
   background-color: rgb(238, 204, 211);
 }

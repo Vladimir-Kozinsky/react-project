@@ -1,5 +1,7 @@
 import { stopSubmit } from "redux-form";
 import { usersAPI, SecurityAPI } from "../API/API";
+import { getProfilePhoto } from "./profileReduser";
+
 
 const GET_DATA_AUTH = 'GET-DATA-AUTH';
 const SET_USER_DATA = 'SET-USER-DATA';
@@ -57,6 +59,7 @@ export const getAuth = () => {
         return usersAPI.getUserAuth().then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getDataAC(response.data.data))
+                dispatch(getProfilePhoto(response.data.data.id))
             }
         })
     }
@@ -67,12 +70,13 @@ export const setDataAC = (id, email, login) => {
 }
 
 export const login = (email, password, rememberMe, captcha) => {
-    return (dispatch) => {
-
+    return (dispatch, getState) => {
+        
         usersAPI.login(email, password, rememberMe, captcha).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuth())
                 dispatch(setCaptchaUrl(null))
+
             } else {
                 if (response.data.resultCode === 10) {
                     dispatch(getCaptchaUrl());
