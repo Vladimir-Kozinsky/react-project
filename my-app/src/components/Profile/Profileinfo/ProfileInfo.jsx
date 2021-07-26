@@ -13,7 +13,6 @@ const ProfileInfo = (props) => {
         }
     }
 
-
     return (
         <div className={s.profileInfo}>
             <div className={s.profileImage}>

@@ -5,12 +5,13 @@
   display: grid;
   grid-template-columns: 245px 935px;
   grid-gap: 20px;
-  grid-template-areas: "n c";
-  border: rgb(200, 255, 0) 1px solid;
+  grid-template-areas: 
+  "n c";
 }
 
 .appConrent {
   grid-area: c;
+
 }
 
 .app {

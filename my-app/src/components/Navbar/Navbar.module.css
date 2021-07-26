@@ -1,13 +1,35 @@
-.nav {
+.navBar {
   grid-area: n;
+  background-color: rgb(241, 238, 238);
+}
+
+.navBarLinks {
+  padding: 30px;
   background-color: white;
-  box-shadow: 0 0 10px rgb(99, 96, 96); 
+  box-shadow: 0 0 10px rgb(99, 96, 96);
 }
 
 .item {
   color: black;
-  margin: 10px;
   height: 20px;
+  padding: 7px;
+}
+
+.itemImgContainer {
+  float: left;
+  height: 20px;
+  width: 30px;
+  text-align: center;
+}
+
+.itemImgContainer img {
+  height: 20px;
+}
+
+.itemLinkContainer {
+  float: left;
+  height: 20px;
+  margin-left: 15px;
 }
 
 .item a {
@@ -20,7 +42,11 @@
 }
 
 .sidebarFriends {
-  border: gold solid 1px;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgb(99, 96, 96);
+  height: 300px;
+  padding: 10px;
 }
 
 .item a:hover {

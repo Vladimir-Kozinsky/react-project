@@ -4,25 +4,28 @@
     display: grid;
     grid-template-rows: 200px 100px;
     grid-template-columns: 250px 650px;
-    grid-gap: 10px;
-    grid-template-areas: 
-    "image personalInfo "
-    "image contacts";
-    box-shadow: 0 0 10px rgb(99, 96, 96); 
+    grid-gap: 20px;
+    grid-template-areas: "image personalInfo " "image contacts";
+    box-shadow: 0 0 10px rgb(99, 96, 96);
 }
+
 .profileImage {
+    margin-top: 10px;
+    margin-left: 10px;
     grid-area: image;
-    background-color: cadetblue;
     width: 250px;
     height: 300px;
 }
+
 .profileImage img {
     width: 250px;
+    border-radius: 10px;
 }
+
 .personalInfo {
     grid-area: personalInfo;
-    padding-left:10px;
 }
+
 .contacts {
     margin-top: 60px;
     grid-area: contacts;
@@ -30,29 +33,30 @@
     grid-template-rows: 30px 30px 30px 30px;
     grid-template-columns: 90px 40px 400px;
     grid-gap: 10px;
-    grid-template-areas: 
-    "contactsText logoF linkF"
-    "contactsText logoV linkV"
-    "contactsText logoI linkI"
-    "contactsText logoW linkW";
+    grid-template-areas: "contactsText logoF linkF" "contactsText logoV linkV" "contactsText logoI linkI" "contactsText logoW linkW";
 }
+
 .contacts img {
-    
     width: 30px;
 }
+
 .contactsText {
     grid-area: contactsText;
     height: 20px;
 }
+
 .contactLogoFacebook {
     grid-area: logoF;
 }
+
 .contactLogoWeb {
-    grid-area: logoW; 
+    grid-area: logoW;
 }
+
 .contactLogoVk {
     grid-area: logoV;
 }
+
 .contactLogoInsta {
     grid-area: logoI;
 }
@@ -60,12 +64,15 @@
 .linkFacebook {
     grid-area: linkF;
 }
+
 .linkWeb {
     grid-area: linkW;
 }
+
 .linkVk {
     grid-area: linkV;
 }
+
 .linkInsta {
     grid-area: linkI;
 }
@@ -77,23 +84,29 @@
     margin: 10px 0 5px 0;
     text-align: center;
 }
+
 .aboutMe {
     margin: 10px 0 10px 0;
 }
+
 .aboutMeDiv {
     float: left;
     width: 210px;
 }
+
 .lookingForAJob {
     margin: 10px 0 10px 0;
 }
+
 .lookingForAJobDiv {
     float: left;
     width: 210px;
 }
+
 .lookingForAJobDescription {
     margin: 10px 0 10px 0;
 }
+
 .lookingForAJobDescriptionDiv {
     float: left;
     width: 210px;
