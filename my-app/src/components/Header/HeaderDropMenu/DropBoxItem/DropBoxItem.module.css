@@ -1,0 +1,42 @@
+.dropMenuItem * {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dropMenuItem {
+    height: 35px;
+    padding-top: 15px;
+}
+
+.dropMenuItem img {
+    height: 19px;
+}
+
+.iconContainer {
+    margin-top: 1px;
+    margin-left: 15px;
+    height: 20px;
+    width: 16px;
+    float: left;
+}
+
+.linkContainer {
+    width: 100px;
+    float: left;
+    margin-left: 15px;
+}
+
+.linkContainer a {
+    text-decoration: none;
+    color: black;
+}
+
+/* HOVER */
+
+.linkContainer a:hover {
+    color: crimson;
+}
+.linkContainer span:hover {
+    color: crimson;
+    cursor: pointer;
+}

@@ -3,12 +3,24 @@
   padding: 0;
 }
 
+.header {
+  width: 100%;
+}
+
+.headerNavPanel {
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 0 5px white; 
+}
+
 .headerContainer {
+  height: 60px;
+  background-color: white;
   width: 1200px;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-areas: "headerLinks logo clock login";
-  border: 1px solid red;
   margin: 0 auto;
 }
 
@@ -22,14 +34,15 @@
   height: 60px;
 }
 
-.loginContainer {
-  grid-area: login;
-  border: 1px solid red;
-}
-
 .headerWallpaper img {
   height: 250px;
   width: 100%;
+}
+
+.headerWallpaper {
+  height: 250px;
+  width: 100%;
+  padding-top: 60px;
 }
 
 .headerLinks a {
@@ -38,93 +51,4 @@
   font-weight: bold;
   font-size: 18px;
   padding-left: 10px;
-}
-
-.login {
-  position: relative;
-  padding-top: 7px;
-  width: 45px;
-  margin-right: 10px;
-  float: right;
-}
-
-.avaPhoto {
-  cursor: pointer;
-  padding-top: 4px;
-}
-
-.avaPhoto img {
-  height: 40px;
-  border-radius: 50px;
-  border: 3px solid crimson;
-}
-
-.dropMenuContent {
-  display: none;
-  position: absolute;
-  margin-right: 40px;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  right: -40px;
-}
-
-.dropMenuboxContainer {
-  margin: 0;
-  position: absolute;  
-  top: 50%; 
-  transform: translate(0, -50%)
-}
-.boxNavLink {
-  font-size: 15px;
-  font-family: Arial, sans-serif ;
-  margin: 0;
-  position: absolute;  
-  top: 50%; 
-  transform: translate(0, -50%)
-}
-
-.dropMenuContent a {
-  color: black;
-  text-decoration: none;
-}
-
-.dropMenuContent li {
-  list-style-type: none;
-  margin-left: 0px;
-}
-
-.dropMenubox {
-  border-bottom: solid 1px grey;
-  height: 60px;
-  width: 200px;
-  padding-left: 20px;
-  position: relative;
-}
-.dropMenubox img {
-  height: 15px;
-  width: 15px;
-}
-.dropMenubox div {
-  float: left;
-  padding-right: 10px;
-}
-
-.dropMenuContent li:hover {
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.dropMenuContent a:hover {
-  color: crimson;
-}
-
-.login:hover .dropMenuContent {
-  display: block;
-  transition: 0.3s;
-}
-
-.menu:hover .menuButton {
-  background-color: rgb(238, 204, 211);
 }

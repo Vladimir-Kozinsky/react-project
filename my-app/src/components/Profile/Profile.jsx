@@ -13,7 +13,7 @@ const Profile = (props) => {
     props.saveProfileInfo(formData);
     if (props.updateProfileInfoSucces) {
     }
-      
+
   }
 
   if (!props.profileInfo) {
@@ -21,12 +21,8 @@ const Profile = (props) => {
   }
   return (
     <div className={s.profilePage}>
-      <div className={s.profileImage}>
-        <img src="https://img.freepik.com/free-vector/watercolor-pastel-sky-background_23-2148898822.jpg?size=626&ext=jpg&ga=GA1.2.1149860058.1620777600"></img>
-      </div>
-
       {props.editMode
-        ? <ProfileInfoReduxForm  initialValues={props.profileInfo}
+        ? <ProfileInfoReduxForm initialValues={props.profileInfo}
           onSubmit={onSubmit}
           profileInfo={props.profileInfo} />
         : <ProfileInfo profileInfo={props.profileInfo}

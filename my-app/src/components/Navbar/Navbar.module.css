@@ -1,25 +1,30 @@
 .nav {
-    grid-area: n;
-    border: orangered 1px solid;
-    background-color: rgb(149, 151, 148);
-  }
+  grid-area: n;
+  background-color: white;
+  box-shadow: 0 0 10px rgb(99, 96, 96); 
+}
+
 .item {
-  color: white;
+  color: black;
   margin: 10px;
   height: 20px;
 }
+
 .item a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
+
 .item a.active {
-  color: gold;
+  color: crimson;
 }
+
 .sidebarFriends {
   border: gold solid 1px;
 }
+
 .item a:hover {
   font-size: 17px;
   transition: 1000;
-  color: gold;
+  color: crimson;
 }

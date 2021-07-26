@@ -1,15 +1,18 @@
 .appWrapper {
+  padding-top: 20px;
   width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 250px 940px;
-  grid-gap: 10px;
-
-  grid-template-areas: 
-  "n c";
+  grid-template-columns: 245px 935px;
+  grid-gap: 20px;
+  grid-template-areas: "n c";
   border: rgb(200, 255, 0) 1px solid;
 }
+
 .appConrent {
   grid-area: c;
-  
+}
+
+.app {
+  background-color: rgb(241, 238, 238);
 }

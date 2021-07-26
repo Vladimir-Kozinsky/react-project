@@ -26,7 +26,7 @@ class App extends Component {
       return <Preloader />
     }
     return (
-      <div>
+      <div className="app">
         <HeaderContainer />
         <div className="appWrapper">
           <Navbar state={this.props.store.getState()} />

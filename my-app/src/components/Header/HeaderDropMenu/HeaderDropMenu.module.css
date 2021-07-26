@@ -1,0 +1,38 @@
+.headerDropMenuContainer {
+    grid-area: login;
+  }
+
+  .userPhotoContainer {
+    position: relative;
+    padding-top: 11px;
+    width: 45px;
+    margin-right: 15px;
+    float: right;
+}
+
+.usserPhoto {
+    cursor: pointer;
+    padding-top: 4px;
+  }
+.userPhoto img {
+    height: 35px;
+    border-radius: 50px;
+}
+
+.dropMenu {
+    display: none;
+    position: absolute;
+    margin-right: 40px;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: -40px;
+    border-radius: 5px;
+}
+
+/* HOVER */
+
+.userPhotoContainer:hover .dropMenu {
+    display: block;
+} 

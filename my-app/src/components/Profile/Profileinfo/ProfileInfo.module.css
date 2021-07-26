@@ -1,6 +1,5 @@
 .profileInfo {
     grid-area: info;
-    border: rgb(11, 228, 11) 1px solid;
     background-color: rgb(252, 252, 252);
     display: grid;
     grid-template-rows: 200px 100px;
@@ -9,6 +8,7 @@
     grid-template-areas: 
     "image personalInfo "
     "image contacts";
+    box-shadow: 0 0 10px rgb(99, 96, 96); 
 }
 .profileImage {
     grid-area: image;
