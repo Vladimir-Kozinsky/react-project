@@ -1,7 +1,7 @@
 .clock {
     grid-area: clock;
-    text-align: center;
   }
   .clock h3 {
       color:crimson;
+      margin-top: 16px;
   }

@@ -1,6 +1,6 @@
 .item {
     color: blue;
-    margin: 10px;
+    margin: 100px;
     border: blue solid 1px;
     display: grid;
     grid-template-columns: 80px 600px;

@@ -4,8 +4,9 @@ import SidebarFriend from './SidebarFriend/SidebarFriend';
 import settingImg from './../common/header/settingImg.png';
 import profileIcon from './../common/header/profileIcon.png';
 import inboxIcon from './../common/header/inboxIcon.png';
-
-
+import newsIcon from './../common/navBar/newsIcon.png';
+import musicIcon from './../common/navBar/musicIcon.png';
+import usersIcon from './../common/navBar/usersIcon.png';
 
 const Navbar = (props) => {
 
@@ -32,7 +33,7 @@ const Navbar = (props) => {
         </div>
         <div className={s.item}>
           <div className={s.itemImgContainer}>
-            <img src="" alt="" />
+            <img src={newsIcon} alt="" />
           </div>
           <div className={s.itemLinkContainer}>
             <NavLink to="/news" activeClassName={s.active}>News</NavLink>
@@ -40,7 +41,7 @@ const Navbar = (props) => {
         </div>
         <div className={s.item}>
           <div className={s.itemImgContainer}>
-            <img src="" alt="" />
+            <img src={musicIcon} alt="" />
           </div>
           <div className={s.itemLinkContainer}>
             <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
@@ -56,7 +57,7 @@ const Navbar = (props) => {
         </div>
         <div className={s.item}>
           <div className={s.itemImgContainer}>
-            <img src="" alt="" />
+            <img src={usersIcon} alt="" />
           </div>
           <div className={s.itemLinkContainer}>
             <NavLink to="/users" activeClassName={s.active}>Users</NavLink>

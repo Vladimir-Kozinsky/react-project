@@ -51,6 +51,6 @@
 
 .item a:hover {
   font-size: 17px;
-  transition: 1000;
+  transition: 0.3s;
   color: crimson;
 }

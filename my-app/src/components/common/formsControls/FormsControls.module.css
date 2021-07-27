@@ -4,6 +4,8 @@
 }
 .errorMessage {
     color: red;
-    border: solid 1px red;
-    border-radius: 3px;
+}
+.errorBorderRed div {
+width: 160px;
+margin: 3px auto;
 }

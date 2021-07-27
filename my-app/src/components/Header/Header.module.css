@@ -25,13 +25,14 @@
 }
 
 .logo {
-  text-align: center;
+  text-align: right;
   grid-area: logo;
   margin-right: 10px;
 }
 
 .logo img {
-  height: 60px;
+  height: 50px;
+  margin-top: 4px;
 }
 
 .headerWallpaper img {
@@ -45,10 +46,20 @@
   padding-top: 60px;
 }
 
+/* STYLES FOR HEADER LINKS */
+
+.headerLinks {
+  text-align: center;
+  padding-top: 16px;
+}
 .headerLinks a {
   text-decoration: none;
-  color: crimson;
+  color: black;
   font-weight: bold;
   font-size: 18px;
-  padding-left: 10px;
+  padding-left: 15px;
+}
+.headerLinks a:hover{
+  color: crimson;
+  transition: 0.3s;
 }

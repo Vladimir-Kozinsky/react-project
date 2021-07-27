@@ -1,10 +1,25 @@
 .sidebarFriend img {
-    width: 50px;
-    border-radius: 30px;
-  }
+  width: 40px;
+  height: 40px;
+}
+
 .sidebarFriend {
-    border: red solid 1px;
-    width: 60px;
-    float: left;
-    margin: 5px;
+  width: 60px;
+  height: 60px;
+  float: left;
+  margin: 5px;
+  text-align: center;
+}
+
+.friendsImgContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 5px crimson;
+}
+.nameContainer:hover {
+  cursor: pointer;
+  color: crimson;
 }

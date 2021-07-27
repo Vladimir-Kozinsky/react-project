@@ -1,15 +1,18 @@
 import s from './SidebarFriend.module.css';
+import ava from './../../common/navBar/ava.jpg';
 
 const SidebarFriend = (props) => {
-   
-    return (
-  
-      <div className={s.sidebarFriend}>
-            <img src="https://www.atlanticrecords.com/sites/g/files/g2000003466/f/styles/recent_album/public/202102/FINAL_AvaMax_MH%26MH.jpg?itok=wrkotbRf" alt="avatar" />
-            <div>{props.friend}</div>
-          </div>
-  
-    )
-  }
+
+  return (
+
+    <div className={s.sidebarFriend}>
+      <div className={s.friendsImgContainer}>
+        <img src={ava} alt="avatar" />
+      </div>
+      <div className={s.nameContainer}>{props.friend}</div>
+    </div>
+
+  )
+}
 
 export default SidebarFriend;

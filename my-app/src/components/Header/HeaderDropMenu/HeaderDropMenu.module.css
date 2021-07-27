@@ -1,8 +1,8 @@
 .headerDropMenuContainer {
     grid-area: login;
-  }
+}
 
-  .userPhotoContainer {
+.userPhotoContainer {
     position: relative;
     padding-top: 11px;
     width: 45px;
@@ -13,7 +13,8 @@
 .usserPhoto {
     cursor: pointer;
     padding-top: 4px;
-  }
+}
+
 .userPhoto img {
     height: 35px;
     border-radius: 50px;
@@ -31,8 +32,39 @@
     border-radius: 5px;
 }
 
+/* STYLES FOR LOGIN */
+
+.login {
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.login a {
+    text-decoration: none;
+    color: crimson;
+    text-align: center;
+    font-weight: bold;
+}
+
+.loginImgContainer {
+    width: 50px;
+    text-align: center;
+    height: 20px;
+    margin: 0 auto;
+}
+
+.loginImgContainer img {
+    height: 20px;
+}
+
+.loginLinkContainer {
+    height: 20px;
+    width: 50px;
+    margin: 0 auto;
+}
+
 /* HOVER */
 
 .userPhotoContainer:hover .dropMenu {
     display: block;
-} 
+}

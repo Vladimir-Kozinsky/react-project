@@ -1,13 +1,3 @@
- .profilePage {
-  display: grid;
-  grid-template-rows: 400px 600px;
-  grid-template-columns: 300 400px;
-  grid-gap: 20px;
-
-  grid-template-areas: 
-  "info info"
-  "posts posts";
-}
 
 
 

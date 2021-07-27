@@ -1,5 +1,28 @@
 .myPosts {
-    grid-area: posts;
-    background-color: white;
-    box-shadow: 0 0 10px rgb(99, 96, 96); 
+    margin-top: 120px;
+    border: solid 1px grey;
+}
+
+.postTextArea {
+    border: solid 1px rgb(94, 255, 0);
+    width: 410px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.postTextArea textarea {
+    width: 400px;
+    height: 70px;
+}
+
+.postButton {
+    border: solid 1px red;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.postButton button {
+    margin-top: 20px;
+    margin-left: 340px;
+    width: 60px;
 }

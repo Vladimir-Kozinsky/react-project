@@ -1,29 +1,29 @@
 .profileInfo {
     grid-area: info;
-    background-color: rgb(252, 252, 252);
     display: grid;
     grid-template-rows: 200px 100px;
     grid-template-columns: 250px 650px;
-    grid-gap: 20px;
+    grid-gap: 10px;
     grid-template-areas: "image personalInfo " "image contacts";
-    box-shadow: 0 0 10px rgb(99, 96, 96);
 }
 
 .profileImage {
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 30px;
+    margin-left: 40px;
     grid-area: image;
-    width: 250px;
-    height: 300px;
+    overflow: hidden;
+    height: 400px;
 }
 
 .profileImage img {
-    width: 250px;
-    border-radius: 10px;
+    height: 300px;
+    margin-left: -50%;
 }
 
 .personalInfo {
+    margin-top: 30px;
     grid-area: personalInfo;
+    background-color: white;
 }
 
 .contacts {
@@ -34,6 +34,7 @@
     grid-template-columns: 90px 40px 400px;
     grid-gap: 10px;
     grid-template-areas: "contactsText logoF linkF" "contactsText logoV linkV" "contactsText logoI linkI" "contactsText logoW linkW";
+    background-color: white;
 }
 
 .contacts img {

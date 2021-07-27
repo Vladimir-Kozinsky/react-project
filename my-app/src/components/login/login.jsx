@@ -7,6 +7,7 @@ import { login } from './../../redux/authReduser';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { redirectToProfile } from '../hoc/redirectToProfile';
+import s from './login.module.css';
 
 let maxLength = MaxLengthCreator(25);
 
@@ -15,8 +16,8 @@ const Login = (props) => {
     props.login(formData.login, formData.password, formData.rememberMe, formData.captcha)
   }
   return (
-    <div>
-      <h1>LOGIN</h1>
+    <div className={s.login}>
+      <h2>LOGIN</h2>
       <LoginReduxForm onSubmit={onSubmit}
         setCaptchaUrlSucces={props.setCaptchaUrlSucces}
         captchaUrl={props.captchaUrl} />
@@ -27,13 +28,13 @@ const Login = (props) => {
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <div>
+      <div className={s.loginInputContainer}>
         <Field placeholder='login' name="login" component={Input} validate={[maxLength, RequiredField]} />
       </div>
-      <div>
+      <div className={s.loginInputContainer}  >
         <Field placeholder='password' name="password" component={Input} validate={[maxLength, RequiredField]} />
       </div>
-      <div>
+      <div className={s.loginCheckBoxContainer}>
         <Field type="checkbox" name="rememberMe" component="input" /> Remember me
       </div>
       {props.error && <div>
@@ -42,8 +43,9 @@ const LoginForm = (props) => {
       }
       {props.captchaUrl && <img src={props.captchaUrl} />}
       {props.captchaUrl && <Field placeholder='captcha' name="captcha" component={Input} />}
-      <div>
+      <div className={s.loginButtonContainer} >
         <button>Login</button>
+
       </div>
     </form>
   )

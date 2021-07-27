@@ -24,7 +24,7 @@ const HeaderDropMenu = (props) => {
                             settingImg={profileIcon}
                             path={"/profile"}
                             itemName={props.authdata.login} />
-                            <DropBoxItem
+                        <DropBoxItem
                             settingImg={inboxIcon}
                             path={"/dialogs"}
                             itemName={"Inbox"} />
@@ -46,7 +46,16 @@ const HeaderDropMenu = (props) => {
                     </div>
                 </div>
 
-                : <NavLink to="/login"><div>login</div></NavLink>}
+                : <div className={s.login}>
+                    <div className={s.loginImgContainer}>
+                        <img src={profileIcon} alt="" />
+                    </div>
+                    <div className={s.loginLinkContainer}>
+                        <NavLink to="/login"><div>Login</div></NavLink>
+                    </div>
+
+                </div>}
+
         </div>
     )
 }
