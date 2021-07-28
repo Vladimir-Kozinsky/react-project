@@ -17,8 +17,14 @@ const MyPosts = (props) => {
 
     return (
         <div className={s.myPosts}>
-            <ProfileReduxForm onSubmit={addPost} />
-            {posts}
+            <div className={s.myPostContainer}>
+                <ProfileReduxForm profilePage={props.profilePage} onSubmit={addPost} />
+            </div>
+
+            <div className={s.postsContainer} >
+                {posts}
+            </div>
+
         </div>
     )
 }
@@ -26,13 +32,18 @@ const MyPosts = (props) => {
 const ProfileForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
-            <div className={s.myPostContainer}>
-                <div className={s.postTextArea}>
-                    <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
+            <div className={s.postContainer}>
+                <div className={s.avaContainer}>
+                    <img src={props.profilePage.profileInfo.photos.small} alt="avatar" />
                 </div>
-                <div className={s.postButton}>
-                    <button >Add</button>
-                </div>
+                    <div className={s.postTextArea}>
+                        <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
+                    </div>
+                    <div className={s.postButton}>
+                        <button >Add</button>
+                    </div>
+        
+
             </div>
 
 

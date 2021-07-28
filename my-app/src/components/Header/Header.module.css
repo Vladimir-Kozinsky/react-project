@@ -11,7 +11,7 @@
   width: 100%;
   position: fixed;
   background-color: white;
-  box-shadow: 0 0 5px white; 
+  box-shadow: 0 0 5px black; 
 }
 
 .headerContainer {
@@ -35,15 +35,14 @@
   margin-top: 4px;
 }
 
-.headerWallpaper img {
-  height: 250px;
-  width: 100%;
-}
+
 
 .headerWallpaper {
   height: 250px;
-  width: 100%;
+  width:auto;
   padding-top: 60px;
+  background: url('./../common/header/wallpaper3.jpg') no-repeat fixed;
+  background-size:   100% auto;
 }
 
 /* STYLES FOR HEADER LINKS */

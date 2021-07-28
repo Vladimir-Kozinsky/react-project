@@ -2,6 +2,13 @@ import { connect } from 'react-redux';
 import { addPostTextActionCreator, updateLikesCountAC } from '../../../redux/profileReduser';
 import MyPosts from './MyPosts';
 
+const MyPostsContainer = (props) => {
+    return (
+        <MyPosts profilePage={props.profilePage}
+        addPost={props.addPost}
+        updateLikesCount={props.updateLikesCount} />
+    )
+}
 
 let mapStateToProps = (state) => {
     return {
@@ -20,6 +27,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
-export default MyPostsContainer;
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer) ;

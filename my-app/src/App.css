@@ -1,7 +1,6 @@
 .appWrapper {
-  padding-top: 20px;
+  margin: -20px auto;
   width: 1200px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 245px 935px;
   grid-gap: 20px;
@@ -11,8 +10,6 @@
 
 .appContent {
   grid-area: c;
-  background-color: white;
-  box-shadow: 0 0 10px rgb(99, 96, 96);
 }
 
 .app {

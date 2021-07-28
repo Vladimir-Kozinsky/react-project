@@ -18,6 +18,10 @@
     border: solid 1px crimson;
     box-shadow: 0 0 3px rgb(255, 101, 132);
     text-align: center;
+    outline:none;
+}
+.loginInputContainer input:focus {
+    border: crimson 2px solid;
 }
 
 .loginButtonContainer {

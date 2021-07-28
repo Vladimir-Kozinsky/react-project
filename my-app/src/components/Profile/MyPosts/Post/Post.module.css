@@ -1,65 +1,83 @@
 .item {
-    color: blue;
-    margin: 100px;
-    border: blue solid 1px;
-    display: grid;
-    grid-template-columns: 80px 600px;
-    grid-template-rows: 100px 40px;
-    grid-gap: 10px;
+  margin: 10px 0px 0px 30px;
+  min-height: 70px;
+}
 
-  grid-template-areas: 
-  "a p"
-  "l l";
-  border: orangered 1px solid;
-  }
+.iconContainer {
+  width: 60px;
+  float: left;
+}
 
 .post {
-  grid-area: p;
+  display: inline-block;
 }
-.postText{
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  border: rgb(92, 139, 226) 1px solid;
+
+.postContainer {
+  max-width: 700px;
+  min-height: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
 }
-.ava {
-  grid-area: a;
-  height: 80px;
+
+.postContainer span {
+  box-shadow: 0 0 3px rgb(255, 101, 132);
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
 }
-.ava img {
-  width: 80px;
+
+.avaContainer {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 0 5px crimson;
 }
-.likes img {
-  width: 75px;
+
+.avaContainer img {
+  width: 40px;
+  height: 40px;
 }
-.likes img:hover{
-  width: 77px;
-  transition-duration: 100ms;
-}
-.likes img:active{
-  width: 79px;
-  transition-duration: 100ms;
-}
+
 .likes {
-  grid-area: l;
-  float: left;
-  
+  height: 36px;
 }
-.likesCount {
-  color: rgb(56, 107, 202);
-  font-size: 18px;
+
+.likeImg {
+  height: 35px;
   width: 35px;
-  height: 34px;
-  float: left;
+  float: right;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.likeImg {
-  height: 35px;
-  width: 80px;
-  float: left;
+
+.likeImg img {
+  height: 18px;
 }
+
+.likes img:hover {
+  height: 20px;
+  transition-duration: 100ms;
+  cursor: pointer;
+}
+
+.likes img:active {
+  height: 22px;
+  transition-duration: 100ms;
+}
+
+.likesCount {
+  color: crimson;
+  font-size: 14px;
+  width: 20px;
+  height: 32px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .postUserName {
-  text-align: center; 
+  text-align: center;
 }

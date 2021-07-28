@@ -32,7 +32,7 @@ const LoginForm = (props) => {
         <Field placeholder='login' name="login" component={Input} validate={[maxLength, RequiredField]} />
       </div>
       <div className={s.loginInputContainer}  >
-        <Field placeholder='password' name="password" component={Input} validate={[maxLength, RequiredField]} />
+        <Field type ="password" placeholder='password' name="password" component={Input} validate={[maxLength, RequiredField]} />
       </div>
       <div className={s.loginCheckBoxContainer}>
         <Field type="checkbox" name="rememberMe" component="input" /> Remember me

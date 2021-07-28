@@ -1,6 +1,6 @@
 import s from './Post.module.css';
 import likeLogo from './../../../common/profile/posts/likeLogo.png';
-import avaImg from './../../../common/profile/posts/ava.png';
+import avaImg from './../../../common/navBar/ava.jpg';
 
 const Post = (props) => {
 
@@ -9,25 +9,27 @@ const Post = (props) => {
     }
     return (
         <div className={s.item}>
-            <div className={s.ava}>
-                <img src={avaImg} alt="avatar" />
+            <div className={s.iconContainer}>
+                <div className={s.avaContainer}>
+                    <img src={avaImg} alt="avatar" />
+                </div>
                 <div className={s.postUserName}>Name</div>
             </div>
 
-            <div className={s.post}>
-                <div className={s.postText}>
-                    {props.message}
+            <div className={s.post} >
+                <div className={s.postContainer}>
+                    <span>{props.message}</span>
                 </div>
-                
-            </div>
-            <div className={s.likes}>
-                <div className={s.likesCount}>{props.likesCounter}</div>
-                <div className={s.likeImg}>
-                    <img onClick={updateLikesCount} src={likeLogo} alt="" />
+                <div className={s.likes}>
+
+                    <div className={s.likeImg}>
+                        <img onClick={updateLikesCount} src={likeLogo} alt="" />
+                    </div>
+                    <div className={s.likesCount}>{props.likesCounter}</div>
+
                 </div>
-
-
             </div>
+
 
         </div>
     )

@@ -2,7 +2,6 @@ import s from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import Clock from './clock/Clock';
 import logo from './../common/header/logo.png';
-import wallpaper from './../common/header/wallpaper.jpg';
 import HeaderDropMenu from './HeaderDropMenu/HeaderDropMenu';
 
 
@@ -28,9 +27,6 @@ const Header = (props) => {
             isAuth={props.isAuth}
             authdata={props.authdata}
             avararPhoto={props.avararPhoto} />
-
-
-
         </div>
 
       </div>
@@ -38,7 +34,6 @@ const Header = (props) => {
 
 
       <div className={s.headerWallpaper}>
-        <img src={wallpaper}></img>
       </div>
 
     </header>

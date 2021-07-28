@@ -7,7 +7,7 @@ const Users = (props) => {
 
     
     return (
-        <div>
+        <div className={s.usersPage}>
             {props.isFetching ? <Preloader /> : null}
 
            <Paginator totalUsersCount={props.totalUsersCount} 

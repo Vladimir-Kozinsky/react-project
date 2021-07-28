@@ -1,3 +1,8 @@
+.usersPage {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(99, 96, 96);
+}
 .user {
     display: grid;
     grid-template-columns: 150px 600px;

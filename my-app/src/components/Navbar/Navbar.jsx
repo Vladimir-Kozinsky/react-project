@@ -70,6 +70,10 @@ const Navbar = (props) => {
         {friends}
       </div>
 
+      <div className={s.emptyBox}>
+
+      </div>
+
     </nav>
   )
 }

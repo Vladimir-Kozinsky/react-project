@@ -54,3 +54,10 @@
   transition: 0.3s;
   color: crimson;
 }
+.emptyBox {
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgb(99, 96, 96);
+  height: 200px;
+  padding: 10px;
+}
