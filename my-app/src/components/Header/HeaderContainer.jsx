@@ -15,7 +15,7 @@ class HeaderAPIContainer extends React.Component {
             authdata={this.props.authdata}
             isAuth={this.props.isAuth}
             logout={this.props.logout}
-            avararPhoto={this.props.avararPhoto} />
+            avatarPhoto={this.props.avatarPhoto} />
 
     }
 }
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
     return {
         authdata: state.auth.authdata,
         isAuth: state.auth.isAuth,
-        avararPhoto: state.profilePage.profileSmallPhotoUrl,
+        avatarPhoto: state.profilePage.profileSmallPhotoUrl,
     }
 }
 

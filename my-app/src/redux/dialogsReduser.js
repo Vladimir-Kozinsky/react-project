@@ -2,17 +2,29 @@ const ADD_MESSAGE = 'ADD-MESSAGE';
 
 let initialState = {
     dialogs: [
-        { id: 1, name: 'Sasha' },
-        { id: 2, name: 'Marina' },
-        { id: 3, name: 'Vasilina' },
-        { id: 4, name: 'Andrey' },
-        { id: 5, name: 'Kristy' },
+        {
+            id: 1, name: 'Sasha', messages: [
+                { id: 1, message: 'Hello' },
+                { id: 2, message: 'I am OK' },
+                { id: 3, message: 'Have a nice day' },
+            ],
+        },
+        {
+            id: 2, name: 'Masha', messages: [
+                { id: 1, message: 'Hello22222' },
+                { id: 2, message: 'I am OK' },
+                { id: 3, message: 'Have a nice day' },
+            ],
+        },
+        {
+            id: 3, name: 'Natasha', messages: [
+                { id: 1, message: 'Hello' },
+                { id: 2, message: 'I am OK33333' },
+                { id: 3, message: 'Have a nice day' },
+            ],
+        },
     ],
-    messages: [
-        { id: 1, message: 'Hello' },
-        { id: 2, message: 'I am OK' },
-        { id: 3, message: 'Have a nice day' },
-    ],
+
 }
 
 const dialogsReduser = (state = initialState, action) => {

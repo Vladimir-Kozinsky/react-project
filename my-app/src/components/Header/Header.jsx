@@ -26,7 +26,7 @@ const Header = (props) => {
             logout={props.logout}
             isAuth={props.isAuth}
             authdata={props.authdata}
-            avararPhoto={props.avararPhoto} />
+            avatarPhoto={props.avatarPhoto} />
         </div>
 
       </div>

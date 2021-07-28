@@ -18,7 +18,10 @@ const MyPosts = (props) => {
     return (
         <div className={s.myPosts}>
             <div className={s.myPostContainer}>
-                <ProfileReduxForm profilePage={props.profilePage} onSubmit={addPost} />
+                <ProfileReduxForm
+                    profilePage={props.profilePage}
+                    onSubmit={addPost}
+                    avatarPhoto={props.avatarPhoto} />
             </div>
 
             <div className={s.postsContainer} >
@@ -34,15 +37,15 @@ const ProfileForm = (props) => {
         <form onSubmit={props.handleSubmit} >
             <div className={s.postContainer}>
                 <div className={s.avaContainer}>
-                    <img src={props.profilePage.profileInfo.photos.small} alt="avatar" />
+                    <img src={props.avatarPhoto} alt="avatar" />
                 </div>
-                    <div className={s.postTextArea}>
-                        <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
-                    </div>
-                    <div className={s.postButton}>
-                        <button >Add</button>
-                    </div>
-        
+                <div className={s.postTextArea}>
+                    <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
+                </div>
+                <div className={s.postButton}>
+                    <button >Add</button>
+                </div>
+
 
             </div>
 

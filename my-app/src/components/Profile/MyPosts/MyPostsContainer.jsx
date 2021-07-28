@@ -6,13 +6,15 @@ const MyPostsContainer = (props) => {
     return (
         <MyPosts profilePage={props.profilePage}
         addPost={props.addPost}
-        updateLikesCount={props.updateLikesCount} />
+        updateLikesCount={props.updateLikesCount}
+        avatarPhoto={props.avatarPhoto} />
     )
 }
 
 let mapStateToProps = (state) => {
     return {
-        profilePage: state.profilePage
+        profilePage: state.profilePage,
+        avatarPhoto: state.profilePage.profileSmallPhotoUrl
     }
 }
 

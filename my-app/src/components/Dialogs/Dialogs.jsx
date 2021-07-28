@@ -7,16 +7,15 @@ import { Field, reduxForm } from 'redux-form';
 
 
 
-
-
 const Dialogs = (props) => {
-
-    let dialogs = props.messagesPage.dialogs.map(d => <UserItem name={d.name} id={d.id} />);
-    let messages = props.messagesPage.messages.map(m => <Message message={m.message} />);
-
     let addMessage = (values) => {
         props.addMessage(values.changeMessageText);
     }
+
+    let dialogs = props.messagesPage.dialogs.map(d => <UserItem
+        name={d.name}
+        id={d.id}
+        messagesPage={props.messagesPage} />);
 
     if (!props.isAuth) return <Redirect to={"/login"} />
     return (
@@ -24,10 +23,8 @@ const Dialogs = (props) => {
             <div className={s.users}>
                 {dialogs}
             </div>
-            <div className={s.messages}>
-                {messages}
-                <DialogReduxForm onSubmit={addMessage} />
-            </div>
+            <DialogReduxForm onSubmit={addMessage} />
+
 
         </div>
     )

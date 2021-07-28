@@ -34,6 +34,7 @@
     box-shadow: 0 0 3px rgb(255, 101, 132);
     outline: none;
     padding: 10px;
+    transition: 0.5s;
 }
 
 .postTextArea textarea:focus {
@@ -60,6 +61,7 @@
     font-weight: bold;
     font-size: 17px;
     box-shadow: 0 0 3px rgb(255, 101, 132);
+    border: 1px solid crimson;
 }
 
 .postButton button:hover {
@@ -69,6 +71,7 @@
     transition: 0.3s;
     width: 103px;
     height: 37px;
+    border: 1px solid rgb(65, 64, 64);
 }
 
 .postContainer {
@@ -83,6 +86,7 @@
     border-radius: 50px;
     overflow: hidden;
     box-shadow: 0 0 5px crimson;
+    margin-top: -5px;
 }
 
 .avaContainer img {

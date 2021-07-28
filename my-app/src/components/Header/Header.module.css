@@ -11,7 +11,7 @@
   width: 100%;
   position: fixed;
   background-color: white;
-  box-shadow: 0 0 5px black; 
+  box-shadow: 0 0 5px black;
 }
 
 .headerContainer {
@@ -35,14 +35,13 @@
   margin-top: 4px;
 }
 
-
-
 .headerWallpaper {
   height: 250px;
-  width:auto;
+  border: 1px solid red;
+  width: 1920px;
   padding-top: 60px;
-  background: url('./../common/header/wallpaper3.jpg') no-repeat fixed;
-  background-size:   100% auto;
+  background: url('./../common/header/wallpaper2.jpg') no-repeat;
+  background-size: 100% 100% ;
 }
 
 /* STYLES FOR HEADER LINKS */
@@ -51,6 +50,7 @@
   text-align: center;
   padding-top: 16px;
 }
+
 .headerLinks a {
   text-decoration: none;
   color: black;
@@ -58,7 +58,8 @@
   font-size: 18px;
   padding-left: 15px;
 }
-.headerLinks a:hover{
+
+.headerLinks a:hover {
   color: crimson;
   transition: 0.3s;
 }

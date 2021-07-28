@@ -14,8 +14,8 @@ const HeaderDropMenu = (props) => {
 
             {props.isAuth === true
                 ? <div className={s.userPhotoContainer}>
-                    <div className={s.userPhoto}>{props.avararPhoto
-                        ? <img src={props.avararPhoto} alt="" />
+                    <div className={s.userPhoto}>{props.avatarPhoto
+                        ? <img src={props.avatarPhoto} alt="" />
                         : <span>Photo</span>}
                     </div>
                     <div className={s.dropMenu}>
