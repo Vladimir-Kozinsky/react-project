@@ -14,12 +14,15 @@ class DialogsAPIContainer extends React.Component {
         return <Dialogs messagesPage={this.props.messagesPage}
             isAuth={this.props.isAuth}
             addMessage={this.props.addMessage}
-            changeMessageText={this.props.changeMessageText} />
+            changeMessageText={this.props.changeMessageText}
+            avatarPhoto={this.props.avatarPhoto} />
     }
 }
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        avatarPhoto: state.profilePage.profileSmallPhotoUrl
+
     }
 }
 export default compose(

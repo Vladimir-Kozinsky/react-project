@@ -1,22 +1,40 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 200px 720px;
-    grid-template-areas: 
-    "u m";
-    grid-gap: 10px;
+    grid-template-columns: 30% auto;
+    grid-template-areas: "users messagesContainer";
+    gap: 20px;
+}
+
+.messagesContainer {
+    grid-area: messagesContainer;
     background: white;
     box-shadow: 0 0 10px rgb(99, 96, 96);
+    height: 600px;
+}
 
-}
 .users {
-    grid-area: u;
-    border: orangered solid 1px;
-    
+    padding: 20px;
+    grid-area: users;
+    background: white;
+    box-shadow: 0 0 10px rgb(99, 96, 96);
 }
+
 .messages {
-    grid-area: m;
-    border: orangered solid 1px;
+    margin: 40px 40px 20px 40px;
+    padding: 10px;
+    height: 400px;
+    box-shadow: 0 0 3px rgb(255, 101, 132);
+    overflow: auto;
 }
+
 .newMessage {
-    margin-top: 20px;
+    margin: 0px 0px 0px 40px;
+    background-color: ivory;
+    width: 550px;
+    text-align: right;
+}
+
+.newMessage textarea {
+    width: 400px;
+    padding: 5px;
 }

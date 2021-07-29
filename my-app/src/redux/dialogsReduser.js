@@ -30,17 +30,21 @@ let initialState = {
 const dialogsReduser = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
+            // let arr = state.dialogs.filter(item => item.id < action.id);
             return {
                 ...state,
-                messages: [...state.messages, { id: 4, message: action.values }]
+                dialogs: [...state.dialogs],
+
+                //...state.dialogs,
+                ...state.dialogs[action.id - 1].messages.push({ id: action.messageId, message: action.values })
             }
         default:
             return state;
     }
 }
 
-export const addMessage = (values) => {
-    return { type: ADD_MESSAGE, values }
+export const addMessage = (values, id, messageId) => {
+    return { type: ADD_MESSAGE, values, id, messageId }
 }
 
 export default dialogsReduser;

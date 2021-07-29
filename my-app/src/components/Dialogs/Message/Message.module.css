@@ -1,0 +1,25 @@
+.messagesItem {
+    margin: 15px;
+    text-align: right;
+}
+
+.messageComtainer {
+    display: inline-block;
+    margin-right: 15px;
+    box-shadow: 0 0 3px rgb(255, 101, 132);
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+.avaContainer {
+    float: right;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    border: 1px solid crimson;
+    overflow: hidden;
+    
+}
+.avaContainer img {
+    height: 30px;
+    width: 30px;
+}

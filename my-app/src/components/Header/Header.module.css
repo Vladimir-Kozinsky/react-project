@@ -37,7 +37,6 @@
 
 .headerWallpaper {
   height: 250px;
-  border: 1px solid red;
   width: 1920px;
   padding-top: 60px;
   background: url('./../common/header/wallpaper2.jpg') no-repeat;
