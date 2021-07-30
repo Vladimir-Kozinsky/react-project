@@ -8,8 +8,18 @@ const SET_USER_DATA = 'SET-USER-DATA';
 const SET_CAPTCHA_URL = 'SET-CAPTCHA-URL';
 
 
+export type initialStateType = {
+    authdata: {
+        id: number | null,
+        email: string | null,
+        login: string | null,
+    },
+    isAuth: boolean,
+    captchaUrl: string | null,
+    setCaptchaUrlSucces: boolean,
+}
 
-let initialState = {
+let initialState: initialStateType = {
     authdata: {
         id: null,
         email: null,
@@ -22,7 +32,7 @@ let initialState = {
 }
 
 
-const authReduser = (state = initialState, action) => {
+const authReduser = (state = initialState, action: getDataACActionType | setCaptchaUrlActionType | setDataACActionType): initialStateType => {
     switch (action.type) {
         case GET_DATA_AUTH:
             return {
@@ -46,34 +56,60 @@ const authReduser = (state = initialState, action) => {
     }
 
 }
+type getDataACActionAuthdataType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+}
 
-export const getDataAC = (authdata) => {
+type getDataACActionType = {
+    type: typeof GET_DATA_AUTH,
+    authdata: getDataACActionAuthdataType
+}
+
+export const getDataAC = (authdata: any): getDataACActionType => {
     return { type: GET_DATA_AUTH, authdata }
 }
 
-export const setCaptchaUrl = (captchaUrl) => {
+type setCaptchaUrlActionType = {
+    type: typeof SET_CAPTCHA_URL,
+    captchaUrl: string | null,
+}
+
+export const setCaptchaUrl = (captchaUrl: string | null): setCaptchaUrlActionType => {
     return { type: SET_CAPTCHA_URL, captchaUrl }
 }
 
-
-export const getAuth = () => {
-    return (dispatch) => {
-        return usersAPI.getUserAuth().then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getDataAC(response.data.data))
-                dispatch(getProfilePhoto(response.data.data.id))
-            }
-        })
-    }
+type setDataACActionPayloadType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
 }
 
-export const setDataAC = (id, email, login) => {
+type setDataACActionType = {
+    type: typeof SET_USER_DATA,
+    payload: setDataACActionPayloadType
+}
+
+export const setDataAC = (id: number | null, email: string | null, login: string | null): setDataACActionType => {
     return { type: SET_USER_DATA, payload: { id, email, login } }
 }
 
-export const login = (email, password, rememberMe, captcha) => {
-    return (dispatch, getState) => {
-        
+export const getAuth = () => {
+    return async (dispatch: any) => {
+        const response = await usersAPI.getUserAuth();
+        if (response.data.resultCode === 0) {
+            dispatch(getDataAC(response.data.data));
+            dispatch(getProfilePhoto(response.data.data.id));
+        }
+    }
+}
+
+
+
+export const login = (email: any, password: any, rememberMe: any, captcha: any) => {
+    return (dispatch: any, getState: any) => {
+
         usersAPI.login(email, password, rememberMe, captcha).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuth())
@@ -90,7 +126,7 @@ export const login = (email, password, rememberMe, captcha) => {
     }
 }
 export const logout = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         usersAPI.logout().then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setDataAC(null, null, null))
@@ -101,7 +137,7 @@ export const logout = () => {
 
 
 export const getCaptchaUrl = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         SecurityAPI.getCaptchaUrl().then(response => {
             dispatch(setCaptchaUrl(response.data.url))
         })
