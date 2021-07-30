@@ -7,6 +7,8 @@ const GET_DATA_AUTH = 'GET-DATA-AUTH';
 const SET_USER_DATA = 'SET-USER-DATA';
 const SET_CAPTCHA_URL = 'SET-CAPTCHA-URL';
 
+
+
 let initialState = {
     authdata: {
         id: null,

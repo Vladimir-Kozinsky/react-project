@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Route, withRouter } from 'react-router-dom';
 import Message from './Message/Message';
+import Button from '../common/buttons/Button';
 
 
 
@@ -42,13 +43,16 @@ const Messages = (props) => {
     }
 
     let params = window.location.pathname;
-
     let id = params.replace(/\D+/, '');
+    if (id === "") {
+        id = 1;
+    }
     let messages = props.messagesPage.dialogs[id - 1].messages.map(m => <Message
         id={m.id}
         message={m.message}
         avatarPhoto={props.avatarPhoto} />);
     //let revMessages = messages.reverse();
+
     return (
         <div>
             <div className={s.messages}>
@@ -65,12 +69,14 @@ const DialogForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
+
+            <div className={s.buttonContainer} >
+                <Button buttonName="Send" />
+            </div>
+            <div className={s.textareaContainer} >
                 <Field component="textarea" name="changeMessageText" />
             </div>
-            <div>
-                <button >Add</button>
-            </div>
+
         </form>
 
     )

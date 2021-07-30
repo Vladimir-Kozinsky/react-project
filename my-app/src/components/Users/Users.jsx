@@ -2,24 +2,25 @@ import s from './Users.module.css';
 import Preloader from '../common/Preloader';
 import { NavLink } from 'react-router-dom';
 import Paginator from './Paginator/Paginator';
+import ava from './../common/navBar/ava.jpg';
 
 const Users = (props) => {
 
-    
+
     return (
         <div className={s.usersPage}>
             {props.isFetching ? <Preloader /> : null}
 
-           <Paginator totalUsersCount={props.totalUsersCount} 
-           pageSize={props.pageSize} 
-           onPageChanged={props.onPageChanged} 
-           currentPage={props.currentPage} />
+            <Paginator totalUsersCount={props.totalUsersCount}
+                pageSize={props.pageSize}
+                onPageChanged={props.onPageChanged}
+                currentPage={props.currentPage} />
             {
                 props.users.map(u => <div className={s.user}>
                     <div className={s.avaBlock}>
                         <div className={s.ava}>
                             <NavLink to={"/profile/" + u.id} >
-                                <img src={u.photos.small} alt="photo" />
+                                <img src={u.photos.small ? u.photos.small : ava} alt="photo" />
                             </NavLink>
 
                         </div>

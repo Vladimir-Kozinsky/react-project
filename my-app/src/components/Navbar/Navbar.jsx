@@ -28,7 +28,7 @@ const Navbar = (props) => {
             <img src={inboxIcon} alt="" />
           </div>
           <div className={s.itemLinkContainer}>
-            <NavLink to="/dialogs/?1" activeClassName={s.active}>Messages</NavLink>
+            <NavLink to="/dialogs/" activeClassName={s.active}>Messages</NavLink>
           </div>
         </div>
         <div className={s.item}>

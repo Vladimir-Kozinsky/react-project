@@ -6,7 +6,27 @@
   text-decoration: none;
   color: black;
 }
-
+.linkContainer{
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 9px;
+}
 .usersItem {
-  margin: 10px;
+  margin: 20px;
+  height: 40px;
+}
+
+.avaContainer {
+  float: left;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 5px crimson;
+}
+
+.avaContainer img {
+  width: 40px;
+  height: 40px;
 }

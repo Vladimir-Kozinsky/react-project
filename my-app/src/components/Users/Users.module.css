@@ -1,30 +1,68 @@
+.usersPage * {
+    margin: 0;
+    padding: 0;
+}
+
 .usersPage {
     background: white;
     padding: 20px;
     box-shadow: 0 0 10px rgb(99, 96, 96);
 }
+
 .user {
-    display: grid;
-    grid-template-columns: 150px 600px;
-    grid-template-areas: "a i";
-    grid-gap: 10px;
+    margin: 0 auto;
+    width: 550px;
 }
 
 .avaBlock {
-    margin-top: 10px;
-    grid-area: a;
-    border: solid 1px red;
-    background-color: rgb(209, 161, 119);
+    margin-top: 5px;
+    float: left;
+}
+
+.ava {
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    border-radius: 50px;
+    margin: 10px auto 2px auto;
+    box-shadow: 0 0 4px crimson;
+}
+
+.ava img {
+    height: 90px;
 }
 
 .infoBlock {
-    margin-top: 10px;
-    grid-area: i;
-    border: solid 1px green;
-    background-color: rgb(247, 192, 144);
-}
-.followButton {
-    margin-top: 10px;
-    margin-left: 15px;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 0px 0px 130px;
+    box-shadow: 0 0 4px crimson;
+    width: 400px;
+    height: 120px;
 }
 
+.followButton {
+    width: 60px;
+    margin: 0 auto;
+}
+
+.button {
+    width: 60px;
+    height: 20px;
+    background-color: crimson;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    box-shadow: 0 0 3px rgb(255, 101, 132);
+    border: 1px solid crimson;
+}
+
+.button:hover {
+    background-color: rgb(65, 64, 64);
+    cursor: pointer;
+    box-shadow: 0 0 3px rgb(65, 64, 64);
+    transition: 0.3s;
+    width: 63px;
+    height: 22px;
+    border: 1px solid rgb(65, 64, 64);
+}

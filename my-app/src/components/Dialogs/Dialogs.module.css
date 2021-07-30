@@ -9,7 +9,7 @@
     grid-area: messagesContainer;
     background: white;
     box-shadow: 0 0 10px rgb(99, 96, 96);
-    height: 600px;
+    height: 560px;
 }
 
 .users {
@@ -20,11 +20,13 @@
 }
 
 .messages {
-    margin: 40px 40px 20px 40px;
+    margin: 30px 40px 20px 40px;
     padding: 10px;
     height: 400px;
     box-shadow: 0 0 3px rgb(255, 101, 132);
     overflow: auto;
+    background: rgb(240, 240, 240);
+    border-radius: 10px;
 }
 
 .newMessage {
@@ -34,7 +36,31 @@
     text-align: right;
 }
 
+/* TEXTAREASTYLES */
+
 .newMessage textarea {
     width: 400px;
-    padding: 5px;
+    height: 15px;
+    border-radius: 20px;
+    border: solid 1px crimson;
+    box-shadow: 0 0 3px rgb(255, 101, 132);
+    outline: none;
+    padding: 10px;
+    transition: 0.5s;
+}
+
+.newMessage textarea:focus {
+    border: crimson 2px solid;
+    height: 50px;
+    transition: 0.5s;
+}
+
+.textareaContainer {
+    float: right;
+}
+
+.buttonContainer {
+    float: right;
+    width: 100px;
+    margin-left: 15px;
 }

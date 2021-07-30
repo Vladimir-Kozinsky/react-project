@@ -4,12 +4,15 @@ import Post from './Post/Post';
 import { Field, reduxForm } from 'redux-form';
 import { MaxLengthCreator } from '../../../utilits/validation/validation';
 import { Textarea } from '../../common/formsControls/FormsControls';
+import Button from '../../common/buttons/Button';
 
 
 let maxLength = MaxLengthCreator(50);
 
 
 const MyPosts = (props) => {
+    
+    //let revMessages = .reverse();
     let posts = props.profilePage.posts.map(p => <Post updateLikesCount={props.updateLikesCount} postId={p.id} message={p.message} likesCounter={p.likesCounter} />)
     let addPost = (value) => {
         props.addPost(value.newPostText);
@@ -43,17 +46,15 @@ const ProfileForm = (props) => {
                     <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
                 </div>
                 <div className={s.postButton}>
-                    <button >Add</button>
+                    <Button buttonName="Add" />
                 </div>
 
-
             </div>
-
-
-
         </form>
     )
 }
+
+
 
 const ProfileReduxForm = reduxForm({ form: 'profilePost' })(ProfileForm)
 
