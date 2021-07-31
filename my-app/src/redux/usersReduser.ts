@@ -18,7 +18,7 @@ let initialState = {
 
 }
 
-const usersReduser = (state = initialState, action) => {
+const usersReduser = (state = initialState, action: any) => {
 
     switch (action.type) {
         case FOLLOWED:
@@ -68,31 +68,31 @@ const usersReduser = (state = initialState, action) => {
 
 }
 
-export const followSuccess = (userId) => {
+export const followSuccess = (userId: number) => {
     return { type: FOLLOWED, userId }
 }
 
-export const unfollowSuccess = (userId) => {
+export const unfollowSuccess = (userId: number) => {
     return { type: UNFOLLOWED, userId }
 }
-export const setUsers = (users) => {
+export const setUsers = (users: any) => {
     return { type: SET_USERS, users }
 }
-export const setCurrentPage = (currentPage) => {
+export const setCurrentPage = (currentPage: number) => {
     return { type: SET_CURRENT_PAGE, currentPage }
 }
-export const setTotalUsersCount = (totalUsersCount) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return { type: SET_TOTAL_USERS, totalUsersCount }
 }
-export const toggleFetching = (isFetching) => {
+export const toggleFetching = (isFetching: boolean) => {
     return { type: IS_FETCHING, isFetching }
 }
-export const toggleIsProgress = (followingInProgress, userId) => {
+export const toggleIsProgress = (followingInProgress: boolean, userId: number) => {
     return { type: TOGGLE_IS_PROGRESS, followingInProgress, userId }
 }
 
-export const requestUsers = (currentPage, pageSize) => {
-    return (dispatch) => {
+export const requestUsers = (currentPage:number, pageSize: number) => {
+    return (dispatch: any) => {
         dispatch(toggleFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleFetching(false));
@@ -102,8 +102,8 @@ export const requestUsers = (currentPage, pageSize) => {
     }
 }
 
-export const follow = (userId) => {
-    return (dispatch) => {
+export const follow = (userId: number) => {
+    return (dispatch: any) => {
         dispatch(toggleIsProgress(true, userId))
         usersAPI.follow(userId)
             .then(response => {
@@ -116,8 +116,8 @@ export const follow = (userId) => {
 
 }
 
-export const unfollow = (userId) => {
-    return (dispatch) => {
+export const unfollow = (userId: number) => {
+    return (dispatch: any) => {
         dispatch(toggleIsProgress(true, userId))
         usersAPI.unfollow(userId)
             .then(response => {

@@ -20,8 +20,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addPost: (value) => {
-            dispatch(addPostTextActionCreator(value));
+        addPost: (value, postId) => {
+            dispatch(addPostTextActionCreator(value, postId));
         },
         updateLikesCount: (postId) => {
             dispatch(updateLikesCountAC(postId))

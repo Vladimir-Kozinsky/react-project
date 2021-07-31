@@ -14,9 +14,14 @@ const MyPosts = (props) => {
     
     //let revMessages = .reverse();
     let posts = props.profilePage.posts.map(p => <Post updateLikesCount={props.updateLikesCount} postId={p.id} message={p.message} likesCounter={p.likesCounter} />)
+    
     let addPost = (value) => {
-        props.addPost(value.newPostText);
+        let postsArr = props.profilePage.posts;
+        let postId = postsArr.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
+
+        props.addPost(value.newPostText, postId.id + 1);
     }
+
 
     return (
         <div className={s.myPosts}>

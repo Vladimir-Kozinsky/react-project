@@ -1,6 +1,22 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
-let initialState = {
+
+type initialStateType = {
+    dialogs: Array<dialogsType>
+}
+
+type dialogsType = {
+    id: number,
+    name: string,
+    messages?: Array<messagesType>
+}
+
+type messagesType = {
+    id: number,
+    message: string,
+}
+
+let initialState: initialStateType = {
     dialogs: [
         {
             id: 1, name: 'Sasha', messages: [
@@ -27,23 +43,29 @@ let initialState = {
 
 }
 
-const dialogsReduser = (state = initialState, action) => {
+
+const dialogsReduser = (state = initialState, action: any):initialStateType => {
+    let id = action.id - 1;
     switch (action.type) {
         case ADD_MESSAGE:
-            // let arr = state.dialogs.filter(item => item.id < action.id);
+            state.dialogs[id].messages?.push({ id: action.messageId, message: action.values }) //WRONG but I dont know how to resolve
             return {
                 ...state,
                 dialogs: [...state.dialogs],
-
-                //...state.dialogs,
-                ...state.dialogs[action.id - 1].messages.push({ id: action.messageId, message: action.values })
-            }
+            };
         default:
             return state;
     }
 }
 
-export const addMessage = (values, id, messageId) => {
+type addMessageActionType = {
+    type: typeof ADD_MESSAGE
+    values: string,
+    id: number,
+    messageId: number,
+}
+
+export const addMessage = (values: string, id: number, messageId: number): addMessageActionType => {
     return { type: ADD_MESSAGE, values, id, messageId }
 }
 

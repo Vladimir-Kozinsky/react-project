@@ -12,7 +12,6 @@ const ProfileInfo = (props) => {
             props.savePhoto(e.target.files[0])
         }
     }
-
     return (
         <div className={s.profileInfo}>
             <div className={s.profileImage}>
