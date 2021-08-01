@@ -97,38 +97,36 @@ export const setDataAC = (id: number | null, email: string | null, login: string
 
 export const getAuth = (): ThunkType => {
     return async (dispatch) => {
-        const response = await usersAPI.getUserAuth();
-        if (response.data.resultCode === 0) {
-            dispatch(getDataAC(response.data.data));
-            dispatch(getProfilePhoto(response.data.data.id));
+        const getUserAuthData = await usersAPI.getUserAuth();
+        if (getUserAuthData.resultCode === 0) {
+            dispatch(getDataAC(getUserAuthData.data));
+            dispatch(getProfilePhoto(getUserAuthData.data.id));
         }
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
-    return (dispatch, getState) => {
-        usersAPI.login(email, password, rememberMe, captcha).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuth())
-                dispatch(setCaptchaUrl(null))
-            } else {
-                if (response.data.resultCode === 10) {
-                    dispatch(getCaptchaUrl());
-                }
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error ";
-                dispatch(stopSubmit('login', { _error: message }));
+    return async (dispatch, getState) => {
+        const loginData = await usersAPI.login(email, password, rememberMe, captcha)
+        if (loginData.resultCode === 0) {
+            dispatch(getAuth())
+            dispatch(setCaptchaUrl(null))
+        } else {
+            if (loginData.resultCode === 10) {
+                dispatch(getCaptchaUrl());
             }
-        })
+            let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error ";
+            dispatch(stopSubmit('login', { _error: message }));
+        }
     }
 }
 
 export const logout = (): ThunkType => {
-    return (dispatch) => {
-        usersAPI.logout().then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setDataAC(null, null, null))
-            }
-        })
+    return async (dispatch) => {
+        const logoutData = await usersAPI.logout()
+        if (logoutData.resultCode === 0) {
+            dispatch(setDataAC(null, null, null))
+        }
     }
 }
 

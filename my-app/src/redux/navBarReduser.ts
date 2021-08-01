@@ -31,11 +31,8 @@ const setFriends = (friends: any) => {
 
 export const getFriends = () => {
     return async (dispatch: any, getState: any) => {
-        const response = await usersAPI.getFriends(true);
-
-        dispatch(setFriends(response.data.items))
-        let state = getState();
-        console.log(state)
+        const getFriendsData = await usersAPI.getFriends(true);
+        dispatch(setFriends(getFriendsData.items))
     }
 }
 

@@ -158,30 +158,26 @@ export const requestUsers = (currentPage: number, pageSize: number): ThunkType =
 }
 
 export const follow = (userId: number): ThunkType => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(followSuccess(userId))
-                    dispatch(getFriends()) // friends update
-                }
-                dispatch(toggleIsProgress(false, userId))
-            })
+        const followData = await usersAPI.follow(userId)
+        if (followData.resultCode === 0) {
+            dispatch(followSuccess(userId))
+            dispatch(getFriends()) // friends update
+        }
+        dispatch(toggleIsProgress(false, userId))
     }
 }
 
 export const unfollow = (userId: number): ThunkType => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
-        usersAPI.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollowSuccess(userId))
-                    dispatch(getFriends()) // friends update
-                }
-                dispatch(toggleIsProgress(false, userId))
-            })
+        const unfollowData = await usersAPI.unfollow(userId)
+        if (unfollowData.resultCode === 0) {
+            dispatch(unfollowSuccess(userId))
+            dispatch(getFriends()) // friends update
+        }
+        dispatch(toggleIsProgress(false, userId))
     }
 }
 
