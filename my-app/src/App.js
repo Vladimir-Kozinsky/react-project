@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { initialazeApp } from './redux/appReduser';
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader';
+import NavBarContainer from './components/Navbar/NavBarContainer';
 
 
 
@@ -29,7 +30,7 @@ class App extends Component {
       <div className="app">
         <HeaderContainer />
         <div className="appWrapper">
-          <Navbar state={this.props.store.getState()} />
+          <NavBarContainer />
           <div className="appContent">
             <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
             <Route path="/dialogs" render={() => <DialogsContainer />} />

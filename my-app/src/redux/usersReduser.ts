@@ -1,5 +1,7 @@
 import usersAPI from "../API/API";
+import { ThunkType } from "../app/hooks";
 import { updateObjectInArray } from "../utilits/validation/object-helper";
+import { getFriends } from "./navBarReduser";
 
 const FOLLOWED = 'FOLLOWED';
 const UNFOLLOWED = 'UNFOLLOWED';
@@ -31,9 +33,9 @@ type UserPhotosType = {
 }
 
 let initialState = {
-    users: [] as Array<UserType> ,
+    users: [] as Array<UserType>,
     pageSize: 5,
-    totalUsersCount: 20 ,
+    totalUsersCount: 20,
     currentPage: 1,
     isFetching: true,
     followingInProgress: [] as Array<number>
@@ -41,15 +43,16 @@ let initialState = {
 }
 export type InitialState = typeof initialState;
 
-const usersReduser = (state = initialState, action: any):InitialState => {
+type ActionType = followSuccessType | unfollowSuccessType | setUsersType | setCurrentPageType
+    | setTotalUsersCountType | toggleFetchingType | toggleIsProgressType
 
+const usersReduser = (state = initialState, action: ActionType): InitialState => {
     switch (action.type) {
         case FOLLOWED:
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
             }
-
         case UNFOLLOWED:
             return {
                 ...state,
@@ -73,12 +76,10 @@ const usersReduser = (state = initialState, action: any):InitialState => {
                     ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
-
         }
         default:
             return state;
     }
-
 }
 
 type followSuccessType = {
@@ -97,7 +98,7 @@ export const unfollowSuccess = (userId: number): unfollowSuccessType => {
 }
 type setUsersType = {
     type: typeof SET_USERS,
-    users: setUsersUserType
+    users: Array<setUsersUserType>
 };
 type setUsersUserType = {
     id: number,
@@ -111,7 +112,7 @@ type setUserPhotosType = {
     large: string
 }
 
-export const setUsers = (users: any):setUsersType => {
+export const setUsers = (users: any): setUsersType => {
     return { type: SET_USERS, users }
 }
 
@@ -145,8 +146,8 @@ export const toggleIsProgress = (followingInProgress: boolean, userId: number): 
     return { type: TOGGLE_IS_PROGRESS, followingInProgress, userId }
 }
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+export const requestUsers = (currentPage: number, pageSize: number): ThunkType => {
+    return (dispatch) => {
         dispatch(toggleFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleFetching(false));
@@ -156,32 +157,32 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const follow = (userId: number) => {
-    return (dispatch: any) => {
+export const follow = (userId: number): ThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
         usersAPI.follow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
+                    dispatch(getFriends()) // friends update
                 }
                 dispatch(toggleIsProgress(false, userId))
             })
     }
-
 }
 
-export const unfollow = (userId: number) => {
-    return (dispatch: any) => {
+export const unfollow = (userId: number): ThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
         usersAPI.unfollow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userId))
+                    dispatch(getFriends()) // friends update
                 }
                 dispatch(toggleIsProgress(false, userId))
             })
     }
-
 }
 
 export default usersReduser;

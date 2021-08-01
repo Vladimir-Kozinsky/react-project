@@ -43,12 +43,13 @@ let initialState: initialStateType = {
 
 }
 
+type ActionType = addMessageActionType
 
-const dialogsReduser = (state = initialState, action: any):initialStateType => {
+const dialogsReduser = (state = initialState, action: ActionType):initialStateType => {
     let id = action.id - 1;
     switch (action.type) {
         case ADD_MESSAGE:
-            state.dialogs[id].messages?.push({ id: action.messageId, message: action.values }) //WRONG but I dont know how to resolve
+            state.dialogs[id].messages?.push({ id: action.messageId, message: action.values }) //WRONG LINE but I dont know how to resolve
             return {
                 ...state,
                 dialogs: [...state.dialogs],
@@ -62,7 +63,7 @@ type addMessageActionType = {
     type: typeof ADD_MESSAGE
     values: string,
     id: number,
-    messageId: number,
+    messageId: number
 }
 
 export const addMessage = (values: string, id: number, messageId: number): addMessageActionType => {

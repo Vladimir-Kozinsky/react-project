@@ -1,7 +1,7 @@
-import { type } from "node:os";
-import { getAuth } from "./authReduser";
+import { getAuth } from "./authReduser"
+import { ThunkType } from './../app/hooks'
 
-const SET_INITIALAZED = 'SET-INITIALAZED';
+const SET_INITIALAZED = 'SET-INITIALAZED'
 
 export type initialStateType = {
     initialazed: boolean,
@@ -31,6 +31,7 @@ export const initialazedSucces = (): initialazedSuccesActionType => {
 type initialazedSuccesActionType = {
     type: typeof SET_INITIALAZED,
 }
+
 
 
 export const initialazeApp = () => {

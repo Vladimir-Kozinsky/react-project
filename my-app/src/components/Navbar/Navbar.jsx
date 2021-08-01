@@ -9,8 +9,9 @@ import musicIcon from './../common/navBar/musicIcon.png';
 import usersIcon from './../common/navBar/usersIcon.png';
 
 const Navbar = (props) => {
+  //let followedUsers = 
 
-  let friends = props.state.navBarPage.sidebar.map(f => <SidebarFriend friend={f.friend} />)
+  let friends = props.friends.map(f => <SidebarFriend name={f.name} photo={f.photos.small} />)
   return (
     <nav className={s.navBar}>
 

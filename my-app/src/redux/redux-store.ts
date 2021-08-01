@@ -18,8 +18,11 @@ let redusers = combineReducers({
     app: appReduser
 });
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 let store = createStore(redusers, applyMiddleware(thunkMiddleware));
-window.store = store;
+//window.store = store;
 
 export default store;
 

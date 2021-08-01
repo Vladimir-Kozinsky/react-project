@@ -34,6 +34,9 @@ export const usersAPI = {
     },
     logout() {
         return instance.delete(`auth/login`)
+    },
+    getFriends(isFollow) {
+        return instance.get(`users?friend=${isFollow}`)
     }
 }
 
@@ -61,12 +64,12 @@ export const ProfileAPI = {
         return instance.put('profile', formData);
     },
     userPhoto(userId) {
-        return instance.get(`profile/${userId}`); 
+        return instance.get(`profile/${userId}`);
     }
 }
 
 export const SecurityAPI = {
-    getCaptchaUrl(){
+    getCaptchaUrl() {
         return instance.get('security/get-captcha-url');
     }
 
