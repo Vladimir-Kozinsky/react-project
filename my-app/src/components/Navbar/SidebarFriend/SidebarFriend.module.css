@@ -23,3 +23,7 @@
   cursor: pointer;
   color: crimson;
 }
+.nameContainer {
+  width: 60px;
+  overflow: hidden;
+}

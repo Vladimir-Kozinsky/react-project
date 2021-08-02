@@ -228,11 +228,9 @@ export const setLikesCounter = (postId: number, count: number): setLikesCounterT
 }
 
 export const getUserInfo = (userId: number): ThunkType => {
-    return (dispatch) => {
-        usersAPI.userInfo(userId)
-            .then(response => {
-                dispatch(setProfileInfo(response.data));
-            })
+    return async (dispatch) => {
+        const getProfile = await usersAPI.userInfo(userId)
+        dispatch(setProfileInfo(getProfile));
     }
 }
 export const getProfilePhoto = (userId: number): ThunkType => {
@@ -245,21 +243,18 @@ export const getProfilePhoto = (userId: number): ThunkType => {
 }
 
 export const getStatus = (userId: number): ThunkType => {
-    return (dispatch) => {
-        ProfileAPI.getUserStatus(userId)
-
-            .then(response => {
-                dispatch(setStatus(response.data));
-            })
+    return async (dispatch) => {
+        const getUserStatusData = await ProfileAPI.getUserStatus(userId)
+        dispatch(setStatus(getUserStatusData));
     }
 }
 export const updateStatus = (status: string): ThunkType => {
-    return (dispatch) => {
-        ProfileAPI.updateStatus(status).then(response => {
-            if (response.data.data.resultCode === 0) {
-                dispatch(setStatus(response.data.data));
-            }
-        })
+    return async (dispatch) => {
+        const updateStatusData = await ProfileAPI.updateStatus(status)
+        if (updateStatusData.resultCode === 0) {
+           // dispatch(setStatus(updateStatusData.data));
+        }
+
     }
 }
 

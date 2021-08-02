@@ -81,15 +81,45 @@ export const usersAPI = {
     }
 }
 
+type getProfileType = {
+    userId: number,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: getProfileContactsType,
+    photos: getProfilePhotosType,
+}
+
+type getProfileContactsType = {
+    github: string,
+    vk: string,
+    facebook: string,
+    instagram: string,
+    twitter: string,
+    website: string,
+    youtube: string,
+    mainLink: string,
+}
+
+type getProfilePhotosType = {
+    small: string,
+    large: string
+}
+type updateStatusType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {}
+}
+
 export const ProfileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/${userId}`);
+        return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
     },
     getUserStatus(userId: number) {
-        return instance.get(`profile/status/${userId}`);
+        return instance.get<string>(`profile/status/${userId}`).then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put('profile/status', { status: status });
+        return instance.put<updateStatusType>('profile/status', { status: status }).then(response => response.data)
     },
     savePhoto(photoFile: string) {
         const formData = new FormData();

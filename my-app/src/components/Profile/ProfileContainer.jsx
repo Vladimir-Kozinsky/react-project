@@ -39,7 +39,7 @@ class ProfileAPIContainer extends React.Component {
             saveProfileInfo={this.props.saveProfileInfo}
             editMode={this.props.editMode}
             setEditMode={this.props.setEditMode}
-            />
+        />
     }
 }
 let mapStateToProps = (state) => {

@@ -163,7 +163,6 @@ export const follow = (userId: number): ThunkType => {
         const followData = await usersAPI.follow(userId)
         if (followData.resultCode === 0) {
             dispatch(followSuccess(userId))
-            dispatch(getFriends()) // friends update
         }
         dispatch(toggleIsProgress(false, userId))
     }
@@ -175,7 +174,6 @@ export const unfollow = (userId: number): ThunkType => {
         const unfollowData = await usersAPI.unfollow(userId)
         if (unfollowData.resultCode === 0) {
             dispatch(unfollowSuccess(userId))
-            dispatch(getFriends()) // friends update
         }
         dispatch(toggleIsProgress(false, userId))
     }
