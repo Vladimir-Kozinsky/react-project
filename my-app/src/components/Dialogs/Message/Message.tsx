@@ -1,13 +1,18 @@
+import React from 'react';
 import s from './Message.module.css';
 
-const Message = (props) => {
+type PropsType = {
+    avatarPhoto: string,
+    message: string
+}
+const Message:React.FC<PropsType> = ({ avatarPhoto, message }) => {
     return (
         <div className={s.messagesItem}>
             <div className={s.avaContainer}>
-                <img src={props.avatarPhoto} alt="" />
+                <img src={avatarPhoto} alt="" />
             </div>
             <div className={s.messageComtainer}>
-                {props.message}
+                {message}
             </div>
         </div>
     )

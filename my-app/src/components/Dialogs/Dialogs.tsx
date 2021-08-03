@@ -11,12 +11,9 @@ import Button from '../common/buttons/Button';
 
 const Dialogs = (props) => {
 
-
-
     let dialogs = props.messagesPage.dialogs.map(d => <UserItem
         name={d.name}
-        id={d.id}
-        messagesPage={props.messagesPage} />);
+        id={d.id} />);
 
     if (!props.isAuth) return <Redirect to={"/login"} />
     return (
@@ -26,7 +23,7 @@ const Dialogs = (props) => {
             </div>
 
             <div className={s.messagesContainer}>
-                <Route path="/dialogs/:id?" render={() => <Messages messagesPage={props.messagesPage}
+                <Route path="/dialogs/:id?" render={() => <Messages dialogs={props.messagesPage.dialogs}
                     addMessage={props.addMessage}
                     avatarPhoto={props.avatarPhoto} />} />
             </div>
@@ -34,10 +31,12 @@ const Dialogs = (props) => {
     )
 }
 
+
+
 const Messages = (props) => {
 
     let addMessage = (values) => {
-        let messageArr = props.messagesPage.dialogs[id - 1].messages;
+        let messageArr = props.dialogs[id - 1].messages;
         let messageId = messageArr.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
         props.addMessage(values.changeMessageText, id, messageId.id + 1);
     }
