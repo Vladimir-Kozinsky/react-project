@@ -1,15 +1,15 @@
-import { NavLink } from 'react-router-dom';
-import s from './Navbar.module.css';
-import SidebarFriend from './SidebarFriend/SidebarFriend';
-import settingImg from './../common/header/settingImg.png';
-import profileIcon from './../common/header/profileIcon.png';
-import inboxIcon from './../common/header/inboxIcon.png';
-import newsIcon from './../common/navBar/newsIcon.png';
-import musicIcon from './../common/navBar/musicIcon.png';
-import usersIcon from './../common/navBar/usersIcon.png';
+import { NavLink } from 'react-router-dom'
+import s from './Navbar.module.css'
+import SidebarFriend from './SidebarFriend/SidebarFriend'
+import settingImg from './../common/header/settingImg.png'
+import profileIcon from './../common/header/profileIcon.png'
+import inboxIcon from './../common/header/inboxIcon.png'
+import newsIcon from './../common/navBar/newsIcon.png'
+import musicIcon from './../common/navBar/musicIcon.png'
+import usersIcon from './../common/navBar/usersIcon.png'
 
 const Navbar = (props) => {
-  //let followedUsers = 
+  const pageCount = Math.ceil(props.totalCount / props.friendsBlockSize)
 
   let friends = props.friends.map(f => <SidebarFriend name={f.name} photo={f.photos.small} />)
   return (
@@ -68,7 +68,22 @@ const Navbar = (props) => {
 
 
       <div className={s.sidebarFriends}>
-        {friends}
+        {props.currentPage === 1
+          ? <div className={s.prevSlider} >
+            <button className={s.prevMuteButton} ></button>
+          </div>
+          : <div className={s.slider}>
+            <button className={s.prevButton} onClick={() => { props.getFriends(true, props.currentPage - 1) }}></button>
+          </div>}
+        
+        {props.currentPage === pageCount
+          ? <div className={s.nextSlider} >
+            <button className={s.nextMuteButton} ></button>
+          </div>
+          : <div className={s.nextSlider}>
+            <button className={s.nextButton} onClick={() => { props.getFriends(true, props.currentPage + 1) }}></button>
+          </div>}
+          {friends}
       </div>
 
       <div className={s.emptyBox}>
@@ -78,5 +93,8 @@ const Navbar = (props) => {
     </nav>
   )
 }
+
+
+
 
 export default Navbar;

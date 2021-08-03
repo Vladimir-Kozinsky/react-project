@@ -1,4 +1,4 @@
-import usersAPI from "../API/API"
+import usersAPI, { ResultCodesEnum } from "../API/API"
 import { ProfileAPI } from "../API/API"
 import { stopSubmit } from "redux-form"
 import { ThunkType } from "../app/hooks"
@@ -234,11 +234,9 @@ export const getUserInfo = (userId: number): ThunkType => {
     }
 }
 export const getProfilePhoto = (userId: number): ThunkType => {
-    return (dispatch) => {
-        ProfileAPI.userPhoto(userId)
-            .then(response => {
-                dispatch(setProfolePhoto(response.data.photos.small))
-            })
+    return async (dispatch) => {
+        const userPhotoData = await ProfileAPI.userPhoto(userId)
+        dispatch(setProfolePhoto(userPhotoData.photos.small))
     }
 }
 
@@ -251,8 +249,8 @@ export const getStatus = (userId: number): ThunkType => {
 export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
         const updateStatusData = await ProfileAPI.updateStatus(status)
-        if (updateStatusData.resultCode === 0) {
-           dispatch(setStatus(status));
+        if (updateStatusData.resultCode === ResultCodesEnum.Success) {
+            dispatch(setStatus(status));
         }
 
     }
@@ -272,31 +270,30 @@ export const updateLikesCountAC = (postId: number): ThunkType => {
 }
 
 export const savePhoto = (photo: string): ThunkType => {
-    return (dispatch) => {
-        ProfileAPI.savePhoto(photo).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(savePhotoSuccess(response.data.data.photos))
-                dispatch(setProfolePhoto(response.data.data.photos.small)) //update small photo in Header
-            }
-        })
+    return async (dispatch) => {
+        const savePhotoData = await ProfileAPI.savePhoto(photo)
+        if (savePhotoData.resultCode === ResultCodesEnum.Success) {
+            dispatch(savePhotoSuccess(savePhotoData.data.photos))
+            dispatch(setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
+        }
     }
 }
 
 export const saveProfileInfo = (formData: any): ThunkType => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const userId = getState().auth.authdata.id
-        ProfileAPI.sendProfileInfo(formData).then(response => {
-            if (response.data.resultCode === 0) {
-                if (userId) {
-                    dispatch(getUserInfo(userId))
-                    dispatch(setEditMode(false))
-                }
-            } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error ";
-                dispatch(stopSubmit('profileInfo', { _error: message }));
-                dispatch(setEditMode(true))
+        const sendProfileInfoData = await ProfileAPI.sendProfileInfo(formData)
+        if (sendProfileInfoData.resultCode === ResultCodesEnum.Success) {
+            if (userId) {
+                dispatch(getUserInfo(userId))
+                dispatch(setEditMode(false))
             }
-        })
+        } else {
+            let message = sendProfileInfoData.messages.length > 0 ? sendProfileInfoData.messages[0] : "Some error ";
+            dispatch(stopSubmit('profileInfo', { _error: message }));
+            dispatch(setEditMode(true))
+        }
+
     }
 }
 

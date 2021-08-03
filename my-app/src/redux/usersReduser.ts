@@ -1,4 +1,4 @@
-import usersAPI from "../API/API";
+import usersAPI, { ResultCodesEnum } from "../API/API";
 import { ThunkType } from "../app/hooks";
 import { updateObjectInArray } from "../utilits/validation/object-helper";
 import { getFriends } from "./navBarReduser";
@@ -161,7 +161,7 @@ export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
         const followData = await usersAPI.follow(userId)
-        if (followData.resultCode === 0) {
+        if (followData.resultCode === ResultCodesEnum.Success) {
             dispatch(followSuccess(userId))
         }
         dispatch(toggleIsProgress(false, userId))
@@ -172,7 +172,7 @@ export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
         dispatch(toggleIsProgress(true, userId))
         const unfollowData = await usersAPI.unfollow(userId)
-        if (unfollowData.resultCode === 0) {
+        if (unfollowData.resultCode === ResultCodesEnum.Success) {
             dispatch(unfollowSuccess(userId))
         }
         dispatch(toggleIsProgress(false, userId))

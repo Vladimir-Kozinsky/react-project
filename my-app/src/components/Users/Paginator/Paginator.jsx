@@ -12,19 +12,16 @@ let Paginator = (props) => {
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
-
     return (
         <div className={s.paginator}>
             {portionNumber > 1 && <button onClick={() => { setPortionNumber(portionNumber - 1) }} >Prev</button>}
-
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
-                    return <span onClick={() => { props.onPageChanged(p); }} className={props.currentPage === p && s.selectedPage} > {p} </span>
+                    return <span onClick={() => { props.onPageChanged(p)}} className={props.currentPage === p && s.selectedPage} > {p} </span>
                 })}
             {portionCount > portionNumber && <button onClick={() => { setPortionNumber(portionNumber + 1) }} >Next</button>}
         </div>
-
     )
 }
 

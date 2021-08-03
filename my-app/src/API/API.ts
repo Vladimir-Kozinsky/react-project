@@ -23,15 +23,17 @@ type userType = {
 }
 
 type followType = {
-    resultCode: number,
+    resultCode: ResultCodesEnum,
     messages: Array<string>,
     data: {}
 }
+
 type unfollowType = {
-    resultCode: number,
+    resultCode: ResultCodesEnum,
     messages: Array<string>,
     data: {}
 }
+
 type getUserAuthType = {
     data: {
         id: number,
@@ -41,16 +43,21 @@ type getUserAuthType = {
     resultCode: number,
     messages: Array<string>,
 }
-type loginType = {
-    resultCode: number,
+
+type logType = {
+    resultCode: ResultCodesEnum,
     messages: Array<string>,
     data: {},
 }
-type logoutType = {
-    resultCode: number,
-    messages: Array<string>,
-    data: {},
+
+
+
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+    CaptchaRequired = 10
 }
+
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 5) {
         return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}`)
@@ -71,13 +78,13 @@ export const usersAPI = {
         return instance.get<getUserAuthType>(`/auth/me`).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {
-        return instance.post<loginType>(`auth/login`, { email, password, rememberMe, captcha }).then(response => response.data)
+        return instance.post<logType>(`auth/login`, { email, password, rememberMe, captcha }).then(response => response.data)
     },
     logout() {
-        return instance.delete<logoutType>(`auth/login`).then(response => response.data)
+        return instance.delete<logType>(`auth/login`).then(response => response.data)
     },
-    getFriends(isFollow: boolean) {
-        return instance.get<getUsersType>(`users?friend=${isFollow}`).then(response => response.data);
+    getFriends(isFollow: boolean, currentPage: number) {
+        return instance.get<getUsersType>(`users?page=${currentPage}&friend=${isFollow}`).then(response => response.data);
     }
 }
 
@@ -105,7 +112,25 @@ type getProfilePhotosType = {
     small: string,
     large: string
 }
+
 type updateStatusType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {}
+}
+
+type savePhotoType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {
+        photos: {
+            small: string,
+            large: string
+        }
+    }
+}
+
+type sendProfileInfoType = {
     resultCode: number
     messages: Array<string>,
     data: {}
@@ -124,28 +149,28 @@ export const ProfileAPI = {
     savePhoto(photoFile: string) {
         const formData = new FormData();
         formData.append("image", photoFile);
-
-        return instance.put('profile/photo', formData, {
+        return instance.put<savePhotoType>('profile/photo', formData, {
             headers: {
                 'Content-Type': 'multipart/formData'
             }
-        })
+        }).then(response => response.data)
     },
     sendProfileInfo(formData: any) {
-        return instance.put('profile', formData);
+        return instance.put<sendProfileInfoType>('profile', formData).then(response => response.data)
     },
     userPhoto(userId: number) {
-        return instance.get(`profile/${userId}`);
+        return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
     }
+}
+
+type getCaptchaUrlType = {
+    url: string
 }
 
 export const SecurityAPI = {
     getCaptchaUrl() {
-        return instance.get('security/get-captcha-url');
+        return instance.get<getCaptchaUrlType>('security/get-captcha-url').then(response => response.data)
     }
-
 }
 
-
 export default usersAPI;
-
