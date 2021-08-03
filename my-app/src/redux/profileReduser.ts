@@ -252,7 +252,7 @@ export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
         const updateStatusData = await ProfileAPI.updateStatus(status)
         if (updateStatusData.resultCode === 0) {
-           // dispatch(setStatus(updateStatusData.data));
+           dispatch(setStatus(status));
         }
 
     }
