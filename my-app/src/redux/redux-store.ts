@@ -20,7 +20,7 @@ let rootReduser = combineReducers({
 
 
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReduser>
 export type AppDispatch = typeof store.dispatch
 
 let store = createStore(rootReduser, applyMiddleware(thunkMiddleware));

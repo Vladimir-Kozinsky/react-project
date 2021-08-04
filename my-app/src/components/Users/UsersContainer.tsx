@@ -13,7 +13,7 @@ type MapStateToPropsType = {
     pageSize: number,
     currentPage: number,
     users: Array<UserType>,
-    isFetching: Boolean,
+    isFetching: boolean,
     followingInProgress: Array<Number>,
     totalUsersCount: number
 }
@@ -25,21 +25,20 @@ type UserType = {
     photos: UserPhotosType,
     folowed: boolean
 }
-
 type UserPhotosType = {
     small: string,
     large: string
 }
 
 type MapDispatchToPropsType = {
-    unfollowSuccess: () => void
-    followSuccess: () => void
+    //  unfollowSuccess: () => void
+    // followSuccess: () => void
     setCurrentPage: (pageNumber: number) => void
-    toggleIsProgress: () => void
+    // toggleIsProgress: () => void
     requestUsers: (currentPage: number, pageSize: number) => void
-    follow: () => void
-    unfollow: () => void
-    toggleFetching: () => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    // toggleFetching: () => void
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -60,16 +59,16 @@ class UsersAPIComponent extends React.Component<PropsType> {
             users={this.props.users}
             unfollow={this.props.unfollow}
             follow={this.props.follow}
-            toggleFetching={this.props.toggleFetching}
+            // toggleFetching={this.props.toggleFetching}
             isFetching={this.props.isFetching}
-            toggleIsProgress={this.props.toggleIsProgress}
+            //  toggleIsProgress={this.props.toggleIsProgress}
             followingInProgress={this.props.followingInProgress}
         //isAuth={this.props.isAuth}
         />
     }
 }
 
-let mapStateToProps = (state: RootState): MapStateToPropsType => {
+let mapStateToProps = (state: any):MapStateToPropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -105,8 +104,7 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
 
 export default compose(
     connect<MapStateToPropsType, MapDispatchToPropsType, RootState>(mapStateToProps, {
-        unfollowSuccess, followSuccess, setCurrentPage,
-        toggleIsProgress, requestUsers, follow, unfollow
+        setCurrentPage, requestUsers, follow, unfollow
     }),
     withRouter,
     withAuthRedirect
