@@ -6,13 +6,49 @@ import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { withRouter } from "react-router-dom";
 import { compose } from 'redux';
 import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress, getUsers } from "../../redux/usersSelectors";
+import { RootState } from "../../redux/redux-store";
 
 
-class UsersAPIComponent extends React.Component {
+type MapStateToPropsType = {
+    pageSize: number,
+    currentPage: number,
+    users: Array<UserType>,
+    isFetching: Boolean,
+    followingInProgress: Array<Number>,
+    totalUsersCount: number
+}
+
+type UserType = {
+    id: number,
+    name: string,
+    status: string,
+    photos: UserPhotosType,
+    folowed: boolean
+}
+
+type UserPhotosType = {
+    small: string,
+    large: string
+}
+
+type MapDispatchToPropsType = {
+    unfollowSuccess: () => void
+    followSuccess: () => void
+    setCurrentPage: (pageNumber: number) => void
+    toggleIsProgress: () => void
+    requestUsers: (currentPage: number, pageSize: number) => void
+    follow: () => void
+    unfollow: () => void
+    toggleFetching: () => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class UsersAPIComponent extends React.Component<PropsType> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.requestUsers(pageNumber, this.props.pageSize);
         this.props.setCurrentPage(pageNumber)
     }
@@ -33,7 +69,7 @@ class UsersAPIComponent extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState): MapStateToPropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -68,7 +104,7 @@ let mapStateToProps = (state) => {
 // }
 
 export default compose(
-    connect(mapStateToProps, {
+    connect<MapStateToPropsType, MapDispatchToPropsType, RootState>(mapStateToProps, {
         unfollowSuccess, followSuccess, setCurrentPage,
         toggleIsProgress, requestUsers, follow, unfollow
     }),

@@ -11,7 +11,7 @@ class DialogsAPIContainer extends React.Component {
 
     }
     render() {
-        return <Dialogs messagesPage={this.props.messagesPage}
+        return <Dialogs dialogs={this.props.dialogs}
             isAuth={this.props.isAuth}
             addMessage={this.props.addMessage}
             changeMessageText={this.props.changeMessageText}
@@ -20,7 +20,7 @@ class DialogsAPIContainer extends React.Component {
 }
 let mapStateToProps = (state) => {
     return {
-        messagesPage: state.messagesPage,
+        dialogs: state.messagesPage.dialogs,
         avatarPhoto: state.profilePage.profileSmallPhotoUrl
 
     }

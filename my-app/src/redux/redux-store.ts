@@ -8,7 +8,7 @@ import authReduser from "./authReduser";
 import { reducer as formReducer } from 'redux-form';
 import appReduser from "./appReduser";
 
-let redusers = combineReducers({
+let rootReduser = combineReducers({
     profilePage: profileReduser,
     messagesPage: dialogsReduser,
     navBarPage: navBarReduser,
@@ -18,10 +18,12 @@ let redusers = combineReducers({
     app: appReduser
 });
 
+
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
-let store = createStore(redusers, applyMiddleware(thunkMiddleware));
+let store = createStore(rootReduser, applyMiddleware(thunkMiddleware));
 //window.store = store;
 
 export default store;

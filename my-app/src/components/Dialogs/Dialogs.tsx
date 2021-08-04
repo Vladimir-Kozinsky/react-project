@@ -3,68 +3,88 @@ import UserItem from './UserItem/UserItem';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { Route, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Message from './Message/Message';
 import Button from '../common/buttons/Button';
 
 
+type PropsType = {
+    dialogs: Array<dialodsType>,
+    isAuth: boolean,
+    addMessage: (changeMessageText: string, id: number, messageId: number) => void,
+    avatarPhoto: string
+}
 
-const Dialogs = (props) => {
+const Dialogs: React.FC<PropsType> = ({ dialogs, isAuth, addMessage, avatarPhoto }) => {
 
-    let dialogs = props.messagesPage.dialogs.map(d => <UserItem
+    let dialogsNewArr = dialogs.map((d: { name: string; id: number; }) => <UserItem
         name={d.name}
         id={d.id} />);
 
-    if (!props.isAuth) return <Redirect to={"/login"} />
+    if (!isAuth) return <Redirect to={"/login"} />
+
     return (
         <div className={s.dialogs}>
             <div className={s.users}>
-                {dialogs}
+                {dialogsNewArr}
             </div>
 
             <div className={s.messagesContainer}>
-                <Route path="/dialogs/:id?" render={() => <Messages dialogs={props.messagesPage.dialogs}
-                    addMessage={props.addMessage}
-                    avatarPhoto={props.avatarPhoto} />} />
+                <Route path="/dialogs/:id?" render={() => <Messages
+                    dialogs={dialogs}
+                    addMessage={addMessage}
+                    avatarPhoto={avatarPhoto} />} />
             </div>
         </div>
     )
 }
 
+type MessagesPropsType = {
+    dialogs: Array<dialodsType>,
+    addMessage: (changeMessageText: string, id: number, messageId: number) => void,
+    avatarPhoto: string
 
+}
+type dialodsType = {
+    id: number,
+    name: string,
+    messages: Array<messagesType>
 
-const Messages = (props) => {
+}
+type messagesType = {
+    id: number,
+    message: string
+}
 
-    let addMessage = (values) => {
-        let messageArr = props.dialogs[id - 1].messages;
-        let messageId = messageArr.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
-        props.addMessage(values.changeMessageText, id, messageId.id + 1);
+const Messages: React.FC<MessagesPropsType> = ({ dialogs, addMessage, avatarPhoto }) => {
+    let addNewMessage = (values: any) => {
+        let messageArr = dialogs[Number(id) - 1].messages;
+        let messageId = messageArr.reduce((acc: any, curr: any) => acc.b > curr.b ? acc : curr);
+        addMessage(values.changeMessageText, Number(id), messageId.id + 1);
     }
 
     let params = window.location.pathname;
     let id = params.replace(/\D+/, '');
-    if (id === "") {
-        id = 1;
+    if (id === '') {
+        id = "1";
     }
-    let messages = props.messagesPage.dialogs[id - 1].messages.map(m => <Message
-        id={m.id}
+    let messages = dialogs[Number(id) - 1].messages.map((m: { id: number; message: string; }) => <Message
         message={m.message}
-        avatarPhoto={props.avatarPhoto} />);
+        avatarPhoto={avatarPhoto} />);
     //let revMessages = messages.reverse();
-
     return (
         <div>
             <div className={s.messages}>
                 {messages}
             </div>
             <div className={s.newMessage}>
-                <DialogReduxForm onSubmit={addMessage} />
+                <DialogReduxForm onSubmit={addNewMessage} />
             </div>
         </div>
     )
 }
 
-const DialogForm = (props) => {
+const DialogForm = (props: any) => {
 
     return (
         <form onSubmit={props.handleSubmit}>

@@ -6,24 +6,31 @@ import profileIcon from './../../common/header/profileIcon.png';
 import inboxIcon from './../../common/header/inboxIcon.png';
 import { NavLink } from 'react-router-dom';
 import DropBoxItem from './DropBoxItem/DropBoxItem';
+import React from 'react';
 
-const HeaderDropMenu = (props) => {
+type PropsType = {
+    logout: () => void,
+    isAuth: boolean,
+    authdata: any,
+    avatarPhoto: string
+}
+
+const HeaderDropMenu: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarPhoto }) => {
 
     return (
         <div className={s.headerDropMenuContainer}>
 
-            {props.isAuth === true
+            {isAuth === true
                 ? <div className={s.userPhotoContainer}>
-                    <div className={s.userPhoto}>{props.avatarPhoto
-                        ? <img src={props.avatarPhoto} alt="" />
+                    <div className={s.userPhoto}>{avatarPhoto
+                        ? <img src={avatarPhoto} alt="" />
                         : <span>Photo</span>}
                     </div>
                     <div className={s.dropMenu}>
-
                         <DropBoxItem
                             settingImg={profileIcon}
                             path={"/profile"}
-                            itemName={props.authdata.login} />
+                            itemName={authdata.login} />
                         <DropBoxItem
                             settingImg={inboxIcon}
                             path={"/dialogs"}
@@ -40,12 +47,10 @@ const HeaderDropMenu = (props) => {
                             settingImg={logoutIcon}
                             path={null}
                             itemName={"Log out"}
-                            onClickCallback={props.logout}
+                            onClickCallback={logout}
                         />
-
                     </div>
                 </div>
-
                 : <div className={s.login}>
                     <div className={s.loginImgContainer}>
                         <img src={profileIcon} alt="" />
@@ -53,9 +58,7 @@ const HeaderDropMenu = (props) => {
                     <div className={s.loginLinkContainer}>
                         <NavLink to="/login"><div>Login</div></NavLink>
                     </div>
-
                 </div>}
-
         </div>
     )
 }
