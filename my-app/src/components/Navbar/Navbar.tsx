@@ -7,11 +7,29 @@ import inboxIcon from './../common/header/inboxIcon.png'
 import newsIcon from './../common/navBar/newsIcon.png'
 import musicIcon from './../common/navBar/musicIcon.png'
 import usersIcon from './../common/navBar/usersIcon.png'
+import React from 'react'
 
-const Navbar = (props) => {
-  const pageCount = Math.ceil(props.totalCount / props.friendsBlockSize)
+type PropsType = {
+  friends: Array<initialStateSideBarType>
+  currentPage: number
+  totalCount: number
+  friendsBlockSize: number
+  getFriends: (isFollow: boolean, currentPage: number) => void
+}
 
-  let friends = props.friends.map(f => <SidebarFriend name={f.name} photo={f.photos.small} />)
+type initialStateSideBarType = {
+  id: number,
+  friend: string,
+  photos: {
+    small: string,
+    large: string
+  }
+}
+
+const Navbar: React.FC<PropsType> = ({ friends, currentPage, totalCount, friendsBlockSize, getFriends }) => {
+  const pageCount = Math.ceil(totalCount / friendsBlockSize)
+
+  let friendsArr = friends.map(f => <SidebarFriend name={f.friend} photo={f.photos.small} />)
   return (
     <nav className={s.navBar}>
 
@@ -68,22 +86,22 @@ const Navbar = (props) => {
 
 
       <div className={s.sidebarFriends}>
-        {props.currentPage === 1
+        {currentPage === 1
           ? <div className={s.prevSlider} >
             <button className={s.prevMuteButton} ></button>
           </div>
           : <div className={s.slider}>
-            <button className={s.prevButton} onClick={() => { props.getFriends(true, props.currentPage - 1) }}></button>
+            <button className={s.prevButton} onClick={() => { getFriends(true, currentPage - 1) }}></button>
           </div>}
-        
-        {props.currentPage === pageCount
+
+        {currentPage === pageCount
           ? <div className={s.nextSlider} >
             <button className={s.nextMuteButton} ></button>
           </div>
           : <div className={s.nextSlider}>
-            <button className={s.nextButton} onClick={() => { props.getFriends(true, props.currentPage + 1) }}></button>
+            <button className={s.nextButton} onClick={() => { getFriends(true, currentPage + 1) }}></button>
           </div>}
-          {friends}
+        {friendsArr}
       </div>
 
       <div className={s.emptyBox}>

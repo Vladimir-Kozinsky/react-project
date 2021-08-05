@@ -12,7 +12,7 @@ type PropsType = {
     dialogs: Array<dialodsType>,
     isAuth: boolean,
     addMessage: (changeMessageText: string, id: number, messageId: number) => void,
-    avatarPhoto: string
+    avatarPhoto: string | null
 }
 
 const Dialogs: React.FC<PropsType> = ({ dialogs, isAuth, addMessage, avatarPhoto }) => {
@@ -42,19 +42,19 @@ const Dialogs: React.FC<PropsType> = ({ dialogs, isAuth, addMessage, avatarPhoto
 type MessagesPropsType = {
     dialogs: Array<dialodsType>,
     addMessage: (changeMessageText: string, id: number, messageId: number) => void,
-    avatarPhoto: string
+    avatarPhoto: string | null
 
 }
 type dialodsType = {
     id: number,
     name: string,
-    messages: Array<messagesType>
+    messages: any
 
 }
-type messagesType = {
-    id: number,
-    message: string
-}
+// type messagesType = {
+//     id: number,
+//     message: string
+// }
 
 const Messages: React.FC<MessagesPropsType> = ({ dialogs, addMessage, avatarPhoto }) => {
     let addNewMessage = (values: any) => {

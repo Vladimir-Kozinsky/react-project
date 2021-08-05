@@ -8,7 +8,7 @@ type initialStateType = {
 type dialogsType = {
     id: number,
     name: string,
-    messages?: Array<messagesType>
+    messages: any
 }
 
 type messagesType = {
@@ -40,12 +40,11 @@ let initialState: initialStateType = {
             ],
         },
     ],
-
 }
 
 type ActionType = addMessageActionType
 
-const dialogsReduser = (state = initialState, action: ActionType):initialStateType => {
+const dialogsReduser = (state = initialState, action: ActionType): initialStateType => {
     let id = action.id - 1;
     switch (action.type) {
         case ADD_MESSAGE:

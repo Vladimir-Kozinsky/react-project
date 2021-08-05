@@ -5,41 +5,71 @@ const SET_FRIENDS = "SET_FRIENDS"
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 export type initialStateType = {
-    friends: Array<initialStateSideBarType>,
-    currentPage: number
+    friends: {
+        items: Array<initialStateSideBarType>
+        currentPage: number
+        totalCount: number
+    },
+    friendsBlockSize: number
+
 }
 type initialStateSideBarType = {
     id: number,
     friend: string,
-    totalCount: number | null
+    photos: {
+        small: string,
+        large: string
+    }
+
 }
 let initialState = {
-    friends: [],
-    currentPage: 1,
-    totalCount: null,
+    friends: {
+        items: [],
+        currentPage: 1,
+        totalCount: 0,
+    },
     friendsBlockSize: 10
 }
 
-let navBarReduser = (state = initialState, action: any) => {
+type ActionType = setFriendsType | setCurrentPageType
+
+let navBarReduser = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case SET_FRIENDS:
             return {
                 ...state,
-                friends: [...action.getFriendsData.items],
-                totalCount: action.getFriendsData.totalCount
+                ...state.friends,
+                items: [...state.]
+                totalCount: action.setFriendsData.totalCount
 
             }
         case SET_CURRENT_PAGE:
             return {
                 ...state,
-                currentPage: action.currentPage,
+                ...state.friends,
+                currentPage = action.currentPage,
             }
     }
     return state;
 }
 
-const setFriends = (getFriendsData: any) => {
-    return { type: SET_FRIENDS, getFriendsData }
+type setFriendsType = {
+    type: typeof SET_FRIENDS,
+    setFriendsData: {
+        items: Array<initialStateSideBarType>
+        totalCount: number,
+        error: string
+    }
+}
+
+type setFriendsDataType = {
+    items: Array<initialStateSideBarType>
+    totalCount: number,
+    error: string
+}
+
+const setFriends = (setFriendsData: setFriendsDataType): setFriendsType => {
+    return { type: SET_FRIENDS, setFriendsData }
 }
 
 type setCurrentPageType = {

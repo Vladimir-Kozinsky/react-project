@@ -41,7 +41,9 @@ type MapDispatchToPropsType = {
     // toggleFetching: () => void
 }
 
-type PropsType = MapStateToPropsType & MapDispatchToPropsType
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnProps
+
+type OwnProps = {};
 
 class UsersAPIComponent extends React.Component<PropsType> {
     componentDidMount() {
@@ -68,7 +70,7 @@ class UsersAPIComponent extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: any):MapStateToPropsType => {
+let mapStateToProps = (state: RootState):MapStateToPropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -103,7 +105,7 @@ let mapStateToProps = (state: any):MapStateToPropsType => {
 // }
 
 export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, RootState>(mapStateToProps, {
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps, {
         setCurrentPage, requestUsers, follow, unfollow
     }),
     withRouter,
