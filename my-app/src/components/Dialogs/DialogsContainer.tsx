@@ -40,7 +40,7 @@ class DialogsAPIContainer extends React.Component<PropsType> {
         return <Dialogs dialogs={this.props.dialogs}
             isAuth={this.props.isAuth}
             addMessage={this.props.addMessage}
-            // changeMessageText={this.props.changeMessageText}
+           // changeMessageText={this.props.changeMessageText}
             avatarPhoto={this.props.avatarPhoto} />
     }
 }

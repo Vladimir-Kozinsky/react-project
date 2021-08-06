@@ -15,11 +15,14 @@ type getUsersType = {
 }
 
 type userType = {
-    id: Number,
+    id: number,
     name: string,
+    photos: {
+        small: string,
+        large: string
+    }
     status: string,
-    photos: { small: string, large: string },
-    folowed: boolean
+    followed: boolean
 }
 
 type followType = {

@@ -10,26 +10,31 @@ import usersIcon from './../common/navBar/usersIcon.png'
 import React from 'react'
 
 type PropsType = {
-  friends: Array<initialStateSideBarType>
+  friends: {
+    items: Array<itemsType>
+    totalCount: number,
+    error: string
+  }
   currentPage: number
-  totalCount: number
   friendsBlockSize: number
   getFriends: (isFollow: boolean, currentPage: number) => void
 }
 
-type initialStateSideBarType = {
+type itemsType = {
   id: number,
-  friend: string,
+  name: string,
   photos: {
     small: string,
     large: string
   }
+  status: string,
+  followed: boolean
 }
 
-const Navbar: React.FC<PropsType> = ({ friends, currentPage, totalCount, friendsBlockSize, getFriends }) => {
-  const pageCount = Math.ceil(totalCount / friendsBlockSize)
+const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, getFriends }) => {
+  const pageCount = Math.ceil(friends.totalCount / friendsBlockSize)
 
-  let friendsArr = friends.map(f => <SidebarFriend name={f.friend} photo={f.photos.small} />)
+  let friendsArr = friends.items.map(f => <SidebarFriend name={f.name} photo={f.photos.small} />)
   return (
     <nav className={s.navBar}>
 
