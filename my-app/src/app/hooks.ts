@@ -8,4 +8,4 @@ export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 
-export type ThunkType = ThunkAction<void, RootState, unknown, AnyAction>
+export type ThunkType = ThunkAction<Promise<void>, RootState, unknown, AnyAction>

@@ -1,5 +1,6 @@
 import { getAuth } from "./authReduser"
-import { ThunkType } from './../app/hooks'
+import { RootState } from "./redux-store"
+import { ThunkAction } from "redux-thunk"
 
 const SET_INITIALAZED = 'SET-INITIALAZED'
 
@@ -11,6 +12,7 @@ let initialState: initialStateType = {
     initialazed: false,
 }
 
+type ActionType = initialazedSuccesActionType
 
 const appReduser = (state = initialState, action: initialazedSuccesActionType): initialStateType => {
     switch (action.type) {
@@ -33,6 +35,7 @@ type initialazedSuccesActionType = {
 }
 
 
+type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
 export const initialazeApp = () => {
     return (dispatch: any) => {

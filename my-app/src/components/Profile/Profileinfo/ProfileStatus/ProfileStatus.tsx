@@ -3,12 +3,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import s from './ProfileStatus.module.css';
 
+type PropsType = {
+    status: string
+    setStatus: (status: string) => void
+    updateStatus: (status: string) => void
+}
 
-const ProfileStatus = (props) => {
+const ProfileStatus: React.FC<PropsType> = ({ status, setStatus, updateStatus }) => {
 
 
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+    let [localStatus, localSetStatus] = useState(status);
 
 
     const activateEditMode = () => {
@@ -17,15 +22,15 @@ const ProfileStatus = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false)
-        props.updateStatus(status);
+        updateStatus(localStatus);
     }
-    const changeStatusText = (e) => {
+    const changeStatusText = (e: any) => {
         setStatus(e.currentTarget.value);
     }
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+        localSetStatus(status)
+    }, [status])
 
     return (
         <div className={s.userStatus}>

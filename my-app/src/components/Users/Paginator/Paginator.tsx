@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import s from './paginator.module.css';
 
 type PropsType = {
-    totalUsersCount: number,
-    pageSize: number,
-    onPageChanged: (p: number) => void,
+    totalUsersCount: number
+    pageSize: number
+    onPageChanged: (p: number) => void
     currentPage: number
 }
 

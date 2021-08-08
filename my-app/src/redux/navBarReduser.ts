@@ -1,6 +1,7 @@
 import actions from "redux-form/lib/actions"
-import { ThunkType } from "../app/hooks"
+import { ThunkAction } from 'redux-thunk';
 import { usersAPI } from "./../API/API"
+import { RootState } from "./redux-store"
 
 const SET_FRIENDS = "SET_FRIENDS"
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
@@ -80,6 +81,8 @@ type setCurrentPageType = {
 const setCurrentPage = (currentPage: number): setCurrentPageType => {
     return { type: SET_CURRENT_PAGE, currentPage }
 }
+
+type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
 export const getFriends = (isFolowed: boolean, currentPage: number): ThunkType => {
     return async (dispatch, getState) => {

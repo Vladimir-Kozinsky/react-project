@@ -22,13 +22,13 @@ type UserType = {
     id: number,
     name: string,
     status: string,
-    photos: UserPhotosType,
-    folowed: boolean
+    photos: {
+        small: string,
+        large: string
+    }
+    followed: boolean
 }
-type UserPhotosType = {
-    small: string,
-    large: string
-}
+
 
 type MapDispatchToPropsType = {
     //  unfollowSuccess: () => void
@@ -70,7 +70,7 @@ class UsersAPIComponent extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: RootState):MapStateToPropsType => {
+let mapStateToProps = (state: RootState): MapStateToPropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),

@@ -1,10 +1,27 @@
-import { Field, reduxForm } from 'redux-form';
+import React from 'react';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { Input, Textarea } from '../../common/formsControls/FormsControls';
 import s from './profileForm.module.css';
 
-const ProfileInfoForm = (props) => {
+type ProfileInfoFormOwnProps = {
+    setEditMode: (editMode: boolean) => void
+    initialValues: any
+}
+type FormDataValuesType = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    contacts: {
+        facebook: string
+        vk: string
+        instagram: string
+        website: string
+    }
+
+}
+const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({handleSubmit, setEditMode, error}) => {
     return (
-        <form className={s.profileform} onSubmit={props.handleSubmit} >
+        <form className={s.profileform} onSubmit={handleSubmit} >
             <div className={s.FullNameDiv}>FullName:</div>
             <div className={s.FullNameText}>
                 <Field placeholder='FullName' name="fullName" component={Input} />
@@ -34,14 +51,14 @@ const ProfileInfoForm = (props) => {
                 </div>
             </div>
 
-            {props.error && <div>{props.error}</div>}
+            {error && <div>{error}</div>}
             <button>Save</button>
-            <button onClick={() => props.setEditMode(false)} >Cancel</button>
+            <button onClick={() => setEditMode(false)} >Cancel</button>
         </form>
     )
 }
 
-export const ProfileInfoReduxForm = reduxForm({ form: 'profileInfo' })(ProfileInfoForm)
+export const ProfileInfoReduxForm = reduxForm<FormDataValuesType, ProfileInfoFormOwnProps>({ form: 'profileInfo' })(ProfileInfoForm)
 
 
 export default ProfileInfoForm;

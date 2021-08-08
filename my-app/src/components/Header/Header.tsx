@@ -9,7 +9,7 @@ type PropsType = {
   logout: () => void,
   isAuth: boolean,
   authdata: any,
-  avatarPhoto: string
+  avatarPhoto: null | string
 }
 
 const Header: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarPhoto }) => {

@@ -1,7 +1,8 @@
 import usersAPI, { ResultCodesEnum } from "../API/API"
 import { ProfileAPI } from "../API/API"
 import { stopSubmit } from "redux-form"
-import { ThunkType } from "../app/hooks"
+import { ThunkAction } from "redux-thunk"
+import { RootState } from "./redux-store"
 
 const ADD_POST = 'ADD-POST'
 const SET_PROFILE_INFO = 'SET-PROFILEINFO'
@@ -49,7 +50,7 @@ type initialStateProfileInfocontactsType = {
 
 type initialStateProfileInfoPhotosType = {
     small: string | null,
-    large: string | null
+    large?: string | undefined
 }
 
 let initialState: initialStateType = {
@@ -75,7 +76,7 @@ let initialState: initialStateType = {
         },
         photos: {
             small: null,
-            large: null
+            large: ''
         }
     },
     status: '',
@@ -227,6 +228,8 @@ export const setLikesCounter = (postId: number, count: number): setLikesCounterT
     return { type: SET_LIKE_COUNTER, postId, count }
 }
 
+type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
+
 export const getUserInfo = (userId: number): ThunkType => {
     return async (dispatch) => {
         const getProfile = await usersAPI.userInfo(userId)
@@ -258,8 +261,8 @@ export const updateStatus = (status: string): ThunkType => {
 
 
 
-export const updateLikesCountAC = (postId: number): ThunkType => {
-    return (dispatch, getState) => {
+export const updateLikesCountAC = (postId: number) => {
+    return (dispatch: any, getState: any) => {
         for (let i = 0; i < getState().profilePage.posts.length; i++) {
             if (getState().profilePage.posts[i].id === postId) {
                 let count = getState().profilePage.posts[i].likesCounter + 1;
@@ -279,7 +282,20 @@ export const savePhoto = (photo: string): ThunkType => {
     }
 }
 
-export const saveProfileInfo = (formData: any): ThunkType => {
+type FormDataValuesType = {
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    contacts: {
+        facebook: string
+        vk: string
+        instagram: string
+        website: string
+    }
+  
+  }
+
+export const saveProfileInfo = (formData: FormDataValuesType): ThunkType => {
     return async (dispatch, getState) => {
         const userId = getState().auth.authdata.id
         const sendProfileInfoData = await ProfileAPI.sendProfileInfo(formData)
@@ -290,7 +306,7 @@ export const saveProfileInfo = (formData: any): ThunkType => {
             }
         } else {
             let message = sendProfileInfoData.messages.length > 0 ? sendProfileInfoData.messages[0] : "Some error ";
-            dispatch(stopSubmit('profileInfo', { _error: message }));
+            //dispatch(stopSubmit('profileInfo', { _error: message }));
             dispatch(setEditMode(true))
         }
 

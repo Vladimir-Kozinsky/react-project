@@ -1,3 +1,5 @@
+
+
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
 
@@ -15,6 +17,7 @@ type messagesType = {
     id: number,
     message: string,
 }
+
 
 let initialState: initialStateType = {
     dialogs: [

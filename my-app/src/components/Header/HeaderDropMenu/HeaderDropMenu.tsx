@@ -12,7 +12,7 @@ type PropsType = {
     logout: () => void,
     isAuth: boolean,
     authdata: any,
-    avatarPhoto: string
+    avatarPhoto: null | string
 }
 
 const HeaderDropMenu: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarPhoto }) => {
@@ -47,7 +47,7 @@ const HeaderDropMenu: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarP
                             settingImg={logoutIcon}
                             path={null}
                             itemName={"Log out"}
-                            onClickCallback={logout}
+                            logout={logout}
                         />
                     </div>
                 </div>

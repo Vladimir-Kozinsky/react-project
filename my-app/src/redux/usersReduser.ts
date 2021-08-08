@@ -1,7 +1,7 @@
+import { ThunkAction } from "redux-thunk";
 import usersAPI, { ResultCodesEnum } from "../API/API";
-import { ThunkType } from "../app/hooks";
 import { updateObjectInArray } from "../utilits/validation/object-helper";
-import { getFriends } from "./navBarReduser";
+import { RootState } from "./redux-store";
 
 const FOLLOWED = 'FOLLOWED';
 const UNFOLLOWED = 'UNFOLLOWED';
@@ -25,7 +25,7 @@ type UserType = {
     name: string,
     status: string,
     photos: UserPhotosType,
-    folowed: boolean
+    followed: boolean
 }
 type UserPhotosType = {
     small: string,
@@ -45,6 +45,8 @@ export type InitialState = typeof initialState;
 
 type ActionType = followSuccessType | unfollowSuccessType | setUsersType | setCurrentPageType
     | setTotalUsersCountType | toggleFetchingType | toggleIsProgressType
+
+type ThunkType = ThunkAction<void, RootState, unknown, ActionType>
 
 const usersReduser = (state = initialState, action: ActionType): InitialState => {
     switch (action.type) {
@@ -105,7 +107,7 @@ type setUsersUserType = {
     name: string,
     status: string,
     photos: setUserPhotosType,
-    folowed: boolean
+    followed: boolean
 }
 type setUserPhotosType = {
     small: string,
