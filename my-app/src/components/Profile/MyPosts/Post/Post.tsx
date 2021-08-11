@@ -1,11 +1,18 @@
 import s from './Post.module.css';
 import likeLogo from './../../../common/profile/posts/likeLogo.png';
 import avaImg from './../../../common/navBar/ava.jpg';
+import React from 'react';
 
-const Post = (props) => {
+type PropsType = {
+    updateLikesCount: (postId: number) => void
+    postId: number
+    message: string
+    likesCounter: number
+}
 
-    let updateLikesCount = () => {
-        props.updateLikesCount(props.postId)
+const Post: React.FC<PropsType> = ({ updateLikesCount, postId, message, likesCounter }) => {
+    let updateLikes = () => {
+        updateLikesCount(postId)
     }
     return (
         <div className={s.item}>
@@ -15,25 +22,19 @@ const Post = (props) => {
                 </div>
                 <div className={s.postUserName}>Name</div>
             </div>
-
             <div className={s.post} >
                 <div className={s.postContainer}>
-                    <span>{props.message}</span>
+                    <span>{message}</span>
                 </div>
                 <div className={s.likes}>
-
                     <div className={s.likeImg}>
-                        <img onClick={updateLikesCount} src={likeLogo} alt="" />
+                        <img onClick={updateLikes} src={likeLogo} alt="" />
                     </div>
-                    <div className={s.likesCount}>{props.likesCounter}</div>
-
+                    <div className={s.likesCount}>{likesCounter}</div>
                 </div>
             </div>
-
-
         </div>
     )
-
 }
 
 export default Post;
