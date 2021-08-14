@@ -1,6 +1,7 @@
 .item {
-  margin: 10px 0px 0px 30px;
+  margin-top: 20px;
   min-height: 70px;
+  border-bottom: rgb(248, 165, 165) 1px solid;
 }
 
 .iconContainer {

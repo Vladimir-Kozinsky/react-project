@@ -41,25 +41,8 @@ class NavBarContainer extends React.Component<PropsType> {
         this.props.getFriends(true, this.props.currentPage);
     }
     componentDidUpdate(prevProps: PropsType, prevState: RootState) {
-        // if (this.props.friends.totalCount != prevProps.friends.totalCount) {
-        //     this.props.getFriends(true, this.props.currentPage);
-        //     console.log(this.props.friends.totalCount)
-        //     console.log(prevProps.friends.totalCount)
-        // }
 
-        //if (prevProps.currentPage != this.props.currentPage || prevProps.friends.totalCount != this.props.friends.totalCount) {
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.friends.length != this.props.friends.length) {
-    //     this.props.getFriends(true, this.props.currentPage);
-    //     console.log(prevProps.friends)
-    //     console.log(this.props.friends.length)
-    // }
-    // console.log(prevProps.friends.length)
-    // console.log(this.props.friends)
-    //}
-
     render() {
         return <Navbar friends={this.props.friends}
             currentPage={this.props.currentPage}
@@ -74,7 +57,6 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         friends: friends(state),
         currentPage: getCurrentPage(state),
         friendsBlockSize: getFriendsBlockSize(state),
-
     }
 }
 

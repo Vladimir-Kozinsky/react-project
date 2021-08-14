@@ -45,8 +45,12 @@
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 0 10px rgb(99, 96, 96);
-  height: 300px;
+  height: 330px;
   padding: 10px;
+}
+.friendsBox {
+  height: 285px;
+  border-bottom: 1px rgb(255, 166, 166) solid;
 }
 
 .item a:hover {
@@ -61,59 +65,4 @@
   box-shadow: 0 0 10px rgb(99, 96, 96);
   height: 200px;
   padding: 10px;
-}
-
-.prevButton {
-  background: url('./../common/navBar/arrow-back.png') no-repeat;
-  height: 39px;
-  width: 25px;
-  border: rgb(204, 203, 203) solid 0.5px;
-}
-
-.prevSlider {
-  height: 39px;
-  width: 25px;
-  float: left;
-  margin-top: 120px;
-  margin-left: -10px;
-}
-
-.prevButton:hover {
-  background-color: rgb(224, 222, 222);
-  transition: 0.3s;
-  cursor: pointer;
-}
-.prevMuteButton {
-  background: url('./../common/navBar/arrow-back.png') no-repeat;
-  height: 39px;
-  width: 25px;
-  border: rgb(204, 203, 203) solid 0.5px;
-  background-color: rgb(224, 222, 222);
-}
-.nextSlider {
-  height: 39px;
-  width: 25px;
-  float: right;
-  margin-top: 120px;
-  margin-right: -10px;
-}
-
-.nextButton {
-  background: url('./../common/navBar/arrow-forward.png') no-repeat;
-  height: 39px;
-  width: 25px;
-  border: rgb(204, 203, 203) solid 0.5px;
-}
-
-.nextButton:hover {
-  background-color: rgb(224, 222, 222);
-  transition: 0.3s;
-  cursor: pointer;
-}
-.nextMuteButton {
-  background: url('./../common/navBar/arrow-forward.png') no-repeat;
-  height: 39px;
-  width: 25px;
-  border: rgb(204, 203, 203) solid 0.5px;
-  background-color: rgb(224, 222, 222);
 }

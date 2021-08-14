@@ -19,7 +19,7 @@ type FormDataValuesType = {
     }
 
 }
-const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({handleSubmit, setEditMode, error}) => {
+const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({handleSubmit, setEditMode, error, reset}) => {
     return (
         <form className={s.profileform} onSubmit={handleSubmit} >
             <div className={s.FullNameDiv}>FullName:</div>

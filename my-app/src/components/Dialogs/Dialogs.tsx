@@ -2,7 +2,7 @@ import s from './Dialogs.module.css';
 import UserItem from './UserItem/UserItem';
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { Route } from 'react-router-dom';
 import Message from './Message/Message';
 import Button from '../common/buttons/Button';

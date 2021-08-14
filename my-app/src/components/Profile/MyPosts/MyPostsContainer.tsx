@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostTextActionCreator, updateLikesCountAC } from '../../../redux/profileReduser';
+import { addPost, updateLikesCount } from '../../../redux/profileReduser';
 import { RootState } from '../../../redux/redux-store';
 import MyPosts from './MyPosts';
 
 
 type MapStateToPropsType = {
     posts: Array<PostsType>
-    avatarPhoto: string
+    avatarPhoto: string | null
 }
 
 type MapDispatchToPropsType = {
@@ -34,22 +34,12 @@ const MyPostsContainer: React.FC<PropsType> = ({ posts, avatarPhoto, updateLikes
     )
 }
 
-let mapStateToProps = (state: RootState) => {
+let mapStateToProps = (state: RootState): MapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         avatarPhoto: state.profilePage.profileSmallPhotoUrl
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        addPost: (value, postId) => {
-            dispatch(addPostTextActionCreator(value, postId));
-        },
-        updateLikesCount: (postId) => {
-            dispatch(updateLikesCountAC(postId))
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPostsContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps,{ addPost, updateLikesCount } )(MyPostsContainer);

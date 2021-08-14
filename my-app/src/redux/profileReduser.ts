@@ -1,6 +1,6 @@
 import usersAPI, { ResultCodesEnum } from "../API/API"
 import { ProfileAPI } from "../API/API"
-import { stopSubmit } from "redux-form"
+import { FormAction, reset, stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
 import { RootState } from "./redux-store"
 
@@ -115,6 +115,7 @@ const profileReduser = (state = initialState, action: ActionType): initialStateT
             state.posts[id].likesCounter = action.count
             return {
                 ...state,
+                posts: [...state.posts]
 
             }
         case SAVE_PHOTO_SACCESS:
@@ -132,12 +133,9 @@ const profileReduser = (state = initialState, action: ActionType): initialStateT
                 ...state,
                 profileSmallPhotoUrl: action.smallPhotoUrl
             }
-
-
         default:
             return state;
     }
-
 }
 
 type addPostTextActionCreatorActionType = {
@@ -145,9 +143,17 @@ type addPostTextActionCreatorActionType = {
     value: string,
     postId: number
 }
-export const addPostTextActionCreator = (value: string, postId: number): addPostTextActionCreatorActionType => {
+export const setPost = (value: string, postId: number): addPostTextActionCreatorActionType => {
     return { type: ADD_POST, value, postId }
 }
+
+export const addPost = (value: string, postId: number) => {
+    return (dispatch: any) => {
+        dispatch(setPost(value, postId));
+        dispatch(reset('profilePost'))
+    }
+}
+
 type setProfileInfoType = {
     type: typeof SET_PROFILE_INFO,
     profileInfo: setProfileInfoProfileInfoType
@@ -261,7 +267,7 @@ export const updateStatus = (status: string): ThunkType => {
 
 
 
-export const updateLikesCountAC = (postId: number) => {
+export const updateLikesCount = (postId: number) => {
     return (dispatch: any, getState: any) => {
         for (let i = 0; i < getState().profilePage.posts.length; i++) {
             if (getState().profilePage.posts[i].id === postId) {
@@ -292,8 +298,8 @@ type FormDataValuesType = {
         instagram: string
         website: string
     }
-  
-  }
+
+}
 
 export const saveProfileInfo = (formData: FormDataValuesType): ThunkType => {
     return async (dispatch, getState) => {

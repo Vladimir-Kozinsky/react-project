@@ -8,6 +8,8 @@ import newsIcon from './../common/navBar/newsIcon.png'
 import musicIcon from './../common/navBar/musicIcon.png'
 import usersIcon from './../common/navBar/usersIcon.png'
 import React from 'react'
+import ButtonBox from '../common/buttons/SliderButton/ButtonBox'
+
 
 type PropsType = {
   friends: {
@@ -91,7 +93,7 @@ const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, g
 
 
       <div className={s.sidebarFriends}>
-        {currentPage === 1
+        {/* {currentPage === 1
           ? <div className={s.prevSlider} >
             <button className={s.prevMuteButton} ></button>
           </div>
@@ -100,13 +102,21 @@ const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, g
           </div>}
 
         {currentPage === pageCount
-          ? <div className={s.nextSlider} >
+          ? <div className={s.nextSliderMute} >
             <button className={s.nextMuteButton} ></button>
           </div>
           : <div className={s.nextSlider}>
             <button className={s.nextButton} onClick={() => { getFriends(true, currentPage + 1) }}></button>
-          </div>}
-        {friendsArr}
+          </div>} */}
+
+
+        <div className={s.friendsBox} >
+          {friendsArr}
+        </div>
+
+        <ButtonBox currentPage={currentPage} getFriends={getFriends} />
+
+
       </div>
 
       <div className={s.emptyBox}>

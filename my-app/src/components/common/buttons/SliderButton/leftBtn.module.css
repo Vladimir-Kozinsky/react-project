@@ -1,0 +1,11 @@
+.buttonContainer {
+    height: 42px;
+}
+.buttonContainer img {
+    height: 40px;
+}
+.buttonContainer img:hover {
+    height: 42px;
+    cursor: pointer;
+    transition: 0.2s;
+}

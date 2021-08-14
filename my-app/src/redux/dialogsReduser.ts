@@ -1,3 +1,6 @@
+import { reset } from "redux-form";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "./redux-store";
 
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
@@ -68,8 +71,16 @@ type addMessageActionType = {
     messageId: number
 }
 
-export const addMessage = (values: string, id: number, messageId: number): addMessageActionType => {
+export const setMessage = (values: string, id: number, messageId: number): addMessageActionType => {
     return { type: ADD_MESSAGE, values, id, messageId }
+}
+
+
+export const addMessage = (values: string, id: number, messageId: number) => {
+    return (dispatch: any) => {
+        dispatch(setMessage(values, id, messageId));
+        dispatch(reset('dialogMessage'))
+    }
 }
 
 export default dialogsReduser;

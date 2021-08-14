@@ -11,7 +11,7 @@ let maxLength = MaxLengthCreator(50);
 type PropsType = {
     updateLikesCount: (postId: number) => void
     posts: Array<PostsType>
-    avatarPhoto: string
+    avatarPhoto: string | null
     addPost: (newPostText: string, postId: number) => void
 }
 
@@ -22,10 +22,7 @@ type PostsType = {
 }
 
 const MyPosts: React.FC<PropsType> = ({ updateLikesCount, posts, avatarPhoto, addPost }) => {
-
-    //let revMessages = .reverse();
-    let postsArr = posts.map(p => <Post updateLikesCount={updateLikesCount} postId={p.id} message={p.message} likesCounter={p.likesCounter} />)
-
+    let postsArr = posts.map(p => <Post updateLikesCount={updateLikesCount} postId={p.id} message={p.message} likesCounter={p.likesCounter} />).reverse()
     let addPostText = (value: FormDataValuesType) => {
         let postsArr = posts;
         let postId = postsArr.reduce((acc: any, curr: any) => acc.b > curr.b ? acc : curr);
@@ -50,7 +47,7 @@ const MyPosts: React.FC<PropsType> = ({ updateLikesCount, posts, avatarPhoto, ad
 }
 
 type ProfileInfoFormOwnProps = {
-    avatarPhoto: string
+    avatarPhoto: string | null
 }
 
 type FormDataValuesType = {
@@ -62,7 +59,7 @@ const ProfileForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFor
         <form onSubmit={handleSubmit} >
             <div className={s.postContainer}>
                 <div className={s.avaContainer}>
-                    <img src={avatarPhoto} alt="avatar" />
+                    <img src={avatarPhoto ? avatarPhoto : ''} alt="avatar" />
                 </div>
                 <div className={s.postTextArea}>
                     <Field component={Textarea} name="newPostText" validate={[maxLength]} placeholder="Write posts" />
