@@ -5,6 +5,7 @@ import instaLogo from './../../common/profile/contactsLogos/instLogo.svg';
 import vkLogo from './../../common/profile/contactsLogos/vkLogo.png';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import React from 'react';
+import editImg from './../../common/profile/editImg.png'
 
 type PropsType = {
     profileInfo: {
@@ -53,7 +54,11 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, upda
             <div className={s.personalInfo}>
                 <div className={s.userName}>
                     {profileInfo.fullName}
+                    <div className={s.editBtn}>
+                    {isOwner && <img onClick={() => setEditMode(true)} src={editImg} alt="" />}
                 </div>
+                </div>
+               
                 <ProfileStatus status={status} setStatus={setStatus} updateStatus={updateStatus} />
                 <div>
                     <div className={s.lookingForAJob}>
@@ -90,7 +95,8 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, upda
                     </div>
 
                 </div>
-                {isOwner && <button onClick={() => setEditMode(true)}>Change info</button>}
+                
+                
 
             </div>
         </div>

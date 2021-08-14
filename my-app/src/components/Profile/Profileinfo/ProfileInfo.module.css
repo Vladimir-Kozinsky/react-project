@@ -114,3 +114,20 @@
     float: left;
     width: 210px;
 }
+.editBtn {
+height: 10px;
+width: 20px;
+display: inline;
+position: relative;
+top: -10px;
+left: 10px
+
+}
+.editBtn img {
+    height: 20px;
+    opacity: 80%;
+}
+.editBtn img:hover {
+    cursor: pointer;
+    opacity: 60%;
+}

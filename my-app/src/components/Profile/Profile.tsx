@@ -46,9 +46,7 @@ const Profile: React.FC<PropsType> = ({ profileInfo, isAuth, status, setStatus, 
     saveProfileInfo(formData);
     // if (props.updateProfileInfoSucces) {
     // }
-
   }
-
   if (!profileInfo) {
     return <Preloader />
   }

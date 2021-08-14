@@ -19,22 +19,29 @@ type FormDataValuesType = {
     }
 
 }
-const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({handleSubmit, setEditMode, error, reset}) => {
+const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({ handleSubmit, setEditMode, error, reset }) => {
     return (
         <form className={s.profileform} onSubmit={handleSubmit} >
-            <div className={s.FullNameDiv}>FullName:</div>
-            <div className={s.FullNameText}>
-                <Field placeholder='FullName' name="fullName" component={Input} />
+            <div>
+                <div className={s.FullNameDiv}>FullName:</div>
+                <div className={s.FullNameText}>
+                    <Field placeholder='FullName' name="fullName" component={Input} />
+                </div>
             </div>
-            <div className={s.lookingForAJobDiv}>LookingForAJob:</div>
-            <div className={s.lookingForAJobText}>
-                <Field type="checkbox" name="lookingForAJob" component={Input} />
+            <div>
+                <div className={s.lookingForAJobDiv}>LookingForAJob:</div>
+                <div className={s.lookingForAJobText}>
+                    <Field type="checkbox" name="lookingForAJob" component={Input} />
+                </div>
             </div>
 
-            <div className={s.lookingForAJobDescription}>
+        <div>
+             <div className={s.lookingForAJobDescription}>
                 <div className={s.lookingForAJobDescriptionDiv}>Job Description:</div>
                 <Field placeholder='Enter Job description' name="lookingForAJobDescription" component={Textarea} />
             </div>
+        </div>
+           
             <div className={s.contacts}>
                 <div className={s.contactsText}>Contacts:</div>
                 <div className={s.linkFacebook}>
