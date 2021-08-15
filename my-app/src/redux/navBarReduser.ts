@@ -1,4 +1,3 @@
-import actions from "redux-form/lib/actions"
 import { ThunkAction } from 'redux-thunk';
 import { usersAPI } from "./../API/API"
 import { RootState } from "./redux-store"
@@ -6,16 +5,6 @@ import { RootState } from "./redux-store"
 const SET_FRIENDS = "SET_FRIENDS"
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
-// export type initialStateType = {
-//     friends: {
-//         items: Array<itemsType>
-//         totalCount: number,
-//         error: string
-//     },
-//     currentPage: number
-//     friendsBlockSize: number
-
-// }
 type itemsType = {
     id: number,
     name: string,
@@ -90,7 +79,6 @@ export const getFriends = (isFolowed: boolean, currentPage: number): ThunkType =
         dispatch(setFriends(setFriendsData))
         dispatch(setCurrentPage(currentPage))
         console.log(getState().navBarPage)
-        //console.log(currentPage)
     }
 }
 

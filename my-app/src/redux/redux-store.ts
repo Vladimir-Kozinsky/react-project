@@ -23,6 +23,10 @@ let rootReduser = combineReducers({
 export type RootState = ReturnType<typeof rootReduser>
 export type AppDispatch = typeof store.dispatch
 
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
+
+export type InferActionType<T extends { [key: string]: (...arg: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+
 let store = createStore(rootReduser, applyMiddleware(thunkMiddleware));
 //window.store = store;
 

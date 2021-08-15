@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { followSuccess, setCurrentPage, follow, unfollow, unfollowSuccess, toggleIsProgress, requestUsers } from "../../redux/usersReduser";
+import { setCurrentPage, follow, unfollow, requestUsers } from "../../redux/usersReduser";
 import React from 'react';
 import Users from "./Users";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
@@ -29,16 +29,11 @@ type UserType = {
     followed: boolean
 }
 
-
 type MapDispatchToPropsType = {
-    //  unfollowSuccess: () => void
-    // followSuccess: () => void
-    setCurrentPage: (pageNumber: number) => void
-    // toggleIsProgress: () => void
+    setCurrentPage: (currentPage: number) => void
     requestUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    // toggleFetching: () => void
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnProps
@@ -61,11 +56,8 @@ class UsersAPIComponent extends React.Component<PropsType> {
             users={this.props.users}
             unfollow={this.props.unfollow}
             follow={this.props.follow}
-            // toggleFetching={this.props.toggleFetching}
             isFetching={this.props.isFetching}
-            //  toggleIsProgress={this.props.toggleIsProgress}
             followingInProgress={this.props.followingInProgress}
-        //isAuth={this.props.isAuth}
         />
     }
 }
@@ -80,29 +72,6 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         followingInProgress: getFollowingInProgress(state),
     }
 }
-
-// let mapDispatchToProps = (dispatch) => {
-// return {
-//     unfollow: (userId) => {
-//         dispatch(unfollowAC(userId));
-//     },
-//     follow: (userId) => {
-//       dispatch(followAC(userId));
-//   },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalUsersCount: (totalCount) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         toggleFetching: (isFetching) => {
-//             dispatch(toggleFetchingAC(isFetching))
-//         }
-//     }
-// }
 
 export default compose(
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps, {

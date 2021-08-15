@@ -1,6 +1,6 @@
 import usersAPI, { ResultCodesEnum } from "../API/API"
 import { ProfileAPI } from "../API/API"
-import { FormAction, reset, stopSubmit } from "redux-form"
+import { reset, stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
 import { RootState } from "./redux-store"
 
@@ -301,8 +301,8 @@ type FormDataValuesType = {
 
 }
 
-export const saveProfileInfo = (formData: FormDataValuesType): ThunkType => {
-    return async (dispatch, getState) => {
+export const saveProfileInfo = (formData: FormDataValuesType) => {
+    return async (dispatch: any, getState: any) => {
         const userId = getState().auth.authdata.id
         const sendProfileInfoData = await ProfileAPI.sendProfileInfo(formData)
         if (sendProfileInfoData.resultCode === ResultCodesEnum.Success) {
@@ -312,7 +312,7 @@ export const saveProfileInfo = (formData: FormDataValuesType): ThunkType => {
             }
         } else {
             let message = sendProfileInfoData.messages.length > 0 ? sendProfileInfoData.messages[0] : "Some error ";
-            //dispatch(stopSubmit('profileInfo', { _error: message }));
+            dispatch(stopSubmit('profileInfo', { _error: message }));
             dispatch(setEditMode(true))
         }
 

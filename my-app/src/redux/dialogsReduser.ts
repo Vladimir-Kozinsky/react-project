@@ -1,6 +1,4 @@
 import { reset } from "redux-form";
-import { ThunkAction } from "redux-thunk";
-import { RootState } from "./redux-store";
 
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
