@@ -1,9 +1,8 @@
-import s from './Users.module.css';
+import s from './users.module.css';
 import Preloader from '../common/Preloader';
 import { NavLink } from 'react-router-dom';
 import Paginator from './Paginator/Paginator';
 import ava from './../common/navBar/ava.jpg';
-import React from 'react';
 
 type PropsType = {
     isFetching: boolean

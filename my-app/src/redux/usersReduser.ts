@@ -1,6 +1,7 @@
 import { ThunkAction } from "redux-thunk";
 import usersAPI, { ResultCodesEnum } from "../API/API";
 import { updateObjectInArray } from "../utilits/validation/object-helper";
+import { getFriends } from "./navBarReduser";
 import { InferActionType, RootState } from "./redux-store";
 
 const FOLLOWED = 'FOLLOWED';

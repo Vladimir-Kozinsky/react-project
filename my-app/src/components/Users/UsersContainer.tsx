@@ -7,6 +7,9 @@ import { withRouter } from "react-router-dom";
 import { compose } from 'redux';
 import { getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress, getUsers } from "../../redux/usersSelectors";
 import { RootState } from "../../redux/redux-store";
+import { getFriendsCurrentPage } from "../../redux/navBarSelectors";
+import { getFriends } from './../../redux/navBarReduser';
+
 
 
 type MapStateToPropsType = {
@@ -15,7 +18,8 @@ type MapStateToPropsType = {
     users: Array<UserType>,
     isFetching: boolean,
     followingInProgress: Array<Number>,
-    totalUsersCount: number
+    totalUsersCount: number,
+    friendsCurrentPage: number
 }
 
 type UserType = {
@@ -34,6 +38,7 @@ type MapDispatchToPropsType = {
     requestUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    getFriends: (isFolowed: boolean, currentPage: number) => void
 }
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnProps
@@ -43,10 +48,21 @@ type OwnProps = {};
 class UsersAPIComponent extends React.Component<PropsType> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+
     }
     onPageChanged = (pageNumber: number) => {
         this.props.requestUsers(pageNumber, this.props.pageSize);
         this.props.setCurrentPage(pageNumber)
+    }
+
+    componentDidUpdate(prevProps: PropsType, prevState: RootState) {
+        if (prevProps.users != this.props.users) {
+            this.props.getFriends(true, this.props.friendsCurrentPage)
+            console.log(this.props)
+        }
+
+
+
     }
     render() {
         return <Users {...this.props} totalUsersCount={this.props.totalUsersCount}
@@ -70,12 +86,13 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
+        friendsCurrentPage: getFriendsCurrentPage(state)
     }
 }
 
 export default compose(
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps, {
-        setCurrentPage, requestUsers, follow, unfollow
+        setCurrentPage, requestUsers, follow, unfollow, getFriends
     }),
     withRouter,
     withAuthRedirect

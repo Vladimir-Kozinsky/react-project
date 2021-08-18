@@ -4,7 +4,7 @@ import Navbar from "./Navbar"
 import { getFriends } from "../../redux/navBarReduser"
 import { RootState } from "../../redux/redux-store"
 import { friends, getFriendsBlockSize } from "../../redux/navBarSelectors"
-import { getCurrentPage } from "../../redux/navBarSelectors"
+import { getFriendsCurrentPage } from "../../redux/navBarSelectors"
 
 
 
@@ -38,10 +38,11 @@ type OwnProps = {};
 
 class NavBarContainer extends React.Component<PropsType> {
     componentDidMount() {
-        this.props.getFriends(true, this.props.currentPage);
+       this.props.getFriends(true, this.props.currentPage);
     }
     componentDidUpdate(prevProps: PropsType, prevState: RootState) {
-
+       //this.props.getFriends(true, this.props.currentPage);
+        //console.log("get")
     }
     render() {
         return <Navbar friends={this.props.friends}
@@ -55,7 +56,7 @@ class NavBarContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: RootState): MapStateToPropsType => {
     return {
         friends: friends(state),
-        currentPage: getCurrentPage(state),
+        currentPage: getFriendsCurrentPage(state),
         friendsBlockSize: getFriendsBlockSize(state),
     }
 }
