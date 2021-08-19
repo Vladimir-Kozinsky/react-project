@@ -55,15 +55,6 @@ class UsersAPIComponent extends React.Component<PropsType> {
         this.props.setCurrentPage(pageNumber)
     }
 
-    componentDidUpdate(prevProps: PropsType, prevState: RootState) {
-        if (prevProps.users != this.props.users) {
-            this.props.getFriends(true, this.props.friendsCurrentPage)
-            console.log(this.props)
-        }
-
-
-
-    }
     render() {
         return <Users {...this.props} totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}

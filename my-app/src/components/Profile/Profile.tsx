@@ -4,6 +4,8 @@ import Preloader from '../common/Preloader';
 import ProfileInfo from './Profileinfo/ProfileInfo';
 import { ProfileInfoReduxForm } from './Profileinfo/ProfileInfoForm';
 import React from 'react';
+import UserItem from '../Dialogs/UserItem/UserItem';
+import { follow } from '../../redux/usersReduser';
 
 type PropsType = {
   profileInfo: {
@@ -35,12 +37,28 @@ type PropsType = {
   saveProfileInfo: (formData: any) => void
   editMode: boolean
   setEditMode: (editMode: boolean) => void
+  users: Array<UserType>
+  follow: (userId: number) => void
+  unfollow: (userId: number) => void
+}
+type UserType = {
+  id: number,
+  name: string,
+  status: string,
+  photos: UserPhotosType,
+  followed: boolean
+}
+
+type UserPhotosType = {
+  small: string,
+  large: string
 }
 
 
-
 const Profile: React.FC<PropsType> = ({ profileInfo, isAuth, status, setStatus, updateStatus,
-  isOwner, savePhoto, saveProfileInfo, editMode, setEditMode }) => {
+  isOwner, savePhoto, saveProfileInfo, editMode, setEditMode, users, follow, unfollow }) => {
+
+  let selectedUser = users.find(item => item.id == profileInfo.userId)
 
   const onSubmit = (formData: any) => {
     saveProfileInfo(formData);
@@ -55,13 +73,16 @@ const Profile: React.FC<PropsType> = ({ profileInfo, isAuth, status, setStatus, 
       {editMode
         ? <ProfileInfoReduxForm initialValues={profileInfo} setEditMode={setEditMode}
           onSubmit={onSubmit} />
-        : <ProfileInfo profileInfo={profileInfo}
+        : <ProfileInfo isFollowed={selectedUser?.followed} profileInfo={profileInfo}
           status={status}
           setStatus={setStatus}
           updateStatus={updateStatus}
           isOwner={isOwner}
           savePhoto={savePhoto}
-          setEditMode={setEditMode} />}
+          setEditMode={setEditMode}
+          follow={follow}
+          unfollow={unfollow} />}
+
       {!editMode && <MyPostsContainer />}
     </div>
   )

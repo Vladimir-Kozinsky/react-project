@@ -1,6 +1,7 @@
 import { stopSubmit } from "redux-form"
 import { usersAPI, SecurityAPI, ResultCodesEnum } from "../API/API"
 import { ThunkType } from "../app/hooks"
+import { getFriends } from "./navBarReduser"
 import { getProfilePhoto } from "./profileReduser"
 
 const GET_DATA_AUTH = 'GET-DATA-AUTH'
@@ -96,11 +97,12 @@ export const setDataAC = (id: number | null, email: string | null, login: string
 }
 
 export const getAuth = (): ThunkType => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         const getUserAuthData = await usersAPI.getUserAuth();
         if (getUserAuthData.resultCode === ResultCodesEnum.Success) {
             dispatch(getDataAC(getUserAuthData.data));
-            dispatch(getProfilePhoto(getUserAuthData.data.id));
+            dispatch(getProfilePhoto(getUserAuthData.data.id))
+            dispatch(getFriends(getState().auth.isAuth, getState().navBarPage.currentPage ));
         }
     }
 }

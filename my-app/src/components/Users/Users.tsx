@@ -44,17 +44,13 @@ const Users: React.FC<PropsType> = ({ isFetching, totalUsersCount, pageSize,
                                 <img src={u.photos.small ? u.photos.small : ava} alt="photo" />
                             </NavLink>
                         </div>
-                        <div className={s.followButton}>
-                            {u.followed
-                                ? <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    unfollow(u.id)
-                                }} className={s.button}>Unfollow</button>
+                        <FollowUnfollowButton
+                            userId={u.id}
+                            followingInProgress={followingInProgress}
+                            unfollow={unfollow}
+                            follow={follow}
+                            isFollowed={u.followed} />
 
-                                : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    follow(u.id)
-                                }} className={s.button}>Follow</button>}
-
-                        </div>
                     </div>
                     <div className={s.infoBlock}>
                         <div>{u.name}</div>
@@ -67,5 +63,31 @@ const Users: React.FC<PropsType> = ({ isFetching, totalUsersCount, pageSize,
         </div>
     )
 }
+
+type PropsButtonType = {
+    followingInProgress: Array<Number>
+    userId: number
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    isFollowed: boolean
+}
+
+
+const FollowUnfollowButton: React.FC<PropsButtonType> = ({ followingInProgress, userId, follow, unfollow, isFollowed }) => {
+    return (
+        <div className={s.followButton}>
+            {isFollowed
+                ? <button disabled={followingInProgress.some(id => id === userId)} onClick={() => {
+                    unfollow(userId)
+                }} className={s.button}>Unfollow</button>
+
+                : <button disabled={followingInProgress.some(id => id === userId)} onClick={() => {
+                    follow(userId)
+                }} className={s.button}>Follow</button>}
+
+        </div>
+    )
+}
+
 
 export default Users;

@@ -20,6 +20,7 @@ type PropsType = {
   currentPage: number
   friendsBlockSize: number
   getFriends: (isFollow: boolean, currentPage: number) => void
+  isAuth: boolean
 }
 
 type itemsType = {
@@ -33,10 +34,10 @@ type itemsType = {
   followed: boolean
 }
 
-const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, getFriends }) => {
+const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, getFriends, isAuth }) => {
   const pageCount = Math.ceil(friends.totalCount / friendsBlockSize)
 
-  let friendsArr = friends.items.map(f => <SidebarFriend name={f.name} photo={f.photos.small} />)
+  let friendsArr = friends.items.map(f => <SidebarFriend name={f.name} photo={f.photos.small} id={f.id} />)
   return (
     <nav className={s.navBar}>
 
@@ -90,17 +91,15 @@ const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, g
           </div>
         </div>
       </div>
-
-
-      <div className={s.sidebarFriends}>
-        {/* {currentPage === 1
+      {isAuth
+        ? <div className={s.sidebarFriends}>
+          {/* {currentPage === 1
           ? <div className={s.prevSlider} >
             <button className={s.prevMuteButton} ></button>
           </div>
           : <div className={s.slider}>
             <button className={s.prevButton} onClick={() => { getFriends(true, currentPage - 1) }}></button>
           </div>}
-
         {currentPage === pageCount
           ? <div className={s.nextSliderMute} >
             <button className={s.nextMuteButton} ></button>
@@ -108,21 +107,14 @@ const Navbar: React.FC<PropsType> = ({ friends, currentPage, friendsBlockSize, g
           : <div className={s.nextSlider}>
             <button className={s.nextButton} onClick={() => { getFriends(true, currentPage + 1) }}></button>
           </div>} */}
-
-
-        <div className={s.friendsBox} >
-          {friendsArr}
+          <div className={s.friendsBox} >
+            {friendsArr}
+          </div>
+          <ButtonBox currentPage={currentPage} getFriends={getFriends} />
         </div>
-
-        <ButtonBox currentPage={currentPage} getFriends={getFriends} />
-
-
-      </div>
-
+        : ''}
       <div className={s.emptyBox}>
-
       </div>
-
     </nav>
   )
 }

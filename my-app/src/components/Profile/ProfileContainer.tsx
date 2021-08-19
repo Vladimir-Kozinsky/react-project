@@ -2,6 +2,7 @@ import Profile from "./Profile";
 import React from 'react';
 import { connect } from "react-redux";
 import { getUserInfo, setStatus, getStatus, updateStatus, savePhoto, saveProfileInfo, setEditMode } from "../../redux/profileReduser";
+import { follow, unfollow } from "../../redux/usersReduser";
 import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from 'redux';
@@ -34,6 +35,20 @@ type MapStateToPropsType = {
     isAuth: boolean
     editMode: boolean
     captchaUrl: string | null
+    users: Array<UserType>
+}
+
+type UserType = {
+    id: number,
+    name: string,
+    status: string,
+    photos: UserPhotosType,
+    followed: boolean
+}
+
+type UserPhotosType = {
+    small: string,
+    large: string
 }
 
 type MapDispatchToPropsType = {
@@ -44,6 +59,8 @@ type MapDispatchToPropsType = {
     savePhoto: (photo: string) => void
     saveProfileInfo: (formData: any) => void
     setEditMode: (editMode: boolean) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 
 type OwnProps = {
@@ -68,11 +85,11 @@ class ProfileAPIContainer extends React.Component<PropsType> {
     componentDidMount() {
         this.updateProfile()
     }
+
     componentDidUpdate(prevProps: PropsType, prevState: RootState) {
         if (prevProps.match.params.userId != this.props.match.params.userId) {
             this.updateProfile()
-        }
-
+        } 
     }
 
     render() {
@@ -84,6 +101,7 @@ class ProfileAPIContainer extends React.Component<PropsType> {
             saveProfileInfo={this.props.saveProfileInfo}
             editMode={this.props.editMode}
             setEditMode={this.props.setEditMode}
+            users={this.props.users}
         />
     }
 }
@@ -95,13 +113,14 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         isAuth: state.auth.isAuth,
         editMode: state.profilePage.editMode,
         // setCaptchaUrlSucces: state.auth.setCaptchaUrlSucces,
-        captchaUrl: state.auth.captchaUrl
+        captchaUrl: state.auth.captchaUrl,
+        users: state.navBarPage.friends.items
 
 
     }
 }
 export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps, { getUserInfo, setStatus, getStatus, updateStatus, savePhoto, saveProfileInfo, setEditMode }),
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnProps, RootState>(mapStateToProps, { getUserInfo, setStatus, getStatus, updateStatus, savePhoto, saveProfileInfo, setEditMode, follow, unfollow }),
     withRouter,
     withAuthRedirect
 )(ProfileAPIContainer);

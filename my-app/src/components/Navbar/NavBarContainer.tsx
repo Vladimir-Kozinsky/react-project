@@ -16,6 +16,8 @@ type MapStateToPropsType = {
     },
     currentPage: number
     friendsBlockSize: number
+    isAuth: boolean
+    users: Array<itemsType>,
 }
 
 type itemsType = {
@@ -29,6 +31,7 @@ type itemsType = {
     followed: boolean
 }
 
+
 type MapDispatchToPropsType = {
     getFriends: (isFollow: boolean, currentPage: number) => void
 }
@@ -38,17 +41,20 @@ type OwnProps = {};
 
 class NavBarContainer extends React.Component<PropsType> {
     componentDidMount() {
-       this.props.getFriends(true, this.props.currentPage);
+        this.props.getFriends(true, this.props.currentPage);
     }
     componentDidUpdate(prevProps: PropsType, prevState: RootState) {
-       //this.props.getFriends(true, this.props.currentPage);
-        //console.log("get")
+        if (prevProps.users != this.props.users) {
+            this.props.getFriends(true, this.props.currentPage)
+        }
+
     }
     render() {
         return <Navbar friends={this.props.friends}
             currentPage={this.props.currentPage}
             friendsBlockSize={this.props.friendsBlockSize}
             getFriends={this.props.getFriends}
+            isAuth={this.props.isAuth}
         />
     }
 }
@@ -58,6 +64,8 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         friends: friends(state),
         currentPage: getFriendsCurrentPage(state),
         friendsBlockSize: getFriendsBlockSize(state),
+        isAuth: state.auth.isAuth,
+        users: state.usersPage.users
     }
 }
 

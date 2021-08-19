@@ -6,6 +6,8 @@ import vkLogo from './../../common/profile/contactsLogos/vkLogo.png';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import React from 'react';
 import editImg from './../../common/profile/editImg.png'
+import FollowUnfollowButton from './../../Users/Users'
+import { unfollow } from '../../../redux/usersReduser';
 
 type PropsType = {
     profileInfo: {
@@ -34,10 +36,14 @@ type PropsType = {
     isOwner: any
     savePhoto: (photo: string) => void
     setEditMode: (editMode: boolean) => void
+    isFollowed: boolean | undefined
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, updateStatus,
-    isOwner, savePhoto, setEditMode }) => {
+    isOwner, savePhoto, setEditMode, isFollowed, follow, unfollow }) => {
 
     const onMainPhotoSelect = (e: any) => {
         if (e.target.files.length) {
@@ -55,10 +61,17 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, upda
                 <div className={s.userName}>
                     {profileInfo.fullName}
                     <div className={s.editBtn}>
-                    {isOwner && <img onClick={() => setEditMode(true)} src={editImg} alt="" />}
+                        {isOwner && <img onClick={() => setEditMode(true)} src={editImg} alt="" />}
+                    </div>
+                    {isOwner
+                        ? ''
+                        : <div className={s.flwBtnContainer}>
+                            {isFollowed ? <button onClick={() => { unfollow(profileInfo.userId ? profileInfo.userId : 0) }} >Unfollow</button>
+                                : <button onClick={() => { follow(profileInfo.userId ? profileInfo.userId : 0) }}>Follow</button>}
+                        </div>}
+
                 </div>
-                </div>
-               
+
                 <ProfileStatus status={status} setStatus={setStatus} updateStatus={updateStatus} />
                 <div>
                     <div className={s.lookingForAJob}>
@@ -95,11 +108,11 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, upda
                     </div>
 
                 </div>
-                
-                
+
+
 
             </div>
-        </div>
+        </div >
     )
 }
 
