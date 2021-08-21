@@ -31,7 +31,6 @@ type PropsType = {
         }
     }
     status: string
-    setStatus: (status: string) => void
     updateStatus: (status: string) => void
     isOwner: any
     savePhoto: (photo: string) => void
@@ -42,7 +41,7 @@ type PropsType = {
 
 }
 
-const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, updateStatus,
+const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
     isOwner, savePhoto, setEditMode, isFollowed, follow, unfollow }) => {
 
     const onMainPhotoSelect = (e: any) => {
@@ -72,7 +71,7 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, setStatus, upda
 
                 </div>
 
-                <ProfileStatus status={status} setStatus={setStatus} updateStatus={updateStatus} />
+                <ProfileStatus status={status} updateStatus={updateStatus} />
                 <div>
                     <div className={s.lookingForAJob}>
                         <div className={s.lookingForAJobDiv}>LookingForAJob:</div>{(profileInfo.lookingForAJob) ? <div className={s.lookingForAJobText}>Yes</div> : <div className={s.lookingForAJobText}>No</div>}

@@ -1,9 +1,9 @@
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import s from './Profile.module.css';
-import Preloader from '../common/Preloader';
+import Preloader from '../common/Preloader/Preloader';
 import ProfileInfo from './Profileinfo/ProfileInfo';
 import { ProfileInfoReduxForm } from './Profileinfo/ProfileInfoForm';
-import React from 'react';
+import React, { useState } from 'react';
 import UserItem from '../Dialogs/UserItem/UserItem';
 import { follow } from '../../redux/usersReduser';
 
@@ -28,15 +28,11 @@ type PropsType = {
       large?: string | undefined
     }
   }
-  isAuth: boolean
   status: string
-  setStatus: (status: string) => void
   updateStatus: (status: string) => void
   isOwner: any
   savePhoto: (photo: string) => void
   saveProfileInfo: (formData: any) => void
-  editMode: boolean
-  setEditMode: (editMode: boolean) => void
   users: Array<UserType>
   follow: (userId: number) => void
   unfollow: (userId: number) => void
@@ -55,15 +51,16 @@ type UserPhotosType = {
 }
 
 
-const Profile: React.FC<PropsType> = ({ profileInfo, isAuth, status, setStatus, updateStatus,
-  isOwner, savePhoto, saveProfileInfo, editMode, setEditMode, users, follow, unfollow }) => {
+const Profile: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
+  isOwner, savePhoto, saveProfileInfo, users, follow, unfollow }) => {
 
   let selectedUser = users.find(item => item.id == profileInfo.userId)
 
+  let [editMode, setEditMode] = useState(false)
+
   const onSubmit = (formData: any) => {
-    saveProfileInfo(formData);
-    // if (props.updateProfileInfoSucces) {
-    // }
+    saveProfileInfo(formData)
+    setEditMode(false) 
   }
   if (!profileInfo) {
     return <Preloader />
@@ -75,7 +72,6 @@ const Profile: React.FC<PropsType> = ({ profileInfo, isAuth, status, setStatus, 
           onSubmit={onSubmit} />
         : <ProfileInfo isFollowed={selectedUser?.followed} profileInfo={profileInfo}
           status={status}
-          setStatus={setStatus}
           updateStatus={updateStatus}
           isOwner={isOwner}
           savePhoto={savePhoto}

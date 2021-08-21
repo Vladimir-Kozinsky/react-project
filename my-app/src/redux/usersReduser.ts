@@ -4,14 +4,6 @@ import { updateObjectInArray } from "../utilits/validation/object-helper";
 import { getFriends } from "./navBarReduser";
 import { InferActionType, RootState } from "./redux-store";
 
-const FOLLOWED = 'FOLLOWED';
-const UNFOLLOWED = 'UNFOLLOWED';
-const SET_USERS = 'SET-USERS';
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const SET_TOTAL_USERS = 'SET-TOTAL-USERS';
-const IS_FETCHING = 'IS-FETCHING';
-const TOGGLE_IS_PROGRESS = 'TOGGLE-IS-PROGRESS';
-
 type UserType = {
     id: number,
     name: string,
@@ -40,29 +32,29 @@ type ThunkType = ThunkAction<void, RootState, unknown, ActionType>
 
 const usersReduser = (state = initialState, action: ActionType): InitialState => {
     switch (action.type) {
-        case FOLLOWED:
+        case 'FOLLOWED':
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
             }
-        case UNFOLLOWED:
+        case 'UNFOLLOWED':
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
             }
-        case SET_USERS: {
+        case 'SET_USERS': {
             return { ...state, users: [...action.users] }
         }
-        case SET_CURRENT_PAGE: {
+        case 'SET_CURRENT_PAGE': {
             return { ...state, currentPage: action.currentPage }
         }
-        case SET_TOTAL_USERS: {
+        case 'SET_TOTAL_USERS': {
             return { ...state, totalUsersCount: action.totalUsersCount }
         }
-        case IS_FETCHING: {
+        case 'IS_FETCHING': {
             return { ...state, isFetching: action.isFetching }
         }
-        case TOGGLE_IS_PROGRESS: {
+        case 'TOGGLE_IS_PROGRESS': {
             return {
                 ...state, followingInProgress: action.followingInProgress
                     ? [...state.followingInProgress, action.userId]
@@ -77,13 +69,13 @@ const usersReduser = (state = initialState, action: ActionType): InitialState =>
 export type ActionType = InferActionType<typeof actions>
 
 export const actions = {
-    followSuccess: (userId: number) => ({ type: FOLLOWED, userId } as const),
-    unfollowSuccess: (userId: number) => ({ type: UNFOLLOWED, userId } as const),
-    setUsers: (users: any) => ({ type: SET_USERS, users } as const),
-    setCurrentPage: (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const),
-    setTotalUsersCount: (totalUsersCount: number) => ({ type: SET_TOTAL_USERS, totalUsersCount } as const),
-    toggleFetching: (isFetching: boolean) => ({ type: IS_FETCHING, isFetching } as const),
-    toggleIsProgress: (followingInProgress: boolean, userId: number) => ({ type: TOGGLE_IS_PROGRESS, followingInProgress, userId } as const)
+    followSuccess: (userId: number) => ({ type: 'FOLLOWED', userId } as const),
+    unfollowSuccess: (userId: number) => ({ type: 'UNFOLLOWED', userId } as const),
+    setUsers: (users: any) => ({ type: 'SET_USERS', users } as const),
+    setCurrentPage: (currentPage: number) => ({ type: 'SET_CURRENT_PAGE', currentPage } as const),
+    setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SET_TOTAL_USERS', totalUsersCount } as const),
+    toggleFetching: (isFetching: boolean) => ({ type: 'IS_FETCHING', isFetching } as const),
+    toggleIsProgress: (followingInProgress: boolean, userId: number) => ({ type: 'TOGGLE_IS_PROGRESS', followingInProgress, userId } as const)
 }
 
 export const setCurrentPage = (currentPage: number): ThunkType => {

@@ -1,6 +1,5 @@
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Navbar from './components/Navbar/Navbar';
 import { Route, withRouter } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -10,7 +9,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { initialazeApp } from './redux/appReduser';
 import { compose } from 'redux';
-import Preloader from './components/common/Preloader';
+import Preloader from './components/common/Preloader/Preloader';
 import NavBarContainer from './components/Navbar/NavBarContainer';
 
 
@@ -51,4 +50,5 @@ let mapStateToProps = (state) => {
 }
 
 
-export default compose(withRouter(connect(mapStateToProps, { initialazeApp })(App)));
+export default compose(connect(mapStateToProps, { initialazeApp }), 
+withRouter)(App);

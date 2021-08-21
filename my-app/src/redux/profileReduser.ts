@@ -2,16 +2,7 @@ import usersAPI, { ResultCodesEnum } from "../API/API"
 import { ProfileAPI } from "../API/API"
 import { reset, stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
-import { RootState } from "./redux-store"
-
-const ADD_POST = 'ADD-POST'
-const SET_PROFILE_INFO = 'SET-PROFILEINFO'
-const SET_STATUS = 'SET-STATUS'
-// const SET_INITIALAZED = 'SET-INITIALAZED'
-const SET_LIKE_COUNTER = 'SET-LIKE-COUNTER'
-const SAVE_PHOTO_SACCESS = 'SAVE-PHOTO-SACCESS'
-const SET_EDIT_MODE = 'SET-EDIT-MODE'
-const SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO'
+import { InferActionType, RootState } from "./redux-store"
 
 export type initialStateType = {
     posts: Array<initialStatePostsType>,
@@ -85,32 +76,26 @@ let initialState: initialStateType = {
     initialazed: false,
 }
 
-type ActionType = addPostTextActionCreatorActionType | setProfileInfoType
-    | savePhotoSuccessType | setEditModeType | setProfolePhotoType | setStatusType | setLikesCounterType
+export type ActionType = InferActionType<typeof actions>
 
 const profileReduser = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD_POST':
             return {
                 ...state,
                 posts: [...state.posts, { id: action.postId, message: action.value, likesCounter: 0 }]
             }
-        case SET_PROFILE_INFO:
+        case 'SET_PROFILE_INFO':
             return {
                 ...state,
                 profileInfo: action.profileInfo
             }
-        case SET_STATUS:
+        case 'SET_STATUS':
             return {
                 ...state,
                 status: action.status
             }
-        // case SET_INITIALAZED:
-        //     return {
-        //         ...state,
-        //         initialazed: true
-        //     }
-        case SET_LIKE_COUNTER:
+        case 'SET_LIKE_COUNTER':
             let id = action.postId - 1;
             state.posts[id].likesCounter = action.count
             return {
@@ -118,17 +103,17 @@ const profileReduser = (state = initialState, action: ActionType): initialStateT
                 posts: [...state.posts]
 
             }
-        case SAVE_PHOTO_SACCESS:
+        case 'SAVE_PHOTO_SACCESS':
             return {
                 ...state,
                 profileInfo: { ...state.profileInfo, photos: action.photos }
             }
-        case SET_EDIT_MODE:
-            return {
-                ...state,
-                editMode: action.editMode
-            }
-        case SET_PROFILE_PHOTO:
+        // case 'SET_EDIT_MODE':
+        //     return {
+        //         ...state,
+        //         editMode: action.editMode
+        //     }
+        case 'SET_PROFILE_PHOTO':
             return {
                 ...state,
                 profileSmallPhotoUrl: action.smallPhotoUrl
@@ -138,100 +123,14 @@ const profileReduser = (state = initialState, action: ActionType): initialStateT
     }
 }
 
-type addPostTextActionCreatorActionType = {
-    type: typeof ADD_POST,
-    value: string,
-    postId: number
-}
-export const setPost = (value: string, postId: number): addPostTextActionCreatorActionType => {
-    return { type: ADD_POST, value, postId }
-}
-
-export const addPost = (value: string, postId: number) => {
-    return (dispatch: any) => {
-        dispatch(setPost(value, postId));
-        dispatch(reset('profilePost'))
-    }
-}
-
-type setProfileInfoType = {
-    type: typeof SET_PROFILE_INFO,
-    profileInfo: setProfileInfoProfileInfoType
-}
-
-type setProfileInfoProfileInfoType = {
-    userId: number,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    contacts: setProfileInfoProfileInfoContacts,
-    photos: setProfileInfoProfileInfoPhotosType,
-}
-
-type setProfileInfoProfileInfoContacts = {
-    github: string,
-    vk: string,
-    facebook: string,
-    instagram: string,
-    twitter: string,
-    website: string,
-    youtube: string,
-    mainLink: string,
-}
-
-type setProfileInfoProfileInfoPhotosType = {
-    small: string,
-    large: string
-}
-export const setProfileInfo = (profileInfo: any): setProfileInfoType => {
-    return { type: SET_PROFILE_INFO, profileInfo }
-}
-
-type savePhotoSuccessType = {
-    type: typeof SAVE_PHOTO_SACCESS,
-    photos: savePhotoSuccessPhotosType
-}
-type savePhotoSuccessPhotosType = {
-    small: string,
-    large: string
-}
-export const savePhotoSuccess = (photos: savePhotoSuccessPhotosType): savePhotoSuccessType => {
-    return { type: SAVE_PHOTO_SACCESS, photos }
-}
-
-type setEditModeType = {
-    type: typeof SET_EDIT_MODE,
-    editMode: boolean
-}
-export const setEditMode = (editMode: boolean): setEditModeType => {
-    return { type: SET_EDIT_MODE, editMode }
-}
-
-type setProfolePhotoType = {
-    type: typeof SET_PROFILE_PHOTO,
-    smallPhotoUrl: string
-}
-export const setProfolePhoto = (smallPhotoUrl: string): setProfolePhotoType => {
-    return { type: SET_PROFILE_PHOTO, smallPhotoUrl }
-}
-
-type setStatusType = {
-    type: typeof SET_STATUS,
-    status: string
-}
-
-export const setStatus = (status: string): setStatusType => {
-    return { type: SET_STATUS, status }
-}
-
-type setLikesCounterType = {
-    type: typeof SET_LIKE_COUNTER,
-    postId: number,
-    count: number
-}
-
-export const setLikesCounter = (postId: number, count: number): setLikesCounterType => {
-    return { type: SET_LIKE_COUNTER, postId, count }
+export const actions = {
+    setPost: (value: string, postId: number) => ({ type: 'ADD_POST', value, postId } as const),
+    setProfileInfo: (profileInfo: any) => ({ type: 'SET_PROFILE_INFO', profileInfo } as const),
+    savePhotoSuccess: (photos: initialStateProfileInfoPhotosType) => ({ type: 'SAVE_PHOTO_SACCESS', photos } as const),
+   // setEditMode: (editMode: boolean) => ({ type: 'SET_EDIT_MODE', editMode } as const),
+    setProfolePhoto: (smallPhotoUrl: string) => ({ type: 'SET_PROFILE_PHOTO', smallPhotoUrl } as const),
+    setStatus: (status: string) => ({ type: 'SET_STATUS', status } as const),
+    setLikesCounter: (postId: number, count: number) => ({ type: 'SET_LIKE_COUNTER', postId, count } as const),
 }
 
 type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
@@ -239,29 +138,28 @@ type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 export const getUserInfo = (userId: number): ThunkType => {
     return async (dispatch) => {
         const getProfile = await usersAPI.userInfo(userId)
-        dispatch(setProfileInfo(getProfile));
+        dispatch(actions.setProfileInfo(getProfile));
     }
 }
 export const getProfilePhoto = (userId: number): ThunkType => {
     return async (dispatch) => {
         const userPhotoData = await ProfileAPI.userPhoto(userId)
-        dispatch(setProfolePhoto(userPhotoData.photos.small))
+        dispatch(actions.setProfolePhoto(userPhotoData.photos.small))
     }
 }
 
 export const getStatus = (userId: number): ThunkType => {
     return async (dispatch) => {
         const getUserStatusData = await ProfileAPI.getUserStatus(userId)
-        dispatch(setStatus(getUserStatusData));
+        dispatch(actions.setStatus(getUserStatusData));
     }
 }
 export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
         const updateStatusData = await ProfileAPI.updateStatus(status)
         if (updateStatusData.resultCode === ResultCodesEnum.Success) {
-            dispatch(setStatus(status));
+            dispatch(actions.setStatus(status));
         }
-
     }
 }
 
@@ -272,7 +170,7 @@ export const updateLikesCount = (postId: number) => {
         for (let i = 0; i < getState().profilePage.posts.length; i++) {
             if (getState().profilePage.posts[i].id === postId) {
                 let count = getState().profilePage.posts[i].likesCounter + 1;
-                dispatch(setLikesCounter(postId, count))
+                dispatch(actions.setLikesCounter(postId, count))
             }
         }
     }
@@ -282,8 +180,8 @@ export const savePhoto = (photo: string): ThunkType => {
     return async (dispatch) => {
         const savePhotoData = await ProfileAPI.savePhoto(photo)
         if (savePhotoData.resultCode === ResultCodesEnum.Success) {
-            dispatch(savePhotoSuccess(savePhotoData.data.photos))
-            dispatch(setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
+            dispatch(actions.savePhotoSuccess(savePhotoData.data.photos))
+            dispatch(actions.setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
         }
     }
 }
@@ -298,7 +196,6 @@ type FormDataValuesType = {
         instagram: string
         website: string
     }
-
 }
 
 export const saveProfileInfo = (formData: FormDataValuesType) => {
@@ -308,14 +205,20 @@ export const saveProfileInfo = (formData: FormDataValuesType) => {
         if (sendProfileInfoData.resultCode === ResultCodesEnum.Success) {
             if (userId) {
                 dispatch(getUserInfo(userId))
-                dispatch(setEditMode(false))
+               // dispatch(actions.setEditMode(false))
             }
         } else {
             let message = sendProfileInfoData.messages.length > 0 ? sendProfileInfoData.messages[0] : "Some error ";
             dispatch(stopSubmit('profileInfo', { _error: message }));
-            dispatch(setEditMode(true))
+           // dispatch(actions.setEditMode(true))
         }
+    }
+}
 
+export const addPost = (value: string, postId: number) => {
+    return (dispatch: any) => {
+        dispatch(actions.setPost(value, postId));
+        dispatch(reset('profilePost'))
     }
 }
 

@@ -1,8 +1,6 @@
 import { reset } from "redux-form";
-
-
-const ADD_MESSAGE = 'ADD-MESSAGE';
-
+import { ThunkAction } from "redux-thunk";
+import { InferActionType, RootState } from "./redux-store"
 
 type initialStateType = {
     dialogs: Array<dialogsType>
@@ -11,14 +9,13 @@ type initialStateType = {
 type dialogsType = {
     id: number,
     name: string,
-    messages: any
+    messages: Array<messagesType>
 }
 
 type messagesType = {
     id: number,
     message: string,
 }
-
 
 let initialState: initialStateType = {
     dialogs: [
@@ -46,12 +43,12 @@ let initialState: initialStateType = {
     ],
 }
 
-type ActionType = addMessageActionType
+type ActionType = InferActionType<typeof actions>
 
 const dialogsReduser = (state = initialState, action: ActionType): initialStateType => {
     let id = action.id - 1;
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'ADD_MESSAGE':
             state.dialogs[id].messages?.push({ id: action.messageId, message: action.values }) //WRONG LINE but I dont know how to resolve
             return {
                 ...state,
@@ -62,21 +59,15 @@ const dialogsReduser = (state = initialState, action: ActionType): initialStateT
     }
 }
 
-type addMessageActionType = {
-    type: typeof ADD_MESSAGE
-    values: string,
-    id: number,
-    messageId: number
+export const actions = {
+    setMessage: (values: string, id: number, messageId: number) => ({ type: 'ADD_MESSAGE', values, id, messageId } as const)
 }
 
-export const setMessage = (values: string, id: number, messageId: number): addMessageActionType => {
-    return { type: ADD_MESSAGE, values, id, messageId }
-}
-
+type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
 export const addMessage = (values: string, id: number, messageId: number) => {
-    return (dispatch: any) => {
-        dispatch(setMessage(values, id, messageId));
+    return  (dispatch: any) => {
+        dispatch(actions.setMessage(values, id, messageId));
         dispatch(reset('dialogMessage'))
     }
 }

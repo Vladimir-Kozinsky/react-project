@@ -1,0 +1,13 @@
+.preloader {
+    width: 960px;
+    height: 600px;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    text-align: center;
+    opacity: 30%;
+    
+}
+.loader {
+    margin-top: 220px;
+}

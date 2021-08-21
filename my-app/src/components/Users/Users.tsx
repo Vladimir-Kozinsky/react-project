@@ -1,5 +1,5 @@
 import s from './users.module.css';
-import Preloader from '../common/Preloader';
+import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
 import Paginator from './Paginator/Paginator';
 import ava from './../common/navBar/ava.jpg';

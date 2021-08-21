@@ -1,9 +1,19 @@
+import { type } from 'os';
 import { ThunkAction } from 'redux-thunk';
 import { usersAPI } from "./../API/API"
-import { RootState } from "./redux-store"
+import { InferActionType, RootState } from "./redux-store"
 
-const SET_FRIENDS = "SET_FRIENDS"
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export type InitialState = {
+    friends: friendsType,
+    currentPage: number,
+    friendsBlockSize: number
+};
+
+type friendsType = {
+    items: Array<itemsType>
+    totalCount: number,
+    error: string,
+}
 
 type itemsType = {
     id: number,
@@ -26,18 +36,16 @@ let initialState = {
     friendsBlockSize: 10
 }
 
-export type InitialState = typeof initialState;
-
-type ActionType = setFriendsType | setCurrentPageType
+type ActionType = InferActionType<typeof actions>
 
 let navBarReduser = (state = initialState, action: ActionType): InitialState => {
     switch (action.type) {
-        case SET_FRIENDS:
+        case 'SET_FRIENDS':
             return {
                 ...state,
                 friends: { ...action.setFriendsData },
             }
-        case SET_CURRENT_PAGE:
+        case 'SET_CURRENT_PAGE':
             return {
                 ...state,
                 currentPage: action.currentPage,
@@ -47,28 +55,9 @@ let navBarReduser = (state = initialState, action: ActionType): InitialState => 
     }
 }
 
-type setFriendsType = {
-    type: typeof SET_FRIENDS,
-    setFriendsData: setFriendsDataType
-}
-
-type setFriendsDataType = {
-    items: Array<itemsType>
-    totalCount: number,
-    error: string
-}
-
-const setFriends = (setFriendsData: setFriendsDataType): setFriendsType => {
-    return { type: SET_FRIENDS, setFriendsData }
-}
-
-type setCurrentPageType = {
-    type: typeof SET_CURRENT_PAGE,
-    currentPage: number
-}
-
-const setCurrentPage = (currentPage: number): setCurrentPageType => {
-    return { type: SET_CURRENT_PAGE, currentPage }
+export const actions = {
+    setFriends: (setFriendsData: friendsType) => ({ type: 'SET_FRIENDS', setFriendsData } as const),
+    setCurrentPage: (currentPage: number) => ({ type: 'SET_CURRENT_PAGE', currentPage } as const),
 }
 
 type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
@@ -76,8 +65,8 @@ type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 export const getFriends = (isFolowed: boolean, currentPage: number): ThunkType => {
     return async (dispatch, getState) => {
         const setFriendsData = await usersAPI.getFriends(isFolowed, currentPage);
-        dispatch(setFriends(setFriendsData))
-        dispatch(setCurrentPage(currentPage))
+        dispatch(actions.setFriends(setFriendsData))
+        dispatch(actions.setCurrentPage(currentPage))
         console.log(getState().navBarPage)
     }
 }

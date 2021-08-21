@@ -1,8 +1,6 @@
 import { getAuth } from "./authReduser"
-import { RootState } from "./redux-store"
+import { RootState, InferActionType } from "./redux-store"
 import { ThunkAction } from "redux-thunk"
-
-const SET_INITIALAZED = 'SET-INITIALAZED'
 
 export type initialStateType = {
     initialazed: boolean,
@@ -12,11 +10,10 @@ let initialState: initialStateType = {
     initialazed: false,
 }
 
-type ActionType = initialazedSuccesActionType
 
-const appReduser = (state = initialState, action: initialazedSuccesActionType): initialStateType => {
+const appReduser = (state = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
-        case SET_INITIALAZED:
+        case 'SET_INITIALAZED':
             return {
                 ...state,
                 initialazed: true,
@@ -26,22 +23,22 @@ const appReduser = (state = initialState, action: initialazedSuccesActionType): 
     }
 }
 
-export const initialazedSucces = (): initialazedSuccesActionType => {
-    return { type: SET_INITIALAZED }
+export type ActionType = InferActionType<typeof actions>
+
+export const actions = {
+    initialazedSucces: () => ({ type: 'SET_INITIALAZED' } as const)
 }
 
-type initialazedSuccesActionType = {
-    type: typeof SET_INITIALAZED,
-}
+
 
 
 type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
-export const initialazeApp = () => {
-    return (dispatch: any) => {
+export const initialazeApp = (): ThunkType => {
+    return async (dispatch) => {
         let promise = dispatch(getAuth());
         promise.then(() => {
-            dispatch(initialazedSucces())
+            dispatch(actions.initialazedSucces())
         })
     }
 }

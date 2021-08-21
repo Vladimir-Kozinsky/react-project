@@ -1,15 +1,14 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import s from './ProfileStatus.module.css';
 
 type PropsType = {
     status: string
-    setStatus: (status: string) => void
     updateStatus: (status: string) => void
 }
 
-const ProfileStatus: React.FC<PropsType> = ({ status, setStatus, updateStatus }) => {
+const ProfileStatus: React.FC<PropsType> = ({ status, updateStatus }) => {
 
 
     let [editMode, setEditMode] = useState(false);
@@ -24,8 +23,8 @@ const ProfileStatus: React.FC<PropsType> = ({ status, setStatus, updateStatus })
         setEditMode(false)
         updateStatus(localStatus);
     }
-    const changeStatusText = (e: any) => {
-        setStatus(e.currentTarget.value);
+    const changeStatusText = (e: ChangeEvent<HTMLInputElement>) => {
+        localSetStatus(e.currentTarget.value);
     }
 
     useEffect(() => {
@@ -47,7 +46,7 @@ const ProfileStatus: React.FC<PropsType> = ({ status, setStatus, updateStatus })
                         onChange={changeStatusText}
                         autoFocus={true}
                         onBlur={deactivateEditMode}
-                        value={status}
+                        value={localStatus}
                         type="text" />
                 </div>
             }
