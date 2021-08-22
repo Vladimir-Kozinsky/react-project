@@ -20,8 +20,7 @@ const ProfileStatus: React.FC<PropsType> = ({ status, updateStatus }) => {
     }
 
     const deactivateEditMode = () => {
-        setEditMode(false)
-        updateStatus(localStatus);
+        updateStatus(localStatus)
     }
     const changeStatusText = (e: ChangeEvent<HTMLInputElement>) => {
         localSetStatus(e.currentTarget.value);
@@ -29,6 +28,7 @@ const ProfileStatus: React.FC<PropsType> = ({ status, updateStatus }) => {
 
     useEffect(() => {
         localSetStatus(status)
+        setEditMode(false)
     }, [status])
 
     return (

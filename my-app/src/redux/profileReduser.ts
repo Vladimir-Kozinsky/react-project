@@ -8,7 +8,6 @@ export type initialStateType = {
     posts: Array<initialStatePostsType>,
     profileInfo: initialStateProfileInfoType,
     status: string,
-    editMode: boolean,
     profileSmallPhotoUrl: null | string,
     initialazed: boolean,
 }
@@ -71,7 +70,6 @@ let initialState: initialStateType = {
         }
     },
     status: '',
-    editMode: false,
     profileSmallPhotoUrl: null,
     initialazed: false,
 }
@@ -108,11 +106,6 @@ const profileReduser = (state = initialState, action: ActionType): initialStateT
                 ...state,
                 profileInfo: { ...state.profileInfo, photos: action.photos }
             }
-        // case 'SET_EDIT_MODE':
-        //     return {
-        //         ...state,
-        //         editMode: action.editMode
-        //     }
         case 'SET_PROFILE_PHOTO':
             return {
                 ...state,
@@ -127,7 +120,6 @@ export const actions = {
     setPost: (value: string, postId: number) => ({ type: 'ADD_POST', value, postId } as const),
     setProfileInfo: (profileInfo: any) => ({ type: 'SET_PROFILE_INFO', profileInfo } as const),
     savePhotoSuccess: (photos: initialStateProfileInfoPhotosType) => ({ type: 'SAVE_PHOTO_SACCESS', photos } as const),
-   // setEditMode: (editMode: boolean) => ({ type: 'SET_EDIT_MODE', editMode } as const),
     setProfolePhoto: (smallPhotoUrl: string) => ({ type: 'SET_PROFILE_PHOTO', smallPhotoUrl } as const),
     setStatus: (status: string) => ({ type: 'SET_STATUS', status } as const),
     setLikesCounter: (postId: number, count: number) => ({ type: 'SET_LIKE_COUNTER', postId, count } as const),

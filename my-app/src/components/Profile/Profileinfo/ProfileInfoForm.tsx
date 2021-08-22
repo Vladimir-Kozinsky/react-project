@@ -7,7 +7,7 @@ type ProfileInfoFormOwnProps = {
     setEditMode: (editMode: boolean) => void
     initialValues: any
 }
-type FormDataValuesType = {
+export type FormDataValuesType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -17,7 +17,6 @@ type FormDataValuesType = {
         instagram: string
         website: string
     }
-
 }
 const ProfileInfoForm: React.FC<InjectedFormProps<FormDataValuesType, ProfileInfoFormOwnProps> & ProfileInfoFormOwnProps> = ({ handleSubmit, setEditMode, error, reset }) => {
     return (

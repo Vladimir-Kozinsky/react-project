@@ -6,8 +6,6 @@ import vkLogo from './../../common/profile/contactsLogos/vkLogo.png';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import React from 'react';
 import editImg from './../../common/profile/editImg.png'
-import FollowUnfollowButton from './../../Users/Users'
-import { unfollow } from '../../../redux/usersReduser';
 
 type PropsType = {
     profileInfo: {
@@ -103,13 +101,8 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
                         <div className={s.linkWeb}>{profileInfo.contacts.website
                             ? profileInfo.contacts.website
                             : "No"}</div>
-
                     </div>
-
                 </div>
-
-
-
             </div>
         </div >
     )

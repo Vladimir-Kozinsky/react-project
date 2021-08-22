@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { withAuthRedirect } from "../hoc/withAuthRedirect";
 import { compose } from 'redux';
 import { RootState } from "../../redux/redux-store";
+import { FormDataValuesType } from "./Profileinfo/ProfileInfoForm";
 
 
 type MapStateToPropsType = {
@@ -54,7 +55,7 @@ type MapDispatchToPropsType = {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: (photo: string) => void
-    saveProfileInfo: (formData: any) => void
+    saveProfileInfo: (formData: FormDataValuesType) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
 }
@@ -85,7 +86,7 @@ class ProfileAPIContainer extends React.Component<PropsType> {
     componentDidUpdate(prevProps: PropsType, prevState: RootState) {
         if (prevProps.match.params.userId != this.props.match.params.userId) {
             this.updateProfile()
-        }
+        } 
     }
 
     render() {
