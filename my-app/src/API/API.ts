@@ -8,6 +8,15 @@ const instance = axios.create({
     }
 });
 
+const proxy = axios.create({
+   // withCredentials: true,
+    baseURL: "http://localhost:3001/api/",
+    // headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     "crossdomain": true 
+    // },
+});
+
 type getUsersType = {
     items: Array<userType>,
     totalCount: number,
@@ -81,14 +90,19 @@ export const usersAPI = {
         return instance.get<getUserAuthType>(`/auth/me`).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {
-        return instance.post<logType>(`auth/login`, { email, password, rememberMe, captcha }).then(response => response.data)
+        return proxy.post<logType>(`auth/login`, { email, password, rememberMe, captcha }, {method: 'POST', headers: {
+            'Content-Type' : 'multipart/form-data'
+        }}).then(response => response.data)
     },
     logout() {
         return instance.delete<logType>(`auth/login`).then(response => response.data)
     },
     getFriends(isFollow: boolean, currentPage: number) {
         return instance.get<getUsersType>(`users?page=${currentPage}&friend=${isFollow}`).then(response => response.data);
-    }
+    },
+    getAll() {
+        return proxy.get(`posts`).then(response => response.data);
+    },
 }
 
 type getProfileType = {
