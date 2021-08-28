@@ -19,7 +19,7 @@ type initialStatePostsType = {
 }
 
 type initialStateProfileInfoType = {
-    userId: number | null,
+    userId: string | null,
     lookingForAJob: boolean | null,
     lookingForAJobDescription: string | null,
     fullName: string | null,
@@ -127,20 +127,20 @@ export const actions = {
 
 type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 
-export const getUserInfo = (userId: number): ThunkType => {
+export const getUserInfo = (userId: string): ThunkType => {
     return async (dispatch) => {
         const getProfile = await usersAPI.userInfo(userId)
         dispatch(actions.setProfileInfo(getProfile));
     }
 }
-export const getProfilePhoto = (userId: number): ThunkType => {
+export const getProfilePhoto = (userId: string): ThunkType => {
     return async (dispatch) => {
         const userPhotoData = await ProfileAPI.userPhoto(userId)
         dispatch(actions.setProfolePhoto(userPhotoData.photos.small))
     }
 }
 
-export const getStatus = (userId: number): ThunkType => {
+export const getStatus = (userId: string): ThunkType => {
     return async (dispatch) => {
         const getUserStatusData = await ProfileAPI.getUserStatus(userId)
         dispatch(actions.setStatus(getUserStatusData));
@@ -197,12 +197,12 @@ export const saveProfileInfo = (formData: FormDataValuesType) => {
         if (sendProfileInfoData.resultCode === ResultCodesEnum.Success) {
             if (userId) {
                 dispatch(getUserInfo(userId))
-               // dispatch(actions.setEditMode(false))
+                // dispatch(actions.setEditMode(false))
             }
         } else {
             let message = sendProfileInfoData.messages.length > 0 ? sendProfileInfoData.messages[0] : "Some error ";
             dispatch(stopSubmit('profileInfo', { _error: message }));
-           // dispatch(actions.setEditMode(true))
+            // dispatch(actions.setEditMode(true))
         }
     }
 }

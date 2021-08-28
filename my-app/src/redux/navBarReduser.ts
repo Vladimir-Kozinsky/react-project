@@ -16,7 +16,7 @@ type friendsType = {
 }
 
 type itemsType = {
-    id: number,
+    id: string,
     name: string,
     photos: {
         small: string,
@@ -65,7 +65,7 @@ type ThunkType = ThunkAction<Promise<void>, RootState, unknown, ActionType>
 export const getFriends = (isFolowed: boolean, currentPage: number): ThunkType => {
     return async (dispatch, getState) => {
         const setFriendsData = await usersAPI.getFriends(isFolowed, currentPage);
-        dispatch(actions.setFriends(setFriendsData))
+       // dispatch(actions.setFriends(setFriendsData))
         dispatch(actions.setCurrentPage(currentPage))
         console.log(getState().navBarPage)
     }

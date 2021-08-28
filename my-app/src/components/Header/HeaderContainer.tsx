@@ -7,9 +7,10 @@ import { RootState } from "../../redux/redux-store";
 
 type MapStateToPropsType = {
     authdata: {
-        id: number | null,
+        id: string | null,
         email: string | null,
         login: string | null,
+        token: string | null
     }
     isAuth: boolean
     avatarPhoto: null | string

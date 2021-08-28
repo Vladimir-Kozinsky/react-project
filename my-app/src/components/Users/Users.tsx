@@ -11,12 +11,12 @@ type PropsType = {
     onPageChanged: (p: number) => void
     currentPage: number
     users: Array<UserType>,
-    followingInProgress: Array<Number>
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
+    followingInProgress: Array<string>
+    unfollow: (userId: string) => void
+    follow: (userId: string) => void
 }
 type UserType = {
-    id: number,
+    id: string,
     name: string,
     status: string,
     photos: {
@@ -65,10 +65,10 @@ const Users: React.FC<PropsType> = ({ isFetching, totalUsersCount, pageSize,
 }
 
 type PropsButtonType = {
-    followingInProgress: Array<Number>
-    userId: number
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    followingInProgress: Array<string>
+    userId: string
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
     isFollowed: boolean
 }
 

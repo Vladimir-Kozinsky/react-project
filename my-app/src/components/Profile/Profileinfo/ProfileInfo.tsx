@@ -9,7 +9,7 @@ import editImg from './../../common/profile/editImg.png'
 
 type PropsType = {
     profileInfo: {
-        userId: number | null
+        userId: string | null
         lookingForAJob: boolean | null
         lookingForAJobDescription: string | null
         fullName: string | null
@@ -34,8 +34,8 @@ type PropsType = {
     savePhoto: (photo: string) => void
     setEditMode: (editMode: boolean) => void
     isFollowed: boolean | undefined
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
 
 }
 
@@ -63,8 +63,8 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
                     {isOwner
                         ? ''
                         : <div className={s.flwBtnContainer}>
-                            {isFollowed ? <button onClick={() => { unfollow(profileInfo.userId ? profileInfo.userId : 0) }} >Unfollow</button>
-                                : <button onClick={() => { follow(profileInfo.userId ? profileInfo.userId : 0) }}>Follow</button>}
+                            {isFollowed ? <button onClick={() => { unfollow(profileInfo.userId ? profileInfo.userId : " ") }} >Unfollow</button>
+                                : <button onClick={() => { follow(profileInfo.userId ? profileInfo.userId : " ") }}>Follow</button>}
                         </div>}
 
                 </div>

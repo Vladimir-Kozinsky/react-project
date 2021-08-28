@@ -10,7 +10,7 @@ import { FormDataValuesType } from './Profileinfo/ProfileInfoForm'
 
 type PropsType = {
   profileInfo: {
-    userId: number | null
+    userId: string | null
     lookingForAJob: boolean | null
     lookingForAJobDescription: string | null
     fullName: string | null
@@ -35,11 +35,11 @@ type PropsType = {
   savePhoto: (photo: string) => void
   saveProfileInfo: (formData: FormDataValuesType) => void
   users: Array<UserType>
-  follow: (userId: number) => void
-  unfollow: (userId: number) => void
+  follow: (userId: string) => void
+  unfollow: (userId: string) => void
 }
 type UserType = {
-  id: number,
+  id: string,
   name: string,
   status: string,
   photos: UserPhotosType,
@@ -55,7 +55,7 @@ type UserPhotosType = {
 const Profile: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
   isOwner, savePhoto, saveProfileInfo, users, follow, unfollow }) => {
 
-  let selectedUser = users.find(item => item.id == profileInfo.userId)
+  let selectedUser = users.find(item => item.id.toString() == profileInfo.userId)
 
   let [editMode, setEditMode] = useState(false)
 

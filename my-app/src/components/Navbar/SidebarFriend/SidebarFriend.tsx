@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 type PropsType = {
   name: string,
   photo: string,
-  id: number
+  id: string
 }
 
 const SidebarFriend: React.FC<PropsType> = ({ name, photo, id }) => {

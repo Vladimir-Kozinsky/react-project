@@ -8,9 +8,10 @@ import { InferActionType } from "./redux-store"
 
 export type initialStateType = {
     authdata: {
-        id: number | null,
+        id: string | null,
         email: string | null,
         login: string | null,
+        token: string | null,
     },
     isAuth: boolean,
     captchaUrl: string | null,
@@ -22,6 +23,7 @@ let initialState: initialStateType = {
         id: null,
         email: null,
         login: null,
+        token: null
     },
     isAuth: false,
     captchaUrl: null,
@@ -72,35 +74,37 @@ export const getAuth = (): ThunkType => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
-    return async (dispatch) => {
-        const loginData = await usersAPI.login(email, password, rememberMe, captcha)
-        console.log(loginData)
-    }
-}
-
-// export const login = (): ThunkType => {
+// export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
 //     return async (dispatch) => {
-//         const loginData = await usersAPI.getAll()
+//         const loginData = await usersAPI.login(email, password, rememberMe, captcha)
 //         console.log(loginData)
 //     }
 // }
 
-// export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
-//     return async (dispatch, getState) => {
-//         const loginData = await usersAPI.login(email, password, rememberMe, captcha)
-//         if (loginData.resultCode === ResultCodesEnum.Success) {
-//             dispatch(getAuth())
-//             dispatch(actions.setCaptchaUrl(null))
-//         } else {
-//             if (loginData.resultCode === ResultCodesEnum.CaptchaRequired) {
-//                 dispatch(getCaptchaUrl());
-//             }
-//             let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error ";
-//             dispatch(stopSubmit('login', { _error: message }));
-//         }
-//     }
-// }
+export const regist = (): ThunkType => {
+    return async (dispatch) => {
+        const registData = await usersAPI.regist()
+        console.log(registData)
+    }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
+    return async (dispatch, getState) => {
+        const loginData = await usersAPI.login(email, password, rememberMe, captcha)
+        console.log(loginData.resultCode)
+        if (loginData.resultCode === ResultCodesEnum.Success) {
+            console.log(loginData)
+            dispatch(actions.getDataAC(loginData.data))
+            dispatch(actions.setCaptchaUrl(null))
+        } else {
+            if (loginData.resultCode === ResultCodesEnum.CaptchaRequired) {
+                dispatch(getCaptchaUrl());
+            }
+            let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error ";
+            dispatch(stopSubmit('login', { _error: message }));
+        }
+    }
+}
 
 export const logout = (): ThunkType => {
     return async (dispatch) => {

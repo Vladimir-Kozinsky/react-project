@@ -17,13 +17,13 @@ type MapStateToPropsType = {
     currentPage: number,
     users: Array<UserType>,
     isFetching: boolean,
-    followingInProgress: Array<Number>,
+    followingInProgress: Array<string>,
     totalUsersCount: number,
     friendsCurrentPage: number
 }
 
 type UserType = {
-    id: number,
+    id: string,
     name: string,
     status: string,
     photos: {
@@ -36,8 +36,8 @@ type UserType = {
 type MapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     requestUsers: (currentPage: number, pageSize: number) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
     getFriends: (isFolowed: boolean, currentPage: number) => void
 }
 

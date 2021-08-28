@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getMaxListeners } from "process";
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,8 +10,8 @@ const instance = axios.create({
 });
 
 const proxy = axios.create({
-   // withCredentials: true,
-    baseURL: "http://localhost:3001/api/",
+    // withCredentials: true,
+    baseURL: "http://localhost:5000/api/",
     // headers: {
     //     "Access-Control-Allow-Origin": "*",
     //     "crossdomain": true 
@@ -24,7 +25,7 @@ type getUsersType = {
 }
 
 type userType = {
-    id: number,
+    id: string,
     name: string,
     photos: {
         small: string,
@@ -48,9 +49,10 @@ type unfollowType = {
 
 type getUserAuthType = {
     data: {
-        id: number,
+        id: string,
         email: string,
         login: string,
+        token: string
     }
     resultCode: number,
     messages: Array<string>,
@@ -59,7 +61,12 @@ type getUserAuthType = {
 type logType = {
     resultCode: ResultCodesEnum,
     messages: Array<string>,
-    data: {},
+    data: {
+        id: string,
+        email: string,
+        login: string,
+        token: string
+    },
 }
 
 
@@ -70,19 +77,33 @@ export enum ResultCodesEnum {
     CaptchaRequired = 10
 }
 
+const registerData = {
+    email: "kozin@gmail.com",
+    password: "password2",
+    rememberMe: false,
+    login: "vovka"
+}
+
 export const usersAPI = {
+    regist() {
+        return proxy.post<logType>(`register`, registerData, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.data)
+    },
     getUsers(currentPage = 1, pageSize = 5) {
-        return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}`)
+        return proxy.get<getUsersType>(`users`)
             .then(response => response.data);
     },
-    follow(userId: number) {
+    follow(userId: string) {
         return instance.post<followType>(`follow/${userId}`).then(response => response.data)
     },
 
-    unfollow(userId: number) {
+    unfollow(userId: string) {
         return instance.delete<unfollowType>(`follow/${userId}`).then(response => response.data)
     },
-    userInfo(userId: number) {
+    userInfo(userId: string) {
         console.warn('Obsolete method. Please prifileAPI object')
         return ProfileAPI.getProfile(userId);
     },
@@ -90,9 +111,11 @@ export const usersAPI = {
         return instance.get<getUserAuthType>(`/auth/me`).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {
-        return proxy.post<logType>(`auth/login`, { email, password, rememberMe, captcha }, {method: 'POST', headers: {
-            'Content-Type' : 'multipart/form-data'
-        }}).then(response => response.data)
+        return proxy.post<logType>(`login`, { email, password }, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.data)
     },
     logout() {
         return instance.delete<logType>(`auth/login`).then(response => response.data)
@@ -106,7 +129,7 @@ export const usersAPI = {
 }
 
 type getProfileType = {
-    userId: number,
+    userId: string,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
@@ -154,10 +177,10 @@ type sendProfileInfoType = {
 }
 
 export const ProfileAPI = {
-    getProfile(userId: number) {
+    getProfile(userId: string) {
         return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
     },
-    getUserStatus(userId: number) {
+    getUserStatus(userId: string) {
         return instance.get<string>(`profile/status/${userId}`).then(response => response.data)
     },
     updateStatus(status: string) {
@@ -175,7 +198,7 @@ export const ProfileAPI = {
     sendProfileInfo(formData: any) {
         return instance.put<sendProfileInfoType>('profile', formData).then(response => response.data)
     },
-    userPhoto(userId: number) {
+    userPhoto(userId: string) {
         return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
     }
 }

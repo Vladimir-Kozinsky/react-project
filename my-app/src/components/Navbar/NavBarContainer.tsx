@@ -21,7 +21,7 @@ type MapStateToPropsType = {
 }
 
 type itemsType = {
-    id: number,
+    id: string,
     name: string,
     photos: {
         small: string,

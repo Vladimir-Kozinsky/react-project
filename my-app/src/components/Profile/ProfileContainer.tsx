@@ -12,7 +12,7 @@ import { FormDataValuesType } from "./Profileinfo/ProfileInfoForm";
 
 type MapStateToPropsType = {
     profileInfo: {
-        userId: number | null
+        userId: string | null
         lookingForAJob: boolean | null
         lookingForAJobDescription: string | null
         fullName: string | null
@@ -32,13 +32,13 @@ type MapStateToPropsType = {
         }
     }
     status: string
-    authorizedUserId: number | null
+    authorizedUserId: string | null
     captchaUrl: string | null
     users: Array<UserType>
 }
 
 type UserType = {
-    id: number,
+    id: string,
     name: string,
     status: string,
     photos: UserPhotosType,
@@ -51,13 +51,13 @@ type UserPhotosType = {
 }
 
 type MapDispatchToPropsType = {
-    getUserInfo: (userId: number) => void
-    getStatus: (userId: number) => void
+    getUserInfo: (userId: string) => void
+    getStatus: (userId: string) => void
     updateStatus: (status: string) => void
     savePhoto: (photo: string) => void
     saveProfileInfo: (formData: FormDataValuesType) => void
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
 }
 
 type OwnProps = {
