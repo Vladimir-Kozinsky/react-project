@@ -70,7 +70,6 @@ type logType = {
 }
 
 
-
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1,
@@ -117,8 +116,12 @@ export const usersAPI = {
             }
         }).then(response => response.data)
     },
-    logout() {
-        return instance.delete<logType>(`auth/login`).then(response => response.data)
+    logout(userId: string) {
+        return proxy.post<logType>(`logout`, { userId }, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.data)
     },
     getFriends(isFollow: boolean, currentPage: number) {
         return instance.get<getUsersType>(`users?page=${currentPage}&friend=${isFollow}`).then(response => response.data);

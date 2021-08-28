@@ -6,10 +6,11 @@ type PropsType = {
     settingImg: string
     path: string | null
     itemName: string
-    logout?: () => void
+    logout: (userId: string) => void
+    userId: string
 }
 
-const DropBoxItem: React.FC<PropsType> = ({ settingImg, path, itemName, logout }) => {
+const DropBoxItem: React.FC<PropsType> = ({ settingImg, path, itemName, userId, logout }) => {
     return (
         <div className={s.dropMenuItem}>
             <div className={s.iconContainer} >
@@ -18,7 +19,7 @@ const DropBoxItem: React.FC<PropsType> = ({ settingImg, path, itemName, logout }
             <div className={s.linkContainer} >
                 {path
                     ? <NavLink className={s.boxNavLink} to={path} >{itemName}</NavLink>
-                    : <span className={s.boxNavLink} onClick={logout} >{itemName}</span>}
+                    : <span className={s.boxNavLink} onClick={()=>logout(userId)} >{itemName}</span>}
             </div>
         </div>
     )

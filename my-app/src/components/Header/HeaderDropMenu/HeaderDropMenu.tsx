@@ -9,10 +9,10 @@ import DropBoxItem from './DropBoxItem/DropBoxItem';
 import React from 'react';
 
 type PropsType = {
-    logout: () => void,
+    logout: (userId: string) => void,
     isAuth: boolean,
-    authdata: any,
     avatarPhoto: null | string
+    authdata: any
 }
 
 const HeaderDropMenu: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarPhoto }) => {
@@ -30,24 +30,33 @@ const HeaderDropMenu: React.FC<PropsType> = ({ logout, isAuth, authdata, avatarP
                         <DropBoxItem
                             settingImg={profileIcon}
                             path={"/profile"}
-                            itemName={authdata.login} />
+                            itemName={authdata.login}
+                            logout={logout}
+                            userId={authdata.userId} />
                         <DropBoxItem
                             settingImg={inboxIcon}
                             path={"/dialogs"}
-                            itemName={"Inbox"} />
+                            itemName={"Inbox"}
+                            logout={logout}
+                            userId={authdata.userId} />
                         <DropBoxItem
                             settingImg={homeIcon}
                             path={"/profile"}
-                            itemName={"Home"} />
+                            itemName={"Home"}
+                            logout={logout}
+                            userId={authdata.userId} />
                         <DropBoxItem
                             settingImg={settingImg}
                             path={"/setting"}
-                            itemName={"Setting"} />
+                            itemName={"Setting"}
+                            logout={logout}
+                            userId={authdata.userId} />
                         <DropBoxItem
                             settingImg={logoutIcon}
                             path={null}
                             itemName={"Log out"}
                             logout={logout}
+                            userId={authdata.id}
                         />
                     </div>
                 </div>

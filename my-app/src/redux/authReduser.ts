@@ -44,7 +44,7 @@ const authReduser = (state = initialState, action: ActionType): initialStateType
         case 'SET_USER_DATA':
             return {
                 ...state,
-                authdata: { ...action.payload },
+                authdata: { ...action.authdata },
                 isAuth: false
             }
         case 'SET_CAPTCHA_URL':
@@ -60,7 +60,7 @@ const authReduser = (state = initialState, action: ActionType): initialStateType
 export const actions = {
     getDataAC: (authdata: any) => ({ type: 'GET_DATA_AUTH', authdata } as const),
     setCaptchaUrl: (captchaUrl: string | null) => ({ type: 'SET_CAPTCHA_URL', captchaUrl } as const),
-    setDataAC: (id: number | null, email: string | null, login: string | null) => ({ type: 'SET_USER_DATA', payload: { id, email, login } } as const)
+    setDataAC: (authdata: any) => ({ type: 'SET_USER_DATA', authdata } as const)
 }
 
 export const getAuth = (): ThunkType => {
@@ -106,11 +106,12 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     }
 }
 
-export const logout = (): ThunkType => {
-    return async (dispatch) => {
-        const logoutData = await usersAPI.logout()
+export const logout = (userId: string): ThunkType => {
+    return async (dispatch, getState) => {
+        const logoutData = await usersAPI.logout(userId)
         if (logoutData.resultCode === ResultCodesEnum.Success) {
-            dispatch(actions.setDataAC(null, null, null))
+            dispatch(actions.setDataAC(logoutData.data))
+            console.log(getState())
         }
     }
 }

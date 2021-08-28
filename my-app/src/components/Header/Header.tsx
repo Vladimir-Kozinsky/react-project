@@ -6,7 +6,7 @@ import HeaderDropMenu from './HeaderDropMenu/HeaderDropMenu';
 import React from 'react';
 
 type PropsType = {
-  logout: () => void,
+  logout: (userId: string) => void,
   isAuth: boolean,
   authdata: any,
   avatarPhoto: null | string
