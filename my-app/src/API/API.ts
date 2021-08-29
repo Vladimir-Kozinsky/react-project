@@ -107,7 +107,9 @@ export const usersAPI = {
         return ProfileAPI.getProfile(userId);
     },
     getUserAuth() {
-        return instance.get<getUserAuthType>(`/auth/me`).then(response => response.data)
+        return proxy.get<getUserAuthType>(`/auth/me`, {
+            params: { userId: '6129fbd8ec114ea2874f92ca' }
+        }).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {
         return proxy.post<logType>(`login`, { email, password }, {
@@ -181,18 +183,18 @@ type sendProfileInfoType = {
 
 export const ProfileAPI = {
     getProfile(userId: string) {
-        return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
+        return proxy.get<getProfileType>(`profile`, { params: { userId: userId } }).then(response => response.data)
     },
     getUserStatus(userId: string) {
-        return instance.get<string>(`profile/status/${userId}`).then(response => response.data)
+        return proxy.get<string>(`profile/status`, { params: { userId: userId }}).then(response => response.data)
     },
     updateStatus(status: string) {
         return instance.put<updateStatusType>('profile/status', { status: status }).then(response => response.data)
     },
     savePhoto(photoFile: string) {
         const formData = new FormData();
-        formData.append("image", photoFile);
-        return instance.put<savePhotoType>('profile/photo', formData, {
+        formData.append("avatar", photoFile);
+        return proxy.post<savePhotoType>('profile/photo', formData, {
             headers: {
                 'Content-Type': 'multipart/formData'
             }
@@ -202,7 +204,7 @@ export const ProfileAPI = {
         return instance.put<sendProfileInfoType>('profile', formData).then(response => response.data)
     },
     userPhoto(userId: string) {
-        return instance.get<getProfileType>(`profile/${userId}`).then(response => response.data)
+        return proxy.get<getProfileType>(`profile/photo`, { params: { userId: userId } }).then(response => response.data)
     }
 }
 
