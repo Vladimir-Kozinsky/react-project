@@ -173,6 +173,7 @@ export const savePhoto = (photo: string): ThunkType => {
         const savePhotoData = await ProfileAPI.savePhoto(photo)
         if (savePhotoData.resultCode === ResultCodesEnum.Success) {
             dispatch(actions.savePhotoSuccess(savePhotoData.data.photos))
+            console.log(savePhotoData.data.photos)
             dispatch(actions.setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
         }
     }
