@@ -171,9 +171,10 @@ export const updateLikesCount = (postId: number) => {
 export const savePhoto = (photo: string): ThunkType => {
     return async (dispatch) => {
         const savePhotoData = await ProfileAPI.savePhoto(photo)
+        console.log(savePhotoData.data)
         if (savePhotoData.resultCode === ResultCodesEnum.Success) {
             dispatch(actions.savePhotoSuccess(savePhotoData.data.photos))
-            console.log(savePhotoData.data.photos)
+            
             dispatch(actions.setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
         }
     }
