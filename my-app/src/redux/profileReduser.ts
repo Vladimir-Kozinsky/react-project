@@ -181,7 +181,6 @@ export const savePhoto = (photo: string): ThunkType => {
 }
 
 type FormDataValuesType = {
-    fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     contacts: {
