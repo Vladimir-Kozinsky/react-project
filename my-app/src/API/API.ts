@@ -186,19 +186,25 @@ export const ProfileAPI = {
         return proxy.get<getProfileType>(`profile`, { params: { userId: userId } }).then(response => response.data)
     },
     getUserStatus(userId: string) {
-        return proxy.get<string>(`profile/status`, { params: { userId: userId }}).then(response => response.data)
+        return proxy.get<string>(`profile/status`, { params: { userId: userId } }).then(response => response.data)
     },
     updateStatus(status: string) {
         return instance.put<updateStatusType>('profile/status', { status: status }).then(response => response.data)
     },
-    savePhoto(photoFile: string) {
+    savePhoto(photoFile: string, userId: string) {
         const formData = new FormData();
         formData.append("avatar", photoFile);
         return proxy.post<savePhotoType>('profile/photo', formData, {
             headers: {
                 'Content-Type': 'multipart/formData'
+            },
+            params: {
+                userId: userId
             }
         }).then(response => response.data)
+    },
+    deletePhoto(filename: string) {
+        return proxy.delete<string>(`${filename}` )
     },
     sendProfileInfo(formData: any) {
         return instance.put<sendProfileInfoType>('profile', formData).then(response => response.data)

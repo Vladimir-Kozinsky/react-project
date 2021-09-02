@@ -168,13 +168,17 @@ export const updateLikesCount = (postId: number) => {
     }
 }
 
-export const savePhoto = (photo: string): ThunkType => {
-    return async (dispatch) => {
-        const savePhotoData = await ProfileAPI.savePhoto(photo)
+export const savePhoto = (photo: string, userId: string): ThunkType => {
+    return async (dispatch, getState) => {
+        let fileName = getState().profilePage.profileInfo.photos.small
+        if (fileName) {
+            await ProfileAPI.deletePhoto(fileName)
+        }
+        const savePhotoData = await ProfileAPI.savePhoto(photo, userId)
         console.log(savePhotoData.data)
         if (savePhotoData.resultCode === ResultCodesEnum.Success) {
             dispatch(actions.savePhotoSuccess(savePhotoData.data.photos))
-            
+
             dispatch(actions.setProfolePhoto(savePhotoData.data.photos.small)) //update small photo in Header
         }
     }

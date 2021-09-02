@@ -35,6 +35,7 @@ type MapStateToPropsType = {
     authorizedUserId: string | null
     captchaUrl: string | null
     users: Array<UserType>
+    userId: string | null
 }
 
 type UserType = {
@@ -54,7 +55,7 @@ type MapDispatchToPropsType = {
     getUserInfo: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string) => void
-    savePhoto: (photo: string) => void
+    savePhoto: (photo: string, userId: string) => void
     saveProfileInfo: (formData: FormDataValuesType) => void
     follow: (userId: string) => void
     unfollow: (userId: string) => void
@@ -97,6 +98,7 @@ class ProfileAPIContainer extends React.Component<PropsType> {
             savePhoto={this.props.savePhoto}
             saveProfileInfo={this.props.saveProfileInfo}
             users={this.props.users}
+            userId = {this.props.userId}
         />
     }
 }
@@ -107,7 +109,8 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
         authorizedUserId: state.auth.authdata.id,
         // setCaptchaUrlSucces: state.auth.setCaptchaUrlSucces,
         captchaUrl: state.auth.captchaUrl,
-        users: state.navBarPage.friends.items
+        users: state.navBarPage.friends.items,
+        userId: state.auth.authdata.id
 
 
     }

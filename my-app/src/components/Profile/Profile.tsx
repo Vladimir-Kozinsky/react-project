@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import UserItem from '../Dialogs/UserItem/UserItem';
 import { follow } from '../../redux/usersReduser';
 import { FormDataValuesType } from './Profileinfo/ProfileInfoForm'
+import { prependOnceListener } from 'process';
 
 type PropsType = {
   profileInfo: {
@@ -32,11 +33,12 @@ type PropsType = {
   status: string
   updateStatus: (status: string) => void
   isOwner: any
-  savePhoto: (photo: string) => void
+  savePhoto: (photo: string, userId: string) => void
   saveProfileInfo: (formData: FormDataValuesType) => void
   users: Array<UserType>
   follow: (userId: string) => void
   unfollow: (userId: string) => void
+  userId: string | null
 }
 type UserType = {
   id: string,
@@ -53,7 +55,7 @@ type UserPhotosType = {
 
 
 const Profile: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
-  isOwner, savePhoto, saveProfileInfo, users, follow, unfollow }) => {
+  isOwner, savePhoto, saveProfileInfo, users, follow, unfollow, userId }) => {
 
   let selectedUser = users.find(item => item.id.toString() == profileInfo.userId)
 
@@ -81,7 +83,8 @@ const Profile: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
           savePhoto={savePhoto}
           setEditMode={setEditMode}
           follow={follow}
-          unfollow={unfollow} />}
+          unfollow={unfollow}
+          userId={userId} />}
 
       {!editMode && <MyPostsContainer />}
     </div>

@@ -31,20 +31,24 @@ type PropsType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: any
-    savePhoto: (photo: string) => void
+    savePhoto: (photo: string, userId: string) => void
     setEditMode: (editMode: boolean) => void
     isFollowed: boolean | undefined
     follow: (userId: string) => void
     unfollow: (userId: string) => void
+    userId: string | null
 
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus,
-    isOwner, savePhoto, setEditMode, isFollowed, follow, unfollow }) => {
+    isOwner, savePhoto, setEditMode, isFollowed, follow, unfollow, userId }) => {
 
     const onMainPhotoSelect = (e: any) => {
         if (e.target.files.length) {
-            savePhoto(e.target.files[0])
+            if (userId) {
+                savePhoto(e.target.files[0], userId)
+            }
+
         }
     }
     return (
