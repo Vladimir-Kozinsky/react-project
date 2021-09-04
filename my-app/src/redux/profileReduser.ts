@@ -155,8 +155,6 @@ export const updateStatus = (status: string): ThunkType => {
     }
 }
 
-
-
 export const updateLikesCount = (postId: number) => {
     return (dispatch: any, getState: any) => {
         for (let i = 0; i < getState().profilePage.posts.length; i++) {
@@ -216,6 +214,18 @@ export const addPost = (value: string, postId: number) => {
     return (dispatch: any) => {
         dispatch(actions.setPost(value, postId));
         dispatch(reset('profilePost'))
+    }
+}
+
+export const regist = (formData: any) => {
+    debugger
+    return async (dispatch: any) => {
+        console.log(formData)
+        const userInfo = await usersAPI.regist(formData)
+        console.log(userInfo)
+        if (userInfo.resultCode === ResultCodesEnum.Success) {
+            dispatch(actions.setProfileInfo(userInfo))
+        }
     }
 }
 

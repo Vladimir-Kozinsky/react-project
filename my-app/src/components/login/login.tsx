@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { MaxLengthCreator, RequiredField } from '../../utilits/validation/validation';
 import { Input } from '../common/formsControls/FormsControls';
-import { login, regist } from '../../redux/authReduser';
+import { login } from '../../redux/authReduser';
 import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { redirectToProfile } from '../hoc/redirectToProfile';
 import s from './login.module.css';
 import { RootState } from '../../redux/redux-store';
+import { NavLink } from 'react-router-dom'
 
 let maxLength = MaxLengthCreator(25);
 
@@ -39,7 +40,7 @@ const Login: React.FC<MapStateToPropsType & MapDispatchToPropsType> = (props) =>
       <LoginReduxForm onSubmit={onSubmit}
         //setCaptchaUrlSucces={props.setCaptchaUrlSucces}
         captchaUrl={props.captchaUrl} />
-        <button onClick={props.regist} >Register</button>
+      <NavLink to="/registr" >Registration</NavLink>
     </div>
   )
 }
@@ -83,7 +84,7 @@ let mapStateToProps = (state: RootState): MapStateToPropsType => {
 
 const LoginReduxForm = reduxForm<FormDataValuesType, LoginFormOwnProps>({ form: 'login' })(LoginForm)
 
-export default compose(connect(mapStateToProps, { login, regist }),
+export default compose(connect(mapStateToProps, { login }),
   withRouter,
   redirectToProfile
 )(Login);

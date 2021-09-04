@@ -11,6 +11,7 @@ import { initialazeApp } from './redux/appReduser';
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
 import NavBarContainer from './components/Navbar/NavBarContainer';
+import Regist from './components/Regist/Regist'
 
 
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/dialogs" render={() => <DialogsContainer />} />
             <Route path="/users" render={() => <UsersContainer />} />
             <Route path="/login" render={() => <Login />} />
+            <Route path='/registr' render={()=> <Regist />} />
           </div>
         </div>
       </div>

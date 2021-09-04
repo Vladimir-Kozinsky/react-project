@@ -81,12 +81,6 @@ export const getAuth = (): ThunkType => {
 //     }
 // }
 
-export const regist = (): ThunkType => {
-    return async (dispatch) => {
-        const registData = await usersAPI.regist()
-        console.log(registData)
-    }
-}
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
     return async (dispatch, getState) => {

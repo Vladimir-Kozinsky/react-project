@@ -69,7 +69,6 @@ type logType = {
     },
 }
 
-
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1,
@@ -80,12 +79,33 @@ const registerData = {
     email: "kozin@gmail.com",
     password: "password2",
     rememberMe: false,
-    login: "vovka"
+    profileInfo: {
+        fullName: "vovka",
+        status: " this my status",
+        lookingForAJob: true,
+        lookingForAJobDescription: 'Ищу работу, знаю это это и это',
+        contacts: {
+            skype: "skyp",
+            vk: "vk.com",
+            facebook: "facebook",
+            icq: "icq",
+            email: "email",
+            googlePlus: "gogep",
+            twitter: "twitter",
+            instagram: "instagra",
+            whatsApp: "watsap"
+        },
+        photos: {
+            small: null,
+            large: null
+        },
+    },
+    isAuth: false
 }
 
 export const usersAPI = {
-    regist() {
-        return proxy.post<logType>(`register`, registerData, {
+    regist(formData: any) {
+        return proxy.post<logType>(`register`, formData, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
             }
@@ -108,7 +128,7 @@ export const usersAPI = {
     },
     getUserAuth() {
         return proxy.get<getUserAuthType>(`/auth/me`, {
-            params: { userId: '6129fbd8ec114ea2874f92ca' }
+            params: { userId: '61333034d49a7030b827df01' }
         }).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {
@@ -204,7 +224,7 @@ export const ProfileAPI = {
         }).then(response => response.data)
     },
     deletePhoto(filename: string) {
-        return proxy.delete<string>(`${filename}` )
+        return proxy.delete<string>(`${filename}`)
     },
     sendProfileInfo(formData: any) {
         return instance.put<sendProfileInfoType>('profile', formData).then(response => response.data)
