@@ -3,6 +3,7 @@ import { ProfileAPI } from "../API/API"
 import { reset, stopSubmit } from "redux-form"
 import { ThunkAction } from "redux-thunk"
 import { InferActionType, RootState } from "./redux-store"
+import { withAuthRedirect } from "../components/hoc/withAuthRedirect"
 
 export type initialStateType = {
     posts: Array<initialStatePostsType>,
@@ -169,7 +170,7 @@ export const updateLikesCount = (postId: number) => {
 export const savePhoto = (photo: string, userId: string): ThunkType => {
     return async (dispatch, getState) => {
         let fileName = getState().profilePage.profileInfo.photos.small
-        if (fileName) {
+        if (fileName && fileName !== 'none') {
             await ProfileAPI.deletePhoto(fileName)
         }
         const savePhotoData = await ProfileAPI.savePhoto(photo, userId)
@@ -218,13 +219,11 @@ export const addPost = (value: string, postId: number) => {
 }
 
 export const regist = (formData: any) => {
-    debugger
     return async (dispatch: any) => {
         console.log(formData)
         const userInfo = await usersAPI.regist(formData)
-        console.log(userInfo)
         if (userInfo.resultCode === ResultCodesEnum.Success) {
-            dispatch(actions.setProfileInfo(userInfo))
+
         }
     }
 }

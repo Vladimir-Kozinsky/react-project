@@ -105,7 +105,7 @@ const registerData = {
 
 export const usersAPI = {
     regist(formData: any) {
-        return proxy.post<logType>(`register`, formData, {
+        return proxy.post(`register`, formData, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
             }
@@ -128,7 +128,7 @@ export const usersAPI = {
     },
     getUserAuth() {
         return proxy.get<getUserAuthType>(`/auth/me`, {
-            params: { userId: '61333034d49a7030b827df01' }
+            params: { userId: '61349c45140b7d2c307e892c' }
         }).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captcha: string | null) {

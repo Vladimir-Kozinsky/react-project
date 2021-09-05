@@ -3,13 +3,15 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Input } from "../common/formsControls/FormsControls";
 import { regist } from "../../redux/profileReduser";
+import s from './registPage.module.css'
 
 const Regist = (props) => {
     const onSubmit = (formData) => {
         props.regist(formData)
+        
     }
     return (
-        <div>
+        <div className={s.registPage}>
             <h2>Registration Form</h2>
             <RegistReduxForm onSubmit={onSubmit} />
         </div>
@@ -26,13 +28,16 @@ const RegistForm = (props) => {
             <Field placeholder='Status' name='status' component={Input} />
             <Field type='checkbox' name='lookingForAJob' component={Input} />
             <Field placeholder='Job description' name='lookingForAJobDescription' component={Input} />
-            <Field placeholder='skype' name='skype' component={Input} />
+            <Field placeholder='github' name='github' component={Input} />
+            <Field placeholder='vk' name='vk' component={Input} />
             <Field placeholder='facebook' name='facebook' component={Input} />
-            <Field placeholder='icq' name='icq' component={Input} />
-            <Field placeholder='googlePlus' name='googlePlus' component={Input} />
-            <Field placeholder='twitter' name='twitter' component={Input} />
             <Field placeholder='instagram' name='instagram' component={Input} />
-            <Field placeholder='whatsApp' name='whatsApp' component={Input} />
+            <Field placeholder='twitter' name='twitter' component={Input} />
+            <Field placeholder='website' name='website' component={Input} />
+            <Field placeholder='youtube' name='youtube' component={Input} />
+            <Field placeholder='mainLink' name='mainLink' component={Input} />
+            <Field placeholder='smallPhoto' name='small' component={Input} />
+            <Field placeholder='largePhoto' name='large' component={Input} />
             <button>Register</button>
         </form>
     )
